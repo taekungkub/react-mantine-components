@@ -19,6 +19,7 @@ import BillingPage from "./views/Account/Billing";
 import ResetPasswordPage from "./views/Auth/ResetPassword";
 import EmptyLayout from "./layout/EmptyLayout";
 import VerifyEmailPage from "./views/Auth/VerifyEmail";
+import NoPermisstionPage from "./views/Exeception/403";
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -47,6 +48,7 @@ function App() {
                   <Route path="/account/billing" element={<BillingPage />}></Route>
                 </Route>
 
+                <Route path="/exeception/403" element={<NoPermisstionPage />}></Route>
                 <Route path="/exeception/404" element={<NotFoundPage />}></Route>
                 <Route path="/exeception/503" element={<ServerOverload />}></Route>
               </Route>

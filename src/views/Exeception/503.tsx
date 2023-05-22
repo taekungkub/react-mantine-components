@@ -2,8 +2,9 @@ import { createStyles, Container, Title, Text, Button, Group, rem } from "@manti
 
 const useStyles = createStyles((theme) => ({
   root: {
-    paddingTop: rem(120),
-    paddingBottom: rem(120),
+    paddingTop: rem(80),
+    paddingBottom: rem(80),
+    height: "100vh",
   },
 
   inner: {
