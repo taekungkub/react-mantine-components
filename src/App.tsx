@@ -16,6 +16,9 @@ import AccountLayout from "./views/Account";
 import PasswordPage from "./views/Account/Password";
 import NotificationPage from "./views/Account/Notification";
 import BillingPage from "./views/Account/Billing";
+import ResetPasswordPage from "./views/Auth/ResetPassword";
+import EmptyLayout from "./layout/EmptyLayout";
+import VerifyEmailPage from "./views/Auth/VerifyEmail";
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -47,9 +50,14 @@ function App() {
                 <Route path="/exeception/404" element={<NotFoundPage />}></Route>
                 <Route path="/exeception/503" element={<ServerOverload />}></Route>
               </Route>
-              <Route path="/signin" element={<SigninPage />}></Route>
-              <Route path="/signup" element={<SignupPage />}></Route>
-              <Route path="/forgotpassword" element={<ForgotPasswordPage />}></Route>
+
+              <Route element={<EmptyLayout />}>
+                <Route path="/signin" element={<SigninPage />}></Route>
+                <Route path="/signup" element={<SignupPage />}></Route>
+                <Route path="/forgotpassword" element={<ForgotPasswordPage />}></Route>
+                <Route path="/resetpassword" element={<ResetPasswordPage />}></Route>
+                <Route path="/verify/email/:code" element={<VerifyEmailPage />}></Route>
+              </Route>
 
               <Route path="*" element={<NotFoundPage />}></Route>
             </Routes>

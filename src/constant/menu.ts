@@ -1,4 +1,4 @@
-import { IconCompass, IconError404, IconFileAnalytics, IconHome, IconLogin, IconNotes, IconUser } from "@tabler/icons-react";
+import { IconCompass, IconError404, IconFileAnalytics, IconHome, IconLogin, IconNotes, IconShoppingCart, IconUser } from "@tabler/icons-react";
 
 export const mockdata = [
   {
@@ -32,8 +32,21 @@ export const mockdata = [
     links: [
       { label: "Sign In", link: "/signin" },
       { label: "Sign Up", link: "/signup" },
-      { label: "Verify Email", link: "/verify/email" },
+      { label: "Verify Email", link: "/verify/email/codeexampletest" },
       { label: "Reset Password", link: "/resetpassword" },
+    ],
+  },
+  {
+    label: "Sales",
+    icon: IconShoppingCart,
+    initiallyOpened: false,
+
+    links: [
+      { label: "Product List", link: "/products" },
+      { label: "Product Edit", link: "/product/edit" },
+      { label: "New Product", link: "/product/new" },
+      { label: "Order List", link: "/orders" },
+      { label: "Order Detail", link: "/order" },
     ],
   },
   {
