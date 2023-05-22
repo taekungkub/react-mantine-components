@@ -8,6 +8,7 @@ import { TheNavbar, TheDrawer } from "./TheNavbar";
 import MenuLang from "../components/MenuLangs";
 import { IconMoon } from "@tabler/icons-react";
 import ButtonToggleTheme from "../components/ButtonToggleTheme";
+import MenuDropdownProfile from "../components/MenuDropdownProfile";
 
 function DashboardLayout() {
   const [opened, setOpened] = useState(false);
@@ -44,29 +45,18 @@ function DashboardLayout() {
                   </Text>
                 </Box>
               </Flex>
-              <Flex gap={4} align={"center"}>
+              <Flex gap={20} align={"center"}>
                 <ButtonToggleTheme />
-                <MenuLang />
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                  <Button>Header</Button>
+                  <MenuLang />
                 </MediaQuery>
+                <MenuDropdownProfile />
               </Flex>
             </Flex>
           </Header>
         }
       >
         <MediaQuery largerThan={"sm"} styles={{ display: "none" }}>
-          {/* <Drawer
-            opened={opened}
-            onClose={handleOpened}
-            title="Default Text"
-            size={"250px"}
-            transitionProps={{ transition: "rotate-left", duration: 150, timingFunction: "linear" }}
-          >
-            <Navbar.Section grow component={ScrollArea}>
-              {links}
-            </Navbar.Section>
-          </Drawer> */}
           <TheDrawer opened={opened} handleOpened={handleOpened} />
         </MediaQuery>
         <Outlet />
