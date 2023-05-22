@@ -1,5 +1,11 @@
+import FormChagePassword from "./components/FormChangePassword";
+
 function PasswordPage() {
-  return <div>Password Page</div>;
+  return (
+    <div>
+      <FormChagePassword />
+    </div>
+  );
 }
 
 export default PasswordPage;

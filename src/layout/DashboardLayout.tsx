@@ -44,7 +44,7 @@ function DashboardLayout() {
                   </Text>
                 </Box>
               </Flex>
-              <Flex gap={4}>
+              <Flex gap={4} align={"center"}>
                 <ButtonToggleTheme />
                 <MenuLang />
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>

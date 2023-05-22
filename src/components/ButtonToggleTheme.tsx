@@ -1,5 +1,5 @@
-import { Button, ColorScheme, useMantineColorScheme } from "@mantine/core";
-import { IconMoon, IconSun } from "@tabler/icons-react";
+import { Button, ColorScheme, Switch, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { IconMoon, IconMoonStars, IconSun } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 
@@ -14,11 +14,16 @@ function ButtonToggleTheme() {
 
   const { toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
+  const theme = useMantineTheme();
 
   return (
-    <Button leftIcon={dark ? <IconMoon /> : <IconSun />} onClick={() => toggleColorScheme()}>
-      {colorScheme.charAt(0).toLocaleUpperCase() + colorScheme.slice(1)}
-    </Button>
+    <Switch
+      checked={colorScheme === "dark"}
+      onChange={() => toggleColorScheme()}
+      size="lg"
+      onLabel={<IconSun color={theme.white} size="1.25rem" stroke={1.5} />}
+      offLabel={<IconMoonStars color={theme.colors.gray[6]} size="1.25rem" stroke={1.5} />}
+    />
   );
 }
 

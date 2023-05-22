@@ -10,16 +10,16 @@ const useStyles = createStyles((theme) => ({
 function UserInfoForm() {
   const { classes, theme } = useStyles();
   return (
-    <MyCard>
+    <Box>
       <TextInput label="Name" placeholder="Name" />
       <TextInput mt="md" label="Email" placeholder="Email" />
+      <TextInput mt="md" label="Telephone" placeholder="Telephone" />
+
       <Box mt={20}>
-        <Group>
-          <Button>Submit</Button>
-          <Button variant="subtle">Close</Button>
-        </Group>
+        <Button>Update</Button>
+        <Button variant="subtle">Close</Button>
       </Box>
-    </MyCard>
+    </Box>
   );
 }
 

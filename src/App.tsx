@@ -14,6 +14,8 @@ import ForgotPasswordPage from "./views/Auth/ForgotPassword";
 import ProfilePage from "./views/Account/Profile";
 import AccountLayout from "./views/Account";
 import PasswordPage from "./views/Account/Password";
+import NotificationPage from "./views/Account/Notification";
+import BillingPage from "./views/Account/Billing";
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -38,6 +40,8 @@ function App() {
                 <Route path="/account" element={<AccountLayout />}>
                   <Route path="/account/profile" element={<ProfilePage />}></Route>
                   <Route path="/account/password" element={<PasswordPage />}></Route>
+                  <Route path="/account/notification" element={<NotificationPage />}></Route>
+                  <Route path="/account/billing" element={<BillingPage />}></Route>
                 </Route>
 
                 <Route path="/exeception/404" element={<NotFoundPage />}></Route>
