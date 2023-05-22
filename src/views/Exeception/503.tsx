@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: rem(220),
     lineHeight: 1,
     marginBottom: `calc(${theme.spacing.xl} * 1.5)`,
-    color: theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[2],
+    color: theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[4],
 
     [theme.fn.smallerThan("sm")]: {
       fontSize: rem(120),
@@ -53,7 +53,6 @@ const useStyles = createStyles((theme) => ({
     margin: "auto",
     marginTop: theme.spacing.xl,
     marginBottom: `calc(${theme.spacing.xl} * 1.5)`,
-    color: theme.colors[theme.primaryColor][1],
   },
 }));
 

@@ -51,7 +51,7 @@ export default function NotFoundPage() {
         Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has been moved to another URL.
       </Text>
       <Group position="center">
-        <Button variant="subtle" size="md" onClick={() => navigate("/")}>
+        <Button variant="white" size="md" onClick={() => navigate("/")}>
           Take me back to home page
         </Button>
       </Group>
