@@ -16,10 +16,7 @@ export const mockdata = [
     icon: IconUser,
     initiallyOpened: false,
 
-    links: [
-      { label: "Profile", link: "/profile" },
-      { label: "Settings", link: "/settings" },
-    ],
+    links: [{ label: "Profile", link: "/account/profile" }],
   },
   {
     label: "Components",
@@ -33,10 +30,10 @@ export const mockdata = [
     initiallyOpened: false,
 
     links: [
-      { label: "Sign In", link: "" },
-      { label: "Sign Up", link: "" },
-      { label: "Verify Email", link: "" },
-      { label: "Reset Password", link: "" },
+      { label: "Sign In", link: "/signin" },
+      { label: "Sign Up", link: "/signup" },
+      { label: "Verify Email", link: "/verify/email" },
+      { label: "Reset Password", link: "/resetpassword" },
     ],
   },
   {
@@ -45,9 +42,9 @@ export const mockdata = [
     initiallyOpened: false,
 
     links: [
-      { label: "403", link: "" },
-      { label: "404", link: "" },
-      { label: "502", link: "" },
+      { label: "403", link: "/exeception/403" },
+      { label: "404", link: "/exeception/404" },
+      { label: "503", link: "/exeception/503" },
     ],
   },
   { label: "Contracts", icon: IconFileAnalytics, link: "/contracts" },

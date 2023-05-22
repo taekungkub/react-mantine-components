@@ -4,6 +4,10 @@ import { Outlet } from "react-router-dom";
 
 import { LinksGroup } from "../components/NavbarLinksGroup";
 import { mockdata } from "../constant/menu";
+import { TheNavbar, TheDrawer } from "./TheNavbar";
+import MenuLang from "../components/MenuLangs";
+import { IconMoon } from "@tabler/icons-react";
+import ButtonToggleTheme from "../components/ButtonToggleTheme";
 
 function DashboardLayout() {
   const [opened, setOpened] = useState(false);
@@ -19,7 +23,6 @@ function DashboardLayout() {
   }));
 
   const { classes } = useStyles();
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (
     <>
@@ -27,13 +30,7 @@ function DashboardLayout() {
         padding="lg"
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
-        navbar={
-          <Navbar hidden width={{ sm: 250 }} height={"100vh-60px"} hiddenBreakpoint={"sm"}>
-            <Navbar.Section grow component={ScrollArea}>
-              {links}
-            </Navbar.Section>
-          </Navbar>
-        }
+        navbar={<TheNavbar />}
         header={
           <Header height={60} p="xs">
             <Flex justify={"space-between"} align={"center"}>
@@ -43,13 +40,13 @@ function DashboardLayout() {
                 </MediaQuery>
                 <Box pl={"sm"}>
                   <Text fz="lg" weight={"bold"}>
-                    Default text
+                    My App
                   </Text>
                 </Box>
               </Flex>
               <Flex gap={4}>
-                <Button>Header {opened}</Button>
-
+                <ButtonToggleTheme />
+                <MenuLang />
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                   <Button>Header</Button>
                 </MediaQuery>
@@ -59,7 +56,7 @@ function DashboardLayout() {
         }
       >
         <MediaQuery largerThan={"sm"} styles={{ display: "none" }}>
-          <Drawer
+          {/* <Drawer
             opened={opened}
             onClose={handleOpened}
             title="Default Text"
@@ -69,9 +66,9 @@ function DashboardLayout() {
             <Navbar.Section grow component={ScrollArea}>
               {links}
             </Navbar.Section>
-          </Drawer>
+          </Drawer> */}
+          <TheDrawer opened={opened} handleOpened={handleOpened} />
         </MediaQuery>
-
         <Outlet />
       </AppShell>
     </>
