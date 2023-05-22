@@ -1,12 +1,8 @@
-import { AppShell, Navbar, Header, Button, Burger, Box, Flex, MediaQuery, Drawer, Text, ScrollArea, createStyles, Transition } from "@mantine/core";
+import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles } from "@mantine/core";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-
-import { LinksGroup } from "../components/NavbarLinksGroup";
-import { mockdata } from "../constant/menu";
 import { TheNavbar, TheDrawer } from "./TheNavbar";
 import MenuLang from "../components/MenuLangs";
-import { IconMoon } from "@tabler/icons-react";
 import ButtonToggleTheme from "../components/ButtonToggleTheme";
 import MenuDropdownProfile from "../components/MenuDropdownProfile";
 
