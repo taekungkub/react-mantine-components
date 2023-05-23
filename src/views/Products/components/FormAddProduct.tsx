@@ -19,7 +19,23 @@ function FormAddProduct() {
     console.log(form.values);
   }
 
+  const [visible, setVisible] = useState(true);
   const [files, setFiles] = useState<FileWithPath[]>([]);
+  const [images, setImages] = useState<FileWithPath[]>([]);
+  const [isHasImage, setIsHasImage] = useState(false);
+  
+  function handleSetFile(e: any) {
+    setImages((oldArray) => [...oldArray, ...e]);
+    setIsHasImage(true);
+    console.log(images);
+  }
+
+  function handleDeleteFile(index: number) {
+    setImages((prevState) => prevState.filter((prevItem, i) => i !== index));
+    if (images.length <= 1) {
+      setIsHasImage(false);
+    }
+  }
 
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit())}>
@@ -67,7 +83,7 @@ function FormAddProduct() {
         <Grid.Col md={5}>
           <PageTitle title="Product Image" subtitle="Add or change image for the product"></PageTitle>
 
-          <DropImage />
+          <DropImage handleSetFile={handleSetFile} isHasImage={isHasImage} images={images} handleDeleteFile={handleDeleteFile} />
         </Grid.Col>
       </Grid>
       <Card p={0} py={20} my={10} sx={{ position: "sticky", bottom: 0 }}>

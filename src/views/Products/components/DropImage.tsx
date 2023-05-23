@@ -21,12 +21,18 @@ import { Dropzone, DropzoneProps, FileWithPath, IMAGE_MIME_TYPE } from "@mantine
 import { useEffect, useState } from "react";
 import { useHover } from "@mantine/hooks";
 
-export default function DropImage() {
+interface Props {
+  handleSetFile:(e:any)=> void
+  handleDeleteFile:(index:number)=> void
+  isHasImage:boolean
+  images:Array<FileWithPath>
+
+}
+
+
+export default function DropImage({handleSetFile , isHasImage , images , handleDeleteFile}:Props) {
   const theme = useMantineTheme();
-  const [files, setFiles] = useState<FileWithPath[]>([]);
-  const [images, setImages] = useState<FileWithPath[]>([]);
-  const [isHasImage, setIsHasImage] = useState(false);
-  const [visible, setVisible] = useState(true);
+
 
   const useStyles = createStyles((theme) => ({
     container: {
@@ -47,46 +53,35 @@ export default function DropImage() {
 
   const { classes, cx } = useStyles();
 
-  function handleSetFile(e: any) {
-    setImages((oldArray) => [...oldArray, ...e]);
-    setIsHasImage(true);
-  }
 
-  function handleDeleteFile(index: number) {
-    setImages((prevState) => prevState.filter((prevItem, i) => i !== index));
-    if (images.length <= 1) {
-      setIsHasImage(false);
-    }
-  }
+
 
   const previews = images.map((file, index) => {
     const imageUrl = URL.createObjectURL(file);
 
     return (
       <Card key={index} withBorder p={"xs"} className={classes.container}>
-        <Card>
+   
           <Overlay sx={{ zIndex: 1 }} opacity={0.5}>
             <Center h={"100%"}>
               <Group position="center">
                 <ActionIcon color="teal" size="sm">
                   <IconEye />
                 </ActionIcon>
-                <ActionIcon color="teal" size="sm" onClick={() => handleDeleteFile(index)}>
+                <ActionIcon color="teal" size="sm" onClick={()=> handleDeleteFile(index)}>
                   <IconTrash />
                 </ActionIcon>
               </Group>
             </Center>
           </Overlay>
-
-          <Image src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
-        </Card>
+          <Image  fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
       </Card>
     );
   });
 
   return (
     <>
-      <SimpleGrid cols={isHasImage ? 3 : 1} breakpoints={[{ maxWidth: "sm", cols: 2 }]}>
+      <SimpleGrid cols={isHasImage ? 4 : 1} breakpoints={[{ maxWidth: "sm", cols: 2 }]}>
         {previews}
 
         <Dropzone
@@ -94,7 +89,7 @@ export default function DropImage() {
           onReject={(files) => console.log("rejected files", files)}
           maxSize={3 * 1024 ** 2}
           accept={IMAGE_MIME_TYPE}
-          onDrop={(e) => handleSetFile(e)}
+          onDrop={handleSetFile}
         >
           <Group position="center" spacing={"xl"} style={{ pointerEvents: "none" }} mih={isHasImage ? "5rem" : "20rem"}>
             <Dropzone.Accept>
