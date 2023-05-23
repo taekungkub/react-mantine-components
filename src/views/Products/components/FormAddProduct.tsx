@@ -1,33 +1,41 @@
 import { Box, Button, Card, Divider, Flex, Grid, Group, TextInput, Image } from "@mantine/core";
-import PageTitle from "../../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 import { joiResolver, useForm } from "@mantine/form";
 import Joi from "joi";
 import DropImage from "./DropImage";
 import { FileWithPath } from "@mantine/dropzone";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
+import useToast from "@/hooks/useToast";
 
 function FormAddProduct() {
   const schema = Joi.object({});
+  const toast = useToast();
 
   const form = useForm({
-    initialValues: { title: "", description: "", sku: "", price: "", category: "", tags: "", vendor: "", brand: "", images: [] },
-    validate: joiResolver(schema),
+    initialValues: { title: "sasdasd", description: "", sku: "", price: "", category: "", tags: "", vendor: "", brand: "", images: [] },
   });
 
-  function handleSubmit() {
-    console.log("Submit !");
-    console.log(form.values);
-  }
-
-  const [visible, setVisible] = useState(true);
-  const [files, setFiles] = useState<FileWithPath[]>([]);
   const [images, setImages] = useState<FileWithPath[]>([]);
   const [isHasImage, setIsHasImage] = useState(false);
-  
-  function handleSetFile(e: any) {
+
+  const [isLoading , setIsLoading] = useState(false)
+
+  function handleSubmit() {
+   
+    console.log("Submit !");
+    console.log(form.values);
+    setIsLoading(true)
+
+    setTimeout(() => {
+      setIsLoading(false)
+      toast.success();
+
+    }, 1500);
+  }
+
+  function handleSetFile(e: FileWithPath[]) {
     setImages((oldArray) => [...oldArray, ...e]);
     setIsHasImage(true);
-    console.log(images);
   }
 
   function handleDeleteFile(index: number) {
@@ -39,7 +47,7 @@ function FormAddProduct() {
 
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit())}>
-      <Grid>
+    <Grid>
         <Grid.Col md={7}>
           <Flex direction={"column"} gap={20} mt={20}>
             <TextInput label="Product Title" />
@@ -87,8 +95,10 @@ function FormAddProduct() {
         </Grid.Col>
       </Grid>
       <Card p={0} py={20} my={10} sx={{ position: "sticky", bottom: 0 }}>
-        <Button type="submit">Submit</Button>
-        <Button variant="default">Discard</Button>
+       <Group>
+       <Button type="submit" loading={isLoading}>Submit</Button>
+        <Button variant="subtle">Discard</Button>
+       </Group>
       </Card>
     </form>
   );

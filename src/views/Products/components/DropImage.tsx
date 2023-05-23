@@ -1,38 +1,18 @@
-import {
-  Group,
-  Text,
-  useMantineTheme,
-  rem,
-  Box,
-  Flex,
-  Image,
-  SimpleGrid,
-  AspectRatio,
-  Overlay,
-  Button,
-  ActionIcon,
-  Center,
-  createStyles,
-  Card,
-  Paper,
-} from "@mantine/core";
+import { Group, Text, useMantineTheme, Flex, Image, SimpleGrid, Overlay, ActionIcon, Center, createStyles, Card } from "@mantine/core";
 import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react";
-import { Dropzone, DropzoneProps, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { useEffect, useState } from "react";
-import { useHover } from "@mantine/hooks";
+import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import useToast from "../../../hooks/useToast";
+import { notifications } from "@mantine/notifications";
 
 interface Props {
-  handleSetFile:(e:any)=> void
-  handleDeleteFile:(index:number)=> void
-  isHasImage:boolean
-  images:Array<FileWithPath>
-
+  handleSetFile: (e: any) => void;
+  handleDeleteFile: (index: number) => void;
+  isHasImage: boolean;
+  images: Array<FileWithPath>;
 }
 
-
-export default function DropImage({handleSetFile , isHasImage , images , handleDeleteFile}:Props) {
+export default function DropImage({ handleSetFile, isHasImage, images, handleDeleteFile }: Props) {
   const theme = useMantineTheme();
-
 
   const useStyles = createStyles((theme) => ({
     container: {
@@ -52,29 +32,32 @@ export default function DropImage({handleSetFile , isHasImage , images , handleD
   }));
 
   const { classes, cx } = useStyles();
+  const toast= useToast();
 
-
-
+  function handleRejectFile(files: FileRejection[]) {
+    console.log("reject files" , files);
+    toast.error()
+  }
 
   const previews = images.map((file, index) => {
     const imageUrl = URL.createObjectURL(file);
 
     return (
       <Card key={index} withBorder p={"xs"} className={classes.container}>
-   
-          <Overlay sx={{ zIndex: 1 }} opacity={0.5}>
-            <Center h={"100%"}>
-              <Group position="center">
-                <ActionIcon color="teal" size="sm">
-                  <IconEye />
-                </ActionIcon>
-                <ActionIcon color="teal" size="sm" onClick={()=> handleDeleteFile(index)}>
-                  <IconTrash />
-                </ActionIcon>
-              </Group>
-            </Center>
-          </Overlay>
-          <Image  fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
+        <Overlay sx={{ zIndex: 1 }} opacity={0.5}>
+          <Center h={"100%"}>
+            <Group position="center">
+              <ActionIcon color="teal" size="sm">
+                <IconEye />
+              </ActionIcon>
+              <ActionIcon color="teal" size="sm" onClick={() => handleDeleteFile(index)}>
+                <IconTrash />
+              </ActionIcon>
+            </Group>
+          </Center>
+        </Overlay>
+
+        <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
       </Card>
     );
   });
@@ -86,10 +69,11 @@ export default function DropImage({handleSetFile , isHasImage , images , handleD
 
         <Dropzone
           style={{ display: "grid", alignContent: "center" }}
-          onReject={(files) => console.log("rejected files", files)}
-          maxSize={3 * 1024 ** 2}
+          onReject={(files) => handleRejectFile(files)}
+          maxSize={3 * 1024 ** 2} //5MB
           accept={IMAGE_MIME_TYPE}
           onDrop={handleSetFile}
+          maxFiles={5}
         >
           <Group position="center" spacing={"xl"} style={{ pointerEvents: "none" }} mih={isHasImage ? "5rem" : "20rem"}>
             <Dropzone.Accept>

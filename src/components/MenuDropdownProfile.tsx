@@ -19,7 +19,7 @@ export default function MenuDropdownProfile() {
   const navigate = useNavigate();
   return (
     <Group position="center">
-      <Menu withArrow width={300} position="bottom" transitionProps={{ transition: "pop" }} withinPortal>
+      <Menu withArrow width={300} position="bottom" transitionProps={{ transition: "pop" }} >
         <Menu.Target>
           <ActionIcon>
             <Avatar
