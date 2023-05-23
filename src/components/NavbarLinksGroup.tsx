@@ -71,6 +71,11 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
       if (location.pathname === link.link) {
         setOpened(true);
       }
+      if (location.pathname.split("/").length >= 2) {
+        if (location.pathname.split("/")[1] !== link.link.split("/")[1]) {
+          setOpened(false);
+        }
+      }
     });
   }, [location.pathname]);
 
@@ -126,7 +131,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
               <Icon size="1.1rem" />
             </ThemeIcon>
 
-            <Box ml="md">{links ? label : itemsAlone()}</Box>
+            <Box ml="md">{links ? label : itemsAlone()} </Box>
           </Box>
           {hasLinks && (
             <ChevronIcon

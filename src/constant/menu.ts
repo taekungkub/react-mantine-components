@@ -15,23 +15,13 @@ export const mockdata = [
     label: "Account",
     icon: IconUser,
     initiallyOpened: false,
-
     links: [{ label: "Profile", link: "/account/profile" }],
-  },
-  {
-    label: "Components",
-    icon: IconCompass,
-    links: [
-      { label: "Button", link: "/components/button" },
-      { label: "Card", link: "/components/card" },
-    ],
   },
 
   {
     label: "Auth",
     icon: IconLogin,
     initiallyOpened: false,
-
     links: [
       { label: "Sign In", link: "/signin" },
       { label: "Sign Up", link: "/signup" },
@@ -43,13 +33,18 @@ export const mockdata = [
     label: "Sales",
     icon: IconShoppingCart,
     initiallyOpened: false,
-
     links: [
       { label: "Product List", link: "/products" },
-      { label: "Product Edit", link: "/product/edit" },
-      { label: "New Product", link: "/product/new" },
-      { label: "Order List", link: "/orders" },
-      { label: "Order Detail", link: "/order" },
+      { label: "New Product", link: "/products/new" },
+    ],
+  },
+
+  {
+    label: "Components",
+    icon: IconCompass,
+    links: [
+      { label: "Button", link: "/components/button" },
+      { label: "Card", link: "/components/card" },
     ],
   },
   {

@@ -20,6 +20,8 @@ import NoPermisstionPage from "./views/Exeception/403";
 import MyGlobalStyles from "./assets/MyGlobalStyle";
 import MyTheme from "./assets/MyTheme";
 import ButtonPage from "./views/Components/Button";
+import ProductListPage from "./views/Products";
+import ProductNewPage from "./views/Products/new";
 
 function App() {
   return (
@@ -43,6 +45,9 @@ function App() {
               <Route path="/exeception/503" element={<ServerOverload />}></Route>
 
               <Route path="/components/button" element={<ButtonPage />}></Route>
+
+              <Route path="/products" element={<ProductListPage />}></Route>
+              <Route path="/products/new" element={<ProductNewPage />}></Route>
             </Route>
 
             <Route element={<EmptyLayout />}>

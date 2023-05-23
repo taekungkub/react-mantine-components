@@ -27,6 +27,7 @@
     "@tiptap/extension-link": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
+    "axios": "^1.4.0",
     "dayjs": "^1.11.7",
     "embla-carousel-react": "^7.1.0",
     "i18next": "^22.5.0",
