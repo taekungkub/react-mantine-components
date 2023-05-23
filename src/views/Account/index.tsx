@@ -15,9 +15,7 @@ export default function AccountLayout() {
 
   return (
     <div>
-      <PageTitle>Settings </PageTitle>
-
-      <Tabs value={activeTab} onTabChange={setActiveTab} defaultValue="profile" mt={10}>
+      <Tabs value={activeTab} onTabChange={setActiveTab} defaultValue="profile">
         <Tabs.List>
           <Tabs.Tab value="/account/profile" icon={<IconPhoto size="0.8rem" />} onClick={() => navigate("/account/profile")}>
             Profile

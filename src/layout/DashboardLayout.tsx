@@ -1,4 +1,4 @@
-import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles } from "@mantine/core";
+import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button } from "@mantine/core";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { TheNavbar, TheDrawer } from "./TheNavbar";
@@ -30,12 +30,12 @@ function DashboardLayout() {
         navbar={<TheNavbar />}
         header={
           <Header height={60} p="xs">
-            <Flex justify={"space-between"} align={"center"}>
+            <Flex justify={"space-between"} align={"center"} px={"sm"}>
               <Flex>
                 <MediaQuery largerThan={"sm"} styles={{ display: "none" }}>
                   <Burger opened={opened} onClick={handleOpened} title={"title"} size="sm" />
                 </MediaQuery>
-                <Box pl={"sm"}>
+                <Box>
                   <Text fz="lg" weight={"bold"}>
                     My App
                   </Text>
@@ -43,10 +43,14 @@ function DashboardLayout() {
               </Flex>
               <Flex gap={20} align={"center"}>
                 <ButtonToggleTheme />
-                <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                  <MenuLang />
-                </MediaQuery>
+
                 <MenuDropdownProfile />
+
+                <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                  <div>
+                    <MenuLang />
+                  </div>
+                </MediaQuery>
               </Flex>
             </Flex>
           </Header>

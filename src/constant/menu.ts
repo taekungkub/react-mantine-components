@@ -21,7 +21,10 @@ export const mockdata = [
   {
     label: "Components",
     icon: IconCompass,
-    links: [{ label: "Card", link: "/profile" }],
+    links: [
+      { label: "Button", link: "/components/button" },
+      { label: "Card", link: "/components/card" },
+    ],
   },
 
   {

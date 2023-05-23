@@ -1,13 +1,10 @@
 import { Menu, Button, Text, createStyles } from "@mantine/core";
-import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconLanguage } from "@tabler/icons-react";
+import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconLanguage, IconChevronDown } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function MenuLang() {
   const useStyles = createStyles((theme) => ({
-    item: {
-      "&[data-hovered]": {},
-    },
     dropdownActive: {
       color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
     },
@@ -22,9 +19,11 @@ export default function MenuLang() {
   };
 
   return (
-    <Menu shadow="md" width={200} classNames={classes}>
+    <Menu shadow="md" width={200}>
       <Menu.Target>
-        <Button leftIcon={<IconLanguage />}>{t("language")}</Button>
+        <Button size="sm" variant="light" rightIcon={<IconChevronDown />}>
+          {t("language")}
+        </Button>
       </Menu.Target>
 
       <Menu.Dropdown>
