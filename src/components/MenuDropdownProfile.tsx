@@ -1,4 +1,4 @@
-import { Menu, Group, Text, Avatar, useMantineTheme, ActionIcon } from "@mantine/core";
+import { Menu, Group, Text, Avatar, useMantineTheme, ActionIcon, createStyles } from "@mantine/core"
 import {
   IconLogout,
   IconHeart,
@@ -10,16 +10,15 @@ import {
   IconSwitchHorizontal,
   IconChevronRight,
   IconDots,
-} from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
+} from "@tabler/icons-react"
+import { useNavigate } from "react-router-dom"
 
 export default function MenuDropdownProfile() {
-  const theme = useMantineTheme();
+  const navigate = useNavigate()
 
-  const navigate = useNavigate();
   return (
     <Group position="center">
-      <Menu withArrow width={300} position="bottom" transitionProps={{ transition: "pop" }} >
+      <Menu withArrow width={300} position="bottom" transitionProps={{ transition: "pop" }}>
         <Menu.Target>
           <ActionIcon>
             <Avatar
@@ -60,5 +59,5 @@ export default function MenuDropdownProfile() {
         </Menu.Dropdown>
       </Menu>
     </Group>
-  );
+  )
 }

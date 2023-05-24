@@ -1,5 +1,5 @@
-import { Icon, IconCheck, IconX } from "@tabler/icons-react";
-import { notifications } from "@mantine/notifications";
+import { Icon, IconCheck, IconX } from "@tabler/icons-react"
+import { notifications } from "@mantine/notifications"
 
 export default function useToast() {
   function success(label = "Successfully", desc = "") {
@@ -8,7 +8,7 @@ export default function useToast() {
       message: desc,
       color: "teal",
       icon: <IconCheck />,
-    });
+    })
   }
 
   function error(label = "Error", desc = "Something went wrong! 🤥") {
@@ -17,10 +17,10 @@ export default function useToast() {
       message: desc,
       color: "red",
       icon: <IconX />,
-    });
+    })
   }
   return {
     success,
     error,
-  };
+  }
 }

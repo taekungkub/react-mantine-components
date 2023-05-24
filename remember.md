@@ -16,10 +16,10 @@ interface Props {
 children:React.ReactNode
 }
 
-// const useStyles = createStyles((theme) => ({
-// navbar: {
-// transition: "all 200ms ease",
-// },
-// }));
+const useStyles = createStyles((theme) => ({
+navbar: {
+transition: "all 200ms ease",
+},
+}));
 
-// const { classes } = useStyles();
+const { classes } = useStyles();

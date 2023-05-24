@@ -1,19 +1,19 @@
-import { useDisclosure } from "@mantine/hooks";
-import { Modal, Button, Group, Grid, TextInput, createStyles, Input } from "@mantine/core";
-import { IMaskInput } from "react-imask";
-import React from "react";
-import { IconPlus } from "@tabler/icons-react";
+import { useDisclosure } from "@mantine/hooks"
+import { Modal, Button, Group, Grid, TextInput, createStyles, Input } from "@mantine/core"
+import { IMaskInput } from "react-imask"
+import React from "react"
+import { IconPlus } from "@tabler/icons-react"
 
 interface Props {
-  opened: boolean;
-  open: () => void;
-  close: () => void;
+  opened: boolean
+  open: () => void
+  close: () => void
 }
 
 export default function ModalCreditCard({ opened, open, close }: Props) {
-  const useStyles = createStyles((theme) => ({}));
+  const useStyles = createStyles((theme) => ({}))
 
-  const { classes } = useStyles();
+  const { classes } = useStyles()
 
   return (
     <>
@@ -43,5 +43,5 @@ export default function ModalCreditCard({ opened, open, close }: Props) {
         </Grid>
       </Modal>
     </>
-  );
+  )
 }
