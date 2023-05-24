@@ -3,6 +3,7 @@ import { DataTable, DataTableSortStatus } from "mantine-datatable"
 import { useEffect, useState } from "react"
 import sortBy from "lodash/sortBy"
 import { IconChevronUp, IconEdit, IconEye, IconSelector, IconTrash } from "@tabler/icons-react"
+import { ProductTy } from "../../../type"
 
 interface Props {
   data: Array<ProductTy>

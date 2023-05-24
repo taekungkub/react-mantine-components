@@ -1,61 +1,61 @@
-import { Box, Button, Card, Divider, Flex, Grid, Group, TextInput, Image } from "@mantine/core";
-import PageTitle from "@/components/PageTitle";
-import { joiResolver, useForm } from "@mantine/form";
-import Joi from "joi";
-import DropImage from "./DropImage";
-import { FileWithPath } from "@mantine/dropzone";
-import { FormEventHandler, useState } from "react";
-import useToast from "@/hooks/useToast";
+import { Box, Button, Card, Divider, Flex, Grid, Group, TextInput, Image } from "@mantine/core"
+import PageTitle from "@/components/PageTitle"
+import { joiResolver, useForm } from "@mantine/form"
+import Joi from "joi"
+import DropImage from "./DropImage"
+import { FileWithPath } from "@mantine/dropzone"
+import { FormEventHandler, useState } from "react"
+import useToast from "@/hooks/useToast"
 
 interface Props {
   inititialForm: {
-    title: string;
-    description: string;
-    sku: string;
-    price: string;
-    category: string;
-    tags: string;
-    vendor: string;
-    brand: string;
-    images: Array<string>;
-  };
+    title: string
+    description: string
+    sku: string
+    price: string
+    category: string
+    tags: string
+    vendor: string
+    brand: string
+    images: Array<string>
+  }
 }
 
 function FormAddProduct({ inititialForm }: Props) {
-  const schema = Joi.object({});
-  const toast = useToast();
+  const schema = Joi.object({})
+  const toast = useToast()
 
   const form = useForm({
     initialValues: {
       ...inititialForm,
     },
-  });
+  })
 
-  const [images, setImages] = useState<FileWithPath[]>([]);
-  const [isHasImage, setIsHasImage] = useState(false);
+  const [images, setImages] = useState<FileWithPath[]>([])
+  const [isHasImage, setIsHasImage] = useState(false)
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   function handleSubmit() {
-    console.log("Submit !");
-    console.log(form.values);
-    setIsLoading(true);
+    console.log("Submit !")
+    console.log(form.values)
+    setIsLoading(true)
 
     setTimeout(() => {
-      setIsLoading(false);
-      toast.success();
-    }, 1500);
+      setIsLoading(false)
+      toast.success()
+    }, 1500)
   }
 
   function handleSetFile(e: FileWithPath[]) {
-    setImages((images) => [...images, ...e]);
-    setIsHasImage(true);
+    setImages((images) => [...images, ...e])
+    setIsHasImage(true)
   }
 
   function handleDeleteFile(index: number) {
-    setImages((images) => images.filter((image, i) => i !== index));
+    setImages((images) => images.filter((image, i) => i !== index))
     if (images.length <= 1) {
-      setIsHasImage(false);
+      setIsHasImage(false)
     }
   }
 
@@ -117,7 +117,7 @@ function FormAddProduct({ inititialForm }: Props) {
         </Group>
       </Card>
     </form>
-  );
+  )
 }
 
-export default FormAddProduct;
+export default FormAddProduct

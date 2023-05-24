@@ -1,17 +1,16 @@
-import { Tabs } from "@mantine/core";
-import { IconPhoto, IconMessageCircle, IconSettings, IconMoneybag } from "@tabler/icons-react";
-import PageTitle from "../../components/PageTitle";
-import { Outlet, useLocation, useNavigate, useRoutes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Tabs } from "@mantine/core"
+import { IconPhoto, IconMessageCircle, IconSettings, IconMoneybag } from "@tabler/icons-react"
+import { Outlet, useLocation, useNavigate, useRoutes } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 export default function AccountLayout() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<string | null>("profile");
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [activeTab, setActiveTab] = useState<string | null>("profile")
 
   useEffect(() => {
-    setActiveTab(location.pathname);
-  }, [location]);
+    setActiveTab(location.pathname)
+  }, [location])
 
   return (
     <div>
@@ -47,5 +46,5 @@ export default function AccountLayout() {
         </Tabs.Panel>
       </Tabs>
     </div>
-  );
+  )
 }

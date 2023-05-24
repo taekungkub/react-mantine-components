@@ -2,6 +2,7 @@ import { useState } from "react"
 import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, TextInput, rem, Badge } from "@mantine/core"
 import { keys } from "@mantine/utils"
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from "@tabler/icons-react"
+import { ProductTy } from "../../../type"
 
 const useStyles = createStyles((theme) => ({
   table: {},

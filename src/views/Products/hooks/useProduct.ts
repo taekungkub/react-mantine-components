@@ -1,24 +1,25 @@
-import { useEffect, useState } from "react";
-import ProductServices from "../../../services/ProductServices";
+import { useEffect, useState } from "react"
+import ProductServices from "../../../services/ProductServices"
+import { ProductTy } from "../../../type"
 
 function useProduct() {
-  const [products, setProducts] = useState<Array<ProductTy>>([]);
+  const [products, setProducts] = useState<Array<ProductTy>>([])
 
   useEffect(() => {
-    getProducts();
+    getProducts()
 
-    return () => {};
-  }, []);
+    return () => {}
+  }, [])
 
   async function getProducts() {
     try {
-      const res = await ProductServices.product();
-      setProducts(res.data.products);
+      const res = await ProductServices.product()
+      setProducts(res.data.products)
     } catch (error) {}
   }
   return {
     products,
-  };
+  }
 }
 
-export default useProduct;
+export default useProduct

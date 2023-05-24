@@ -1,7 +1,7 @@
-import { Box, Divider, Grid } from "@mantine/core";
-import PageTitle from "../../components/PageTitle";
-import FormAddProduct from "./components/FormAddProduct";
-import { useState } from "react";
+import { Box, Divider, Grid } from "@mantine/core"
+import PageTitle from "../../components/PageTitle"
+import FormAddProduct from "./components/FormAddProduct"
+import { useState } from "react"
 
 function ProductNewPage() {
   const [data, setData] = useState({
@@ -14,7 +14,7 @@ function ProductNewPage() {
     vendor: "",
     brand: "",
     images: [],
-  });
+  })
   return (
     <div>
       <PageTitle pageTitle="Add New Product"></PageTitle>
@@ -23,7 +23,7 @@ function ProductNewPage() {
         <FormAddProduct inititialForm={data} />
       </Box>
     </div>
-  );
+  )
 }
 
-export default ProductNewPage;
+export default ProductNewPage

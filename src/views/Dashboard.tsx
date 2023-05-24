@@ -1,11 +1,11 @@
-import PageTitle from "../components/PageTitle";
+import PageTitle from "../components/PageTitle"
 
 function Dashboard() {
   return (
     <div>
-      <PageTitle title="Dashboard"></PageTitle>
+      <PageTitle title="Dashboard" />
     </div>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard

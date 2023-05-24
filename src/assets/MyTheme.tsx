@@ -1,9 +1,9 @@
-import { ButtonStylesParams, CardProps, ColorScheme, ColorSchemeProvider, MantineProvider } from "@mantine/core";
-import { useHotkeys, useLocalStorage } from "@mantine/hooks";
-import { Notifications } from "@mantine/notifications";
+import { ButtonStylesParams, CardProps, ColorScheme, ColorSchemeProvider, MantineProvider } from "@mantine/core"
+import { useHotkeys, useLocalStorage } from "@mantine/hooks"
+import { Notifications } from "@mantine/notifications"
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 function MyTheme({ children }: Props) {
@@ -11,11 +11,11 @@ function MyTheme({ children }: Props) {
     key: "mantine-color-scheme",
     defaultValue: "light",
     getInitialValueInEffect: true,
-  });
+  })
 
-  const toggleColorScheme = (value?: ColorScheme) => setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const toggleColorScheme = (value?: ColorScheme) => setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"))
 
-  useHotkeys([["mod+J", () => toggleColorScheme()]]);
+  useHotkeys([["mod+J", () => toggleColorScheme()]])
 
   return (
     <>
@@ -51,7 +51,7 @@ function MyTheme({ children }: Props) {
         </MantineProvider>
       </ColorSchemeProvider>
     </>
-  );
+  )
 }
 
-export default MyTheme;
+export default MyTheme

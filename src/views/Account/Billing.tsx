@@ -1,10 +1,10 @@
-import { Avatar, Box, Button, Card, Divider, Grid, Group, Text } from "@mantine/core";
-import ModalCreditCard from "../../components/Modals/ModalCreditCard";
-import BillingHistory from "./components/BillingHistory";
-import PageTitle from "../../components/PageTitle";
-import MyCard from "../../components/MyCard";
-import { IconBrandMastercard, IconBrandVisa, IconCreditCard, IconDeviceDesktopStar, IconDeviceIpad, IconPlus } from "@tabler/icons-react";
-import { useDisclosure } from "@mantine/hooks";
+import { Avatar, Box, Button, Card, Divider, Grid, Group, Text } from "@mantine/core"
+import ModalCreditCard from "../../components/Modals/ModalCreditCard"
+import BillingHistory from "./components/BillingHistory"
+import PageTitle from "../../components/PageTitle"
+import MyCard from "../../components/MyCard"
+import { IconBrandMastercard, IconBrandVisa, IconCreditCard, IconDeviceDesktopStar, IconDeviceIpad, IconPlus } from "@tabler/icons-react"
+import { useDisclosure } from "@mantine/hooks"
 
 const mockData = {
   data: [
@@ -37,10 +37,10 @@ const mockData = {
       status: "Paid",
     },
   ],
-};
+}
 
 function SectionAddCard() {
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false)
 
   return (
     <>
@@ -92,22 +92,22 @@ function SectionAddCard() {
 
       <ModalCreditCard opened={opened} open={open} close={close} />
     </>
-  );
+  )
 }
 
 function BillingPage() {
   return (
     <div>
-      <PageTitle subtitle="You can update your cards information here">Payment Method</PageTitle>
+      <PageTitle title="Payment Method" subtitle="You can update your cards information here" />
       <SectionAddCard />
       <Box mt={50} mb={20}>
-        <PageTitle title="Billing History" subtitle="View your previos billing"></PageTitle>
+        <PageTitle title="Billing History" subtitle="View your previos billing" />
       </Box>
       <Box>
         <BillingHistory data={mockData.data} />
       </Box>
     </div>
-  );
+  )
 }
 
-export default BillingPage;
+export default BillingPage
