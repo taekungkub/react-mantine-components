@@ -1,4 +1,4 @@
-import { Global, MantineProvider } from "@mantine/core";
+import { Global, MantineProvider } from "@mantine/core"
 
 export default function MyGlobalStyles() {
   return (
@@ -16,5 +16,5 @@ export default function MyGlobalStyles() {
         },
       })}
     />
-  );
+  )
 }

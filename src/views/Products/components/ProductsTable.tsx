@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, TextInput, rem, Badge } from "@mantine/core";
-import { keys } from "@mantine/utils";
-import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from "@tabler/icons-react";
+import { useState } from "react"
+import { createStyles, Table, ScrollArea, UnstyledButton, Group, Text, Center, TextInput, rem, Badge } from "@mantine/core"
+import { keys } from "@mantine/utils"
+import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from "@tabler/icons-react"
 
 const useStyles = createStyles((theme) => ({
   table: {},
@@ -23,24 +23,24 @@ const useStyles = createStyles((theme) => ({
     height: rem(21),
     borderRadius: rem(21),
   },
-}));
+}))
 
 interface RowData extends ProductTy {}
 
 interface TableSortProps {
-  data: RowData[];
+  data: RowData[]
 }
 
 interface ThProps {
-  children: React.ReactNode;
-  reversed: boolean;
-  sorted: boolean;
-  onSort(): void;
+  children: React.ReactNode
+  reversed: boolean
+  sorted: boolean
+  onSort(): void
 }
 
 function Th({ children, reversed, sorted, onSort }: ThProps) {
-  const { classes } = useStyles();
-  const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
+  const { classes } = useStyles()
+  const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector
   return (
     <th className={classes.th}>
       <UnstyledButton onClick={onSort} className={classes.control}>
@@ -54,53 +54,53 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
         </Group>
       </UnstyledButton>
     </th>
-  );
+  )
 }
 
 function filterData(data: RowData[], search: string) {
-  const query = search.toLowerCase().trim();
-  return data.filter((item) => keys(data[0]).some((key) => item[key].toString().toLowerCase().includes(query)));
+  const query = search.toLowerCase().trim()
+  return data.filter((item) => keys(data[0]).some((key) => item[key].toString().toLowerCase().includes(query)))
 }
 
 function sortData(data: RowData[], payload: { sortBy: keyof RowData | null; reversed: boolean; search: string }) {
-  const { sortBy } = payload;
+  const { sortBy } = payload
 
   if (!sortBy) {
-    return filterData(data, payload.search);
+    return filterData(data, payload.search)
   }
 
   return filterData(
     [...data].sort((a, b) => {
       if (payload.reversed) {
-        return b[sortBy].toString().localeCompare(a[sortBy].toString());
+        return b[sortBy].toString().localeCompare(a[sortBy].toString())
       }
 
-      return a[sortBy].toString().localeCompare(b[sortBy].toString());
+      return a[sortBy].toString().localeCompare(b[sortBy].toString())
     }),
     payload.search
-  );
+  )
 }
 
 export default function BillingHistory({ data }: TableSortProps) {
-  const { classes } = useStyles();
+  const { classes } = useStyles()
 
-  const [search, setSearch] = useState("");
-  const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
-  const [reverseSortDirection, setReverseSortDirection] = useState(false);
+  const [search, setSearch] = useState("")
+  const [sortedData, setSortedData] = useState(data)
+  const [sortBy, setSortBy] = useState<keyof RowData | null>(null)
+  const [reverseSortDirection, setReverseSortDirection] = useState(false)
 
   const setSorting = (field: keyof RowData) => {
-    const reversed = field === sortBy ? !reverseSortDirection : false;
-    setReverseSortDirection(reversed);
-    setSortBy(field);
-    setSortedData(sortData(data, { sortBy: field, reversed, search }));
-  };
+    const reversed = field === sortBy ? !reverseSortDirection : false
+    setReverseSortDirection(reversed)
+    setSortBy(field)
+    setSortedData(sortData(data, { sortBy: field, reversed, search }))
+  }
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.currentTarget;
-    setSearch(value);
-    setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
-  };
+    const { value } = event.currentTarget
+    setSearch(value)
+    setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }))
+  }
 
   const rows = sortedData.map((row) => (
     <tr key={row.id}>
@@ -111,7 +111,7 @@ export default function BillingHistory({ data }: TableSortProps) {
       <td>{row.price}</td>
       <td>{row.rating}</td>
     </tr>
-  ));
+  ))
 
   return (
     <ScrollArea>
@@ -166,5 +166,5 @@ export default function BillingHistory({ data }: TableSortProps) {
         </tbody>
       </Table>
     </ScrollArea>
-  );
+  )
 }

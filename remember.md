@@ -15,3 +15,11 @@ const { classes , cx} = useStyles();
 interface Props {
 children:React.ReactNode
 }
+
+// const useStyles = createStyles((theme) => ({
+// navbar: {
+// transition: "all 200ms ease",
+// },
+// }));
+
+// const { classes } = useStyles();

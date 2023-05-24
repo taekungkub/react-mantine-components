@@ -7,39 +7,53 @@ import { FileWithPath } from "@mantine/dropzone";
 import { FormEventHandler, useState } from "react";
 import useToast from "@/hooks/useToast";
 
-function FormAddProduct() {
+interface Props {
+  inititialForm: {
+    title: string;
+    description: string;
+    sku: string;
+    price: string;
+    category: string;
+    tags: string;
+    vendor: string;
+    brand: string;
+    images: Array<string>;
+  };
+}
+
+function FormAddProduct({ inititialForm }: Props) {
   const schema = Joi.object({});
   const toast = useToast();
 
   const form = useForm({
-    initialValues: { title: "sasdasd", description: "", sku: "", price: "", category: "", tags: "", vendor: "", brand: "", images: [] },
+    initialValues: {
+      ...inititialForm,
+    },
   });
 
   const [images, setImages] = useState<FileWithPath[]>([]);
   const [isHasImage, setIsHasImage] = useState(false);
 
-  const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleSubmit() {
-   
     console.log("Submit !");
     console.log(form.values);
-    setIsLoading(true)
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false)
+      setIsLoading(false);
       toast.success();
-
     }, 1500);
   }
 
   function handleSetFile(e: FileWithPath[]) {
-    setImages((oldArray) => [...oldArray, ...e]);
+    setImages((images) => [...images, ...e]);
     setIsHasImage(true);
   }
 
   function handleDeleteFile(index: number) {
-    setImages((prevState) => prevState.filter((prevItem, i) => i !== index));
+    setImages((images) => images.filter((image, i) => i !== index));
     if (images.length <= 1) {
       setIsHasImage(false);
     }
@@ -47,10 +61,10 @@ function FormAddProduct() {
 
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit())}>
-    <Grid>
+      <Grid>
         <Grid.Col md={7}>
           <Flex direction={"column"} gap={20} mt={20}>
-            <TextInput label="Product Title" />
+            <TextInput label="Product Title" {...form.getInputProps("title")} />
             <TextInput label="description" />
           </Flex>
 
@@ -95,10 +109,12 @@ function FormAddProduct() {
         </Grid.Col>
       </Grid>
       <Card p={0} py={20} my={10} sx={{ position: "sticky", bottom: 0 }}>
-       <Group>
-       <Button type="submit" loading={isLoading}>Submit</Button>
-        <Button variant="subtle">Discard</Button>
-       </Group>
+        <Group>
+          <Button type="submit" loading={isLoading}>
+            Submit
+          </Button>
+          <Button variant="subtle">Discard</Button>
+        </Group>
       </Card>
     </form>
   );

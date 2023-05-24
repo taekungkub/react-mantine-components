@@ -2,6 +2,7 @@ import { Drawer, Navbar, ScrollArea } from "@mantine/core";
 import { mockdata } from "../constant/menu";
 import { LinksGroup } from "../components/NavbarLinksGroup";
 
+//Sidebar
 export function TheNavbar() {
   const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
 

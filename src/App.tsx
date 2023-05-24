@@ -21,7 +21,7 @@ import MyGlobalStyles from "./assets/MyGlobalStyle";
 import MyTheme from "./assets/MyTheme";
 import ButtonPage from "./views/Components/Button";
 import ProductListPage from "./views/Products";
-import ProductNewPage from "./views/Products/new";
+import ProductNewPage from "./views/Products/NewProduct";
 
 function App() {
   return (

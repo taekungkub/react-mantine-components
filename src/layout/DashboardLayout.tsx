@@ -1,25 +1,13 @@
-import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button } from "@mantine/core";
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { TheNavbar, TheDrawer } from "./TheNavbar";
-import MenuLang from "../components/MenuLangs";
-import ButtonToggleTheme from "../components/ButtonToggleTheme";
-import MenuDropdownProfile from "../components/MenuDropdownProfile";
+import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button } from "@mantine/core"
+import { Outlet } from "react-router-dom"
+import { TheNavbar, TheDrawer } from "./TheNavbar"
+import MenuLang from "../components/MenuLangs"
+import ButtonToggleTheme from "../components/ButtonToggleTheme"
+import MenuDropdownProfile from "../components/MenuDropdownProfile"
+import useSidebar from "../hooks/useSidebar"
 
 function DashboardLayout() {
-  const [opened, setOpened] = useState(false);
-
-  function handleOpened() {
-    setOpened(!opened);
-  }
-
-  const useStyles = createStyles((theme) => ({
-    navbar: {
-      transition: "all 200ms ease",
-    },
-  }));
-
-  const { classes } = useStyles();
+  const { opened, setOpened, handleOpened } = useSidebar()
 
   return (
     <>
@@ -62,7 +50,7 @@ function DashboardLayout() {
         <Outlet />
       </AppShell>
     </>
-  );
+  )
 }
 
-export default DashboardLayout;
+export default DashboardLayout
