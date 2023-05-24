@@ -1,18 +1,17 @@
-import { Group, Text, useMantineTheme, Flex, Image, SimpleGrid, Overlay, ActionIcon, Center, createStyles, Card } from "@mantine/core";
-import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react";
-import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import useToast from "../../../hooks/useToast";
-import { notifications } from "@mantine/notifications";
+import { Group, Text, useMantineTheme, Flex, Image, SimpleGrid, Overlay, ActionIcon, Center, createStyles, Card } from "@mantine/core"
+import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react"
+import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone"
+import useToast from "../../../hooks/useToast"
 
 interface Props {
-  handleSetFile: (e: any) => void;
-  handleDeleteFile: (index: number) => void;
-  isHasImage: boolean;
-  images: Array<FileWithPath>;
+  handleSetFile: (e: any) => void
+  handleDeleteFile: (index: number) => void
+  isHasImage: boolean
+  images: Array<FileWithPath | String>
 }
 
 export default function DropImage({ handleSetFile, isHasImage, images, handleDeleteFile }: Props) {
-  const theme = useMantineTheme();
+  const theme = useMantineTheme()
 
   const useStyles = createStyles((theme) => ({
     container: {
@@ -29,18 +28,24 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
 
       "&:hover": {},
     },
-  }));
+  }))
 
-  const { classes, cx } = useStyles();
-  const toast= useToast();
+  const { classes, cx } = useStyles()
+  const toast = useToast()
 
   function handleRejectFile(files: FileRejection[]) {
-    console.log("reject files" , files);
+    console.log("reject files", files)
     toast.error()
   }
 
   const previews = images.map((file, index) => {
-    const imageUrl = URL.createObjectURL(file);
+    console.log(typeof file)
+    let imageUrl = ""
+    if (typeof file === "string") {
+      imageUrl = file
+    } else {
+      imageUrl = URL.createObjectURL(file as FileWithPath)
+    }
 
     return (
       <Card key={index} withBorder p={"xs"} className={classes.container}>
@@ -59,8 +64,8 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
 
         <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
       </Card>
-    );
-  });
+    )
+  })
 
   return (
     <>
@@ -97,5 +102,5 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
         </Dropzone>
       </SimpleGrid>
     </>
-  );
+  )
 }

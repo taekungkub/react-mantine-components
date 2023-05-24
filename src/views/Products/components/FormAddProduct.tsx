@@ -4,7 +4,7 @@ import { joiResolver, useForm } from "@mantine/form"
 import Joi from "joi"
 import DropImage from "./DropImage"
 import { FileWithPath } from "@mantine/dropzone"
-import { FormEventHandler, useState } from "react"
+import { FormEventHandler, useEffect, useState } from "react"
 import useToast from "@/hooks/useToast"
 
 interface Props {
@@ -31,7 +31,7 @@ function FormAddProduct({ inititialForm }: Props) {
     },
   })
 
-  const [images, setImages] = useState<FileWithPath[]>([])
+  const [images, setImages] = useState<Array<FileWithPath | String>>(inititialForm.images)
   const [isHasImage, setIsHasImage] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +47,7 @@ function FormAddProduct({ inititialForm }: Props) {
     }, 1500)
   }
 
-  function handleSetFile(e: FileWithPath[]) {
+  function handleSetFile(e: Array<FileWithPath | String>) {
     setImages((images) => [...images, ...e])
     setIsHasImage(true)
   }
@@ -58,6 +58,12 @@ function FormAddProduct({ inititialForm }: Props) {
       setIsHasImage(false)
     }
   }
+
+  useEffect(() => {
+    if (inititialForm.images.length >= 1) {
+      setIsHasImage(true)
+    }
+  }, [inititialForm.images])
 
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit())}>

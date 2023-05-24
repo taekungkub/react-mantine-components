@@ -13,7 +13,7 @@ function ProductNewPage() {
     tags: "",
     vendor: "",
     brand: "",
-    images: [],
+    images: [""],
   })
   return (
     <div>
