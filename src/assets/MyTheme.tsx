@@ -22,6 +22,7 @@ function MyTheme({ children }: Props) {
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
         <MantineProvider
           theme={{
+            loader: "bars",
             colorScheme,
             fontFamily: "Poppins",
             components: {

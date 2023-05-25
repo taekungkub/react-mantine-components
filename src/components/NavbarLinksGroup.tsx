@@ -87,6 +87,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
       key={link.label}
       onClick={(event) => {
         event.preventDefault()
+
         navigate(`${link.link}`)
       }}
     >
@@ -94,7 +95,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
     </Text>
   ))
 
-  const itemsAlone = () => {
+  const ItemsNoDropdown = () => {
     if (link)
       return (
         <>
@@ -115,23 +116,22 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
 
   return (
     <>
-      <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
-        <Group
-          position="apart"
-          spacing={0}
-          onClick={(event) => {
-            event.preventDefault()
-            if (!hasLinks) {
-              navigate(`${link}`)
-            }
-          }}
-        >
+      <UnstyledButton
+        onClick={() => {
+          setOpened((o) => !o)
+
+          if (!hasLinks) {
+            navigate(`${link}`)
+          }
+        }}
+        className={classes.control}
+      >
+        <Group position="apart" spacing={0}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <ThemeIcon variant="light" size={30}>
               <Icon size="1.1rem" />
             </ThemeIcon>
-
-            <Box ml="md">{links ? label : itemsAlone()} </Box>
+            <Box ml="md">{links ? label : ItemsNoDropdown()} </Box>
           </Box>
           {hasLinks && (
             <ChevronIcon
