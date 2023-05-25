@@ -7,4 +7,7 @@ export default {
   product(id: string) {
     return Api.get("/products/" + id)
   },
+  categories() {
+    return Api.get("/products/categories")
+  },
 }

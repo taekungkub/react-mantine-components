@@ -20,9 +20,10 @@ interface Props {
     brand: string
     images: Array<string>
   }
+  category?: Array<string>
 }
 
-function FormAddProduct({ inititialForm }: Props) {
+function FormAddProduct({ inititialForm, category }: Props) {
   const schema = Joi.object({})
   const toast = useToast()
 
@@ -107,18 +108,7 @@ function FormAddProduct({ inititialForm }: Props) {
           <Flex direction={"column"} gap={20} mt={20}>
             <Grid>
               <Grid.Col sm={6}>
-                <Select
-                  {...form.getInputProps("category")}
-                  label="Category"
-                  data={[
-                    { value: "smartphones", label: "smartphones" },
-                    { value: "laptops", label: "laptops" },
-                    { value: "skincare", label: "skincare" },
-                    { value: "groceries", label: "groceries" },
-                    { value: "home-decoration", label: "home-decoration" },
-                    { value: "fragrances", label: "fragrances" },
-                  ]}
-                />
+                <Select {...form.getInputProps("category")} label="Category" data={category ?? []} />
               </Grid.Col>
               <Grid.Col sm={6}>
                 <MultiSelect

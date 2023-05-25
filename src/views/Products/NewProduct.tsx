@@ -3,25 +3,12 @@ import PageTitle from "../../components/PageTitle"
 import FormAddProduct from "./components/FormAddProduct"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import ProductServices from "../../services/ProductServices"
+import useOneProduct from "./hooks/useOneProduct"
 
 function ProductNewPage() {
-  const initProduct = {
-    title: "",
-    description: "",
-    sku: "",
-    price: "",
-    stock: "",
-    category: "",
-    tags: "",
-    vendor: "",
-    brand: "",
-    images: [],
-  }
-
-  const [data, setData] = useState(initProduct)
-
   const params = useParams()
+
+  const { data, category, initProduct, getProduct, getCategory, setData } = useOneProduct()
 
   useEffect(() => {
     if (!params.id) {
@@ -29,26 +16,20 @@ function ProductNewPage() {
         ...initProduct,
         images: [],
       })
-    }
-    getProduct()
-  }, [params.id])
+      getCategory()
 
-  async function getProduct() {
-    try {
-      const res = await ProductServices.product(params.id as string)
-      setData({
-        ...res.data,
-        images: res.data.images,
-      })
-    } catch (error) {}
-  }
+      return
+    }
+    getProduct(params.id as string)
+    getCategory()
+  }, [params.id])
 
   return (
     <div>
       <PageTitle pageTitle="Add New Product"></PageTitle>
       <Box mt={20}>
         <PageTitle title="Basic Information" subtitle="Section to config basic product information"></PageTitle>
-        <FormAddProduct inititialForm={data} />
+        <FormAddProduct inititialForm={data} category={category} />
       </Box>
     </div>
   )
