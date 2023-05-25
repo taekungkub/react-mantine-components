@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import sortBy from "lodash/sortBy"
 import { IconChevronUp, IconEdit, IconEye, IconSelector, IconTrash } from "@tabler/icons-react"
 import { ProductTy } from "../../../type"
+import { Navigate, useNavigate } from "react-router-dom"
 
 interface Props {
   data: Array<ProductTy>
@@ -17,6 +18,8 @@ export default function ProductsTable2({ data }: Props) {
     const myData = sortBy(data, sortStatus.columnAccessor)
     setRecords(sortStatus.direction === "desc" ? myData.reverse() : myData)
   }, [sortStatus, data])
+
+  const navigate = useNavigate()
   return (
     <DataTable
       rowStyle={(theme) => ({})}
@@ -44,9 +47,9 @@ export default function ProductsTable2({ data }: Props) {
         {
           title: "Action",
           accessor: "actions",
-          render: ({}) => (
+          render: ({ id }) => (
             <Group position="center">
-              <ActionIcon size={20}>
+              <ActionIcon size={20} onClick={() => navigate(`/products/${id}`)}>
                 <IconEdit />
               </ActionIcon>
               <ActionIcon size={20}>
@@ -71,7 +74,7 @@ export default function ProductsTable2({ data }: Props) {
         unsorted: <IconSelector size={16} />,
       }}
       // execute this callback when a row is clicked
-      //   onRowClick={({ title, brand, description }) => alert(`You clicked on ${title}, a ${brand.toLowerCase()} president born in ${description}`)}
+      // onRowClick={({ id }) => }
     />
   )
 }

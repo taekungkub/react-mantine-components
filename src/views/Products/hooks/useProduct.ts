@@ -13,7 +13,7 @@ function useProduct() {
 
   async function getProducts() {
     try {
-      const res = await ProductServices.product()
+      const res = await ProductServices.products()
       setProducts(res.data.products)
     } catch (error) {}
   }

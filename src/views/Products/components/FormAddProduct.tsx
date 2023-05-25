@@ -1,4 +1,4 @@
-import { Box, Button, Card, Divider, Flex, Grid, Group, TextInput, Image } from "@mantine/core"
+import { Box, Button, Card, Divider, Flex, Grid, Group, TextInput, Image, Textarea, Select, MultiSelect } from "@mantine/core"
 import PageTitle from "@/components/PageTitle"
 import { joiResolver, useForm } from "@mantine/form"
 import Joi from "joi"
@@ -13,6 +13,7 @@ interface Props {
     description: string
     sku: string
     price: string
+    stock: string
     category: string
     tags: string
     vendor: string
@@ -26,15 +27,28 @@ function FormAddProduct({ inititialForm }: Props) {
   const toast = useToast()
 
   const form = useForm({
-    initialValues: {
-      ...inititialForm,
-    },
+    initialValues: inititialForm,
   })
 
   const [images, setImages] = useState<Array<FileWithPath | String>>(inititialForm.images)
   const [isHasImage, setIsHasImage] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    setImages(inititialForm.images)
+    form.setValues(inititialForm)
+  }, [inititialForm])
+
+  useEffect(() => {
+    form.setValues((prev) => ({ ...prev, images: images as Array<string> }))
+
+    if (images.length === 0) {
+      setIsHasImage(false)
+    } else {
+      setIsHasImage(true)
+    }
+  }, [images])
 
   function handleSubmit() {
     console.log("Submit !")
@@ -49,14 +63,10 @@ function FormAddProduct({ inititialForm }: Props) {
 
   function handleSetFile(e: Array<FileWithPath | String>) {
     setImages((images) => [...images, ...e])
-    setIsHasImage(true)
   }
 
   function handleDeleteFile(index: number) {
     setImages((images) => images.filter((image, i) => i !== index))
-    if (images.length <= 1) {
-      setIsHasImage(false)
-    }
   }
 
   useEffect(() => {
@@ -71,7 +81,7 @@ function FormAddProduct({ inititialForm }: Props) {
         <Grid.Col md={7}>
           <Flex direction={"column"} gap={20} mt={20}>
             <TextInput label="Product Title" {...form.getInputProps("title")} />
-            <TextInput label="description" />
+            <Textarea label="description" {...form.getInputProps("description")} />
           </Flex>
 
           <Divider my={40} />
@@ -80,10 +90,13 @@ function FormAddProduct({ inititialForm }: Props) {
           <Flex direction={"column"} gap={20} mt={20}>
             <Grid>
               <Grid.Col sm={6}>
-                <TextInput label="SKU" />
+                <TextInput label="Price" {...form.getInputProps("price")} />
               </Grid.Col>
               <Grid.Col sm={6}>
-                <TextInput label="Price" />
+                <TextInput label="Stock" {...form.getInputProps("stock")} />
+              </Grid.Col>
+              <Grid.Col sm={6}>
+                <TextInput label="SKU" />
               </Grid.Col>
             </Grid>
           </Flex>
@@ -94,13 +107,43 @@ function FormAddProduct({ inititialForm }: Props) {
           <Flex direction={"column"} gap={20} mt={20}>
             <Grid>
               <Grid.Col sm={6}>
-                <TextInput label="Category" />
+                <Select
+                  {...form.getInputProps("category")}
+                  label="Category"
+                  data={[
+                    { value: "smartphones", label: "smartphones" },
+                    { value: "laptops", label: "laptops" },
+                    { value: "skincare", label: "skincare" },
+                    { value: "groceries", label: "groceries" },
+                    { value: "home-decoration", label: "home-decoration" },
+                    { value: "fragrances", label: "fragrances" },
+                  ]}
+                />
               </Grid.Col>
               <Grid.Col sm={6}>
-                <TextInput label="Tags" />
+                <MultiSelect
+                  data={[
+                    { value: "unisex", label: "Unisex" },
+                    { value: "trend", label: "Trend" },
+                  ]}
+                  label="Tags"
+                />
               </Grid.Col>
               <Grid.Col sm={6}>
-                <TextInput label="Brand" />
+                <Select
+                  {...form.getInputProps("brand")}
+                  label="Brand"
+                  data={[
+                    { value: "Apple", label: "Apple" },
+                    { value: "fauji", label: "fauji" },
+                    { value: "Dry Rose	", label: "Dry Rose	" },
+                    { value: "Golden", label: "Golden" },
+                    { value: "Huawei", label: "Huawei" },
+                    { value: "OPPO", label: "OPPO" },
+                    { value: "Samsung", label: "Samsung" },
+                    { value: "Microsoft Surface	", label: "Microsoft Surface	" },
+                  ]}
+                />
               </Grid.Col>
               <Grid.Col sm={6}>
                 <TextInput label="Vendor" />

@@ -32,9 +32,9 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     if (error) setError(undefined)
   }, [location.pathname])
 
-  useEffect(() => {
-    getUserInfo()
-  }, [token])
+  // useEffect(() => {
+  //   getUserInfo()
+  // }, [token])
 
   async function getUserInfo() {
     try {
@@ -61,10 +61,6 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       setLoading(false)
     }
   }
-
-  useEffect(() => {
-    console.log(user)
-  }, [user])
 
   function signUp(email: string, name: string, password: string) {
     setLoading(true)

@@ -54,6 +54,7 @@ function App() {
 
                 <Route path="/products" element={<ProductListPage />}></Route>
                 <Route path="/products/new" element={<ProductNewPage />}></Route>
+                <Route path="/products/:id" element={<ProductNewPage />}></Route>
               </Route>
 
               <Route element={<EmptyLayout />}>

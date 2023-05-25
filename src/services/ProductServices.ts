@@ -1,7 +1,10 @@
-import Api from "./Api";
+import Api from "./Api"
 
 export default {
-  product() {
-    return Api.get("/products");
+  products() {
+    return Api.get("/products")
   },
-};
+  product(id: string) {
+    return Api.get("/products/" + id)
+  },
+}

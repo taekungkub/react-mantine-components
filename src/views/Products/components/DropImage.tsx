@@ -39,7 +39,6 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
   }
 
   const previews = images.map((file, index) => {
-    console.log(typeof file)
     let imageUrl = ""
     if (typeof file === "string") {
       imageUrl = file
