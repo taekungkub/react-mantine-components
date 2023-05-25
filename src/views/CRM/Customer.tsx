@@ -1,4 +1,4 @@
-import { Flex, TextInput, Text } from "@mantine/core"
+import { Flex, TextInput, Text, SimpleGrid, ThemeIcon } from "@mantine/core"
 import CustomerDataTable from "../../components/CustomerDataTable"
 import PageTitle from "../../components/PageTitle"
 import useCustomer, { useFilterCustomer } from "../../hooks/useCustomer"
@@ -6,6 +6,30 @@ import { useDisclosure } from "@mantine/hooks"
 import EditCustomerDrawer from "./components/EditCustomerDrawer"
 import { CustomerTy } from "../../type"
 import { modals } from "@mantine/modals"
+import CardStatsCustomer from "../../components/Cards/CardStatsCustomer"
+import { IconUserCheck, IconUserPlus, IconUsers } from "@tabler/icons-react"
+
+function SectionUserStats() {
+  return (
+    <SimpleGrid cols={3} breakpoints={[{ maxWidth: "sm", cols: 1 }]} mt={20}>
+      <CardStatsCustomer title="Total Customers" value={2400} percent={17.9} type="UP">
+        <ThemeIcon size={"xl"}>
+          <IconUsers />
+        </ThemeIcon>
+      </CardStatsCustomer>
+      <CardStatsCustomer title="Active Customers" value={1897} percent={32.7} type="UP">
+        <ThemeIcon size={"xl"} color="violet">
+          <IconUserCheck />
+        </ThemeIcon>
+      </CardStatsCustomer>
+      <CardStatsCustomer title="New Customers" value={241} percent={2.7} type="DOWN">
+        <ThemeIcon size={"xl"} color="teal">
+          <IconUserPlus />
+        </ThemeIcon>
+      </CardStatsCustomer>
+    </SimpleGrid>
+  )
+}
 
 function CustomerPage() {
   const { custoemrs, searchQuery, setSearchQuery, selectedCustomer, setSelectedCustomer } = useCustomer()
@@ -36,6 +60,7 @@ function CustomerPage() {
   return (
     <div>
       <PageTitle pageTitle={"Customer"}></PageTitle>
+      <SectionUserStats />
       <Flex wrap={"wrap"} gap={10} justify={"start"} my={20}>
         <TextInput placeholder="Seacrch" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
       </Flex>
