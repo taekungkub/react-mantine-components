@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea } from "@mantine/core";
-import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea } from "@mantine/core"
+import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -45,39 +45,39 @@ const useStyles = createStyles((theme) => ({
   chevron: {
     transition: "transform 200ms ease",
   },
-}));
+}))
 
 interface LinksGroupProps {
-  icon: React.FC<any>;
-  label: string;
-  initiallyOpened?: boolean;
-  links?: { label: string; link: string }[];
-  link?: string;
+  icon: React.FC<any>
+  label: string
+  initiallyOpened?: boolean
+  links?: { label: string; link: string }[]
+  link?: string
 }
 
 export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: LinksGroupProps) {
-  const { classes, theme, cx } = useStyles();
-  const hasLinks = Array.isArray(links);
-  const [opened, setOpened] = useState(initiallyOpened || false);
-  const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft;
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [active, setActive] = useState(location.pathname ?? "");
+  const { classes, theme, cx } = useStyles()
+  const hasLinks = Array.isArray(links)
+  const [opened, setOpened] = useState(initiallyOpened || false)
+  const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [active, setActive] = useState(location.pathname ?? "")
 
   useEffect(() => {
-    setActive(location.pathname);
+    setActive(location.pathname)
 
     links?.map((link) => {
       if (location.pathname === link.link) {
-        setOpened(true);
+        setOpened(true)
       }
       if (location.pathname.split("/").length >= 2) {
         if (location.pathname.split("/")[1] !== link.link.split("/")[1]) {
-          setOpened(false);
+          setOpened(false)
         }
       }
-    });
-  }, [location.pathname]);
+    })
+  }, [location.pathname])
 
   const items = (hasLinks ? links : []).map((link) => (
     <Text<"a">
@@ -86,13 +86,13 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
       href={link.link}
       key={link.label}
       onClick={(event) => {
-        event.preventDefault();
-        navigate(`${link.link}`);
+        event.preventDefault()
+        navigate(`${link.link}`)
       }}
     >
       {link.label}
     </Text>
-  ));
+  ))
 
   const itemsAlone = () => {
     if (link)
@@ -104,14 +104,14 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
             href={link}
             key={label}
             onClick={(event) => {
-              event.preventDefault();
+              event.preventDefault()
             }}
           >
             {label}
           </Text>
         </>
-      );
-  };
+      )
+  }
 
   return (
     <>
@@ -120,9 +120,9 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
           position="apart"
           spacing={0}
           onClick={(event) => {
-            event.preventDefault();
+            event.preventDefault()
             if (!hasLinks) {
-              navigate(`${link}`);
+              navigate(`${link}`)
             }
           }}
         >
@@ -147,7 +147,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
       </UnstyledButton>
       {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
     </>
-  );
+  )
 }
 
 const mockdata = {
@@ -158,7 +158,7 @@ const mockdata = {
     { label: "Previous releases", link: "/" },
     { label: "Releases schedule", link: "/" },
   ],
-};
+}
 
 // export function NavbarLinksGroup() {
 //   return (

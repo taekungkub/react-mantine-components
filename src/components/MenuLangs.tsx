@@ -1,22 +1,22 @@
-import { Menu, Button, Text, createStyles } from "@mantine/core";
-import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconLanguage, IconChevronDown } from "@tabler/icons-react";
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { Menu, Button, Text, createStyles } from "@mantine/core"
+import { IconSettings, IconSearch, IconPhoto, IconMessageCircle, IconTrash, IconArrowsLeftRight, IconLanguage, IconChevronDown } from "@tabler/icons-react"
+import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 export default function MenuLang() {
   const useStyles = createStyles((theme) => ({
     dropdownActive: {
       color: theme.colors[theme.primaryColor][theme.fn.primaryShade()],
     },
-  }));
+  }))
 
-  const { classes, cx } = useStyles();
+  const { classes, cx } = useStyles()
 
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation()
 
   const changeLanguage = (lng: any) => {
-    i18n.changeLanguage(lng);
-  };
+    i18n.changeLanguage(lng)
+  }
 
   return (
     <Menu shadow="md" width={200}>
@@ -39,5 +39,5 @@ export default function MenuLang() {
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
-  );
+  )
 }

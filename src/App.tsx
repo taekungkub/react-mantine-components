@@ -1,27 +1,26 @@
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./views/Home";
-import DashboardLayout from "./layout/DashboardLayout";
-import Dashboard from "./views/Dashboard";
-import NotFoundPage from "./views/Exeception/404";
-import ServerOverload from "./views/Exeception/503";
-import SigninPage from "./views/Auth/Signin";
-import SignupPage from "./views/Auth/Signup";
-import ForgotPasswordPage from "./views/Auth/ForgotPassword";
-import ProfilePage from "./views/Account/Profile";
-import AccountLayout from "./views/Account";
-import PasswordPage from "./views/Account/Password";
-import NotificationPage from "./views/Account/Notification";
-import BillingPage from "./views/Account/Billing";
-import ResetPasswordPage from "./views/Auth/ResetPassword";
-import EmptyLayout from "./layout/EmptyLayout";
-import VerifyEmailPage from "./views/Auth/VerifyEmail";
-import NoPermisstionPage from "./views/Exeception/403";
-import MyGlobalStyles from "./assets/MyGlobalStyle";
-import MyTheme from "./assets/MyTheme";
-import ButtonPage from "./views/Components/Button";
-import ProductListPage from "./views/Products";
-import ProductNewPage from "./views/Products/NewProduct";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Home from "./views/Home"
+import DashboardLayout from "./layout/DashboardLayout"
+import Dashboard from "./views/Dashboard"
+import NotFoundPage from "./views/Exeception/404"
+import ServerOverload from "./views/Exeception/503"
+import SigninPage from "./views/Auth/Signin"
+import SignupPage from "./views/Auth/Signup"
+import ForgotPasswordPage from "./views/Auth/ForgotPassword"
+import ProfilePage from "./views/Account/Profile"
+import AccountLayout from "./views/Account"
+import PasswordPage from "./views/Account/Password"
+import NotificationPage from "./views/Account/Notification"
+import BillingPage from "./views/Account/Billing"
+import ResetPasswordPage from "./views/Auth/ResetPassword"
+import EmptyLayout from "./layout/EmptyLayout"
+import VerifyEmailPage from "./views/Auth/VerifyEmail"
+import NoPermisstionPage from "./views/Exeception/403"
+import MyGlobalStyles from "./assets/MyGlobalStyle"
+import MyTheme from "./assets/MyTheme"
+import ButtonPage from "./views/Components/Button"
+import ProductListPage from "./views/Products"
+import ProductNewPage from "./views/Products/NewProduct"
 
 function App() {
   return (
@@ -63,7 +62,7 @@ function App() {
         </BrowserRouter>
       </MyTheme>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
