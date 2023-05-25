@@ -1,6 +1,7 @@
 import { ButtonStylesParams, CardProps, ColorScheme, ColorSchemeProvider, MantineProvider } from "@mantine/core"
 import { useHotkeys, useLocalStorage } from "@mantine/hooks"
 import { Notifications } from "@mantine/notifications"
+import { ModalsProvider } from "@mantine/modals"
 
 interface Props {
   children: React.ReactNode
@@ -48,7 +49,7 @@ function MyTheme({ children }: Props) {
         >
           <Notifications position="top-right" />
 
-          {children}
+          <ModalsProvider>{children}</ModalsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </>

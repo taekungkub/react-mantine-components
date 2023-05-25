@@ -24,6 +24,7 @@ import ProductNewPage from "./views/Products/NewProduct"
 import { AuthProvider } from "./context/AuthContext"
 import PrivateRoutes from "./middleware/PrivateRoutes"
 import UnAuthRoutes from "./middleware/UnAuthRoutes"
+import CustomerPage from "./views/CRM/Customer"
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
                     <Route path="/account/billing" element={<BillingPage />}></Route>
                   </Route>
                 </Route>
+
+                <Route path="/crm/customer" element={<CustomerPage />}></Route>
 
                 <Route path="/exeception/403" element={<NoPermisstionPage />}></Route>
                 <Route path="/exeception/404" element={<NotFoundPage />}></Route>

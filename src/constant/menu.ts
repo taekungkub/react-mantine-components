@@ -1,4 +1,15 @@
-import { IconCompass, IconError404, IconFileAnalytics, IconHome, IconLogin, IconNotes, IconShoppingCart, IconUser } from "@tabler/icons-react"
+import {
+  IconCompass,
+  IconError404,
+  IconFileAnalytics,
+  IconHome,
+  IconLogin,
+  IconNotes,
+  IconShoppingCart,
+  IconUser,
+  IconUsers,
+  IconUsersGroup,
+} from "@tabler/icons-react"
 
 export const mockdata = [
   {
@@ -19,14 +30,11 @@ export const mockdata = [
   },
 
   {
-    label: "Auth",
-    icon: IconLogin,
-    initiallyOpened: false,
+    label: "Components",
+    icon: IconCompass,
     links: [
-      { label: "Sign In", link: "/signin" },
-      { label: "Sign Up", link: "/signup" },
-      { label: "Verify Email", link: "/verify/email/codeexampletest" },
-      { label: "Reset Password", link: "/resetpassword" },
+      { label: "Button", link: "/components/button" },
+      { label: "Card", link: "/components/card" },
     ],
   },
   {
@@ -41,13 +49,23 @@ export const mockdata = [
   },
 
   {
-    label: "Components",
-    icon: IconCompass,
+    label: "CRM",
+    icon: IconUsers,
+    links: [{ label: "Customer", link: "/crm/customer" }],
+  },
+
+  {
+    label: "Auth",
+    icon: IconLogin,
+    initiallyOpened: false,
     links: [
-      { label: "Button", link: "/components/button" },
-      { label: "Card", link: "/components/card" },
+      { label: "Sign In", link: "/signin" },
+      { label: "Sign Up", link: "/signup" },
+      { label: "Verify Email", link: "/verify/email/codeexampletest" },
+      { label: "Reset Password", link: "/resetpassword" },
     ],
   },
+
   {
     label: "Exception",
     icon: IconError404,
