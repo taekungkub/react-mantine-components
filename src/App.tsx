@@ -16,10 +16,10 @@ import ResetPasswordPage from "./views/Auth/ResetPassword"
 import EmptyLayout from "./layout/EmptyLayout"
 import VerifyEmailPage from "./views/Auth/VerifyEmail"
 import NoPermisstionPage from "./views/Exeception/403"
-import MyGlobalStyles from "./assets/MyGlobalStyle"
-import MyTheme from "./assets/MyTheme"
+import MyGlobalStyles from "./style/MyGlobalStyle"
+import ThemeProvider from ".//ThemeProvider"
 import ButtonPage from "./views/Components/Button"
-import ProductListPage from "./views/Products"
+import ProductListPage from "./views/Products/ProductList"
 import ProductNewPage from "./views/Products/NewProduct"
 import { AuthProvider } from "./context/AuthContext"
 import PrivateRoutes from "./middleware/PrivateRoutes"
@@ -29,7 +29,7 @@ import CustomerPage from "./views/CRM/Customer"
 function App() {
   return (
     <>
-      <MyTheme>
+      <ThemeProvider>
         <MyGlobalStyles />
         <BrowserRouter>
           <AuthProvider>
@@ -75,7 +75,7 @@ function App() {
             </Routes>
           </AuthProvider>
         </BrowserRouter>
-      </MyTheme>
+      </ThemeProvider>
     </>
   )
 }

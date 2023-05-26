@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode
 }
 
-function MyTheme({ children }: Props) {
+function ThemeProvider({ children }: Props) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
     defaultValue: "light",
@@ -56,4 +56,4 @@ function MyTheme({ children }: Props) {
   )
 }
 
-export default MyTheme
+export default ThemeProvider

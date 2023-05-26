@@ -1,7 +1,25 @@
-import { Group, Text, useMantineTheme, Flex, Image, SimpleGrid, Overlay, ActionIcon, Center, createStyles, Card } from "@mantine/core"
+import {
+  Group,
+  Text,
+  useMantineTheme,
+  Flex,
+  Image,
+  SimpleGrid,
+  Overlay,
+  ActionIcon,
+  Center,
+  createStyles,
+  Card,
+  Modal,
+  Button,
+  Transition,
+} from "@mantine/core"
 import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react"
 import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone"
-import useToast from "../../../hooks/useToast"
+import useToast from "../../../../hooks/useToast"
+import "./index.scss"
+import { useDisclosure } from "@mantine/hooks"
+import { useState } from "react"
 
 interface Props {
   handleSetFile: (e: any) => void
@@ -12,67 +30,71 @@ interface Props {
 
 export default function DropImage({ handleSetFile, isHasImage, images, handleDeleteFile }: Props) {
   const theme = useMantineTheme()
-
-  const useStyles = createStyles((theme) => ({
-    container: {
-      position: "relative",
-    },
-
-    overlay: {
-      position: "absolute",
-      height: "100%",
-      width: "100%",
-      margin: "0 auto",
-      zIndex: 2,
-      backgroundColor: "rgba(0,0,0,0.85)",
-
-      "&:hover": {},
-    },
-  }))
-
+  const useStyles = createStyles((theme) => ({}))
   const { classes, cx } = useStyles()
   const toast = useToast()
+  const [opened, { open, close }] = useDisclosure(false)
+
+  const [imageModal, setImageModal] = useState("")
 
   function handleRejectFile(files: FileRejection[]) {
     console.log("reject files", files)
     toast.error()
   }
 
+  function handleViewImage(file: String | FileWithPath) {
+    let imageUrl = ""
+    if (typeof file === "string") imageUrl = file
+    else imageUrl = URL.createObjectURL(file as FileWithPath)
+
+    setImageModal(imageUrl)
+    open()
+  }
+
   const previews = images.map((file, index) => {
     let imageUrl = ""
-    if (typeof file === "string") {
-      imageUrl = file
-    } else {
-      imageUrl = URL.createObjectURL(file as FileWithPath)
-    }
+    if (typeof file === "string") imageUrl = file
+    else imageUrl = URL.createObjectURL(file as FileWithPath)
 
     return (
-      <Card key={index} withBorder p={"xs"} className={classes.container}>
-        <Overlay sx={{ zIndex: 1 }} opacity={0.5}>
+      <div className="boxWrapper" key={index}>
+        <div className="boxAction">
           <Center h={"100%"}>
             <Group position="center">
-              <ActionIcon color="teal" size="sm">
+              <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleViewImage(file)}>
                 <IconEye />
               </ActionIcon>
-              <ActionIcon color="teal" size="sm" onClick={() => handleDeleteFile(index)}>
+              <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleDeleteFile(index)}>
                 <IconTrash />
               </ActionIcon>
             </Group>
           </Center>
-        </Overlay>
-
-        <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
-      </Card>
+        </div>
+        <div className="overlay"></div>
+        <div className="innerBox">
+          <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
+        </div>
+      </div>
     )
   })
 
   return (
     <>
-      <SimpleGrid cols={isHasImage ? 4 : 1} breakpoints={[{ maxWidth: "sm", cols: 2 }]}>
+      <Modal opened={opened} onClose={close} withCloseButton={false} centered transitionProps={{ transition: "pop" }}>
+        <Image fit="cover" src={imageModal} imageProps={{ onLoad: () => URL.revokeObjectURL(imageModal) }} />
+      </Modal>
+
+      <SimpleGrid
+        cols={isHasImage ? 4 : 1}
+        breakpoints={[
+          { maxWidth: "lg", cols: 3 },
+          { maxWidth: "sm", cols: 3 },
+          { maxWidth: "xs", cols: 2 },
+        ]}
+      >
         {previews}
 
         <Dropzone
-          style={{ display: "grid", alignContent: "center" }}
           onReject={(files) => handleRejectFile(files)}
           maxSize={3 * 1024 ** 2} //5MB
           accept={IMAGE_MIME_TYPE}
