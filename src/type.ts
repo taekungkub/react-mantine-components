@@ -88,3 +88,10 @@ export interface CustomerTy {
   ssn: "661-64-2976"
   userAgent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/12.0.702.0 Safari/534.24"
 }
+
+
+
+
+
+
+export type FetchStatusTy = "idle" | "loading" | "succeeded" | "failed";
