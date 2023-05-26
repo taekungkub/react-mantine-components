@@ -13,6 +13,8 @@ import {
   Modal,
   Button,
   Transition,
+  Box,
+  Paper,
 } from "@mantine/core"
 import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react"
 import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone"
@@ -57,24 +59,26 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
     else imageUrl = URL.createObjectURL(file as FileWithPath)
 
     return (
-      <div className="boxWrapper" key={index}>
-        <div className="boxAction">
-          <Center h={"100%"}>
-            <Group position="center">
-              <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleViewImage(file)}>
-                <IconEye />
-              </ActionIcon>
-              <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleDeleteFile(index)}>
-                <IconTrash />
-              </ActionIcon>
-            </Group>
-          </Center>
-        </div>
-        <div className="overlay"></div>
-        <div className="innerBox">
-          <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
-        </div>
-      </div>
+      <Paper withBorder radius={"sm"} p={"sm"} key={index}>
+        <Paper bg={"gray.2"} h={"100%"} className="boxWrapper">
+          <div className="overlay"></div>
+          <Box className="boxAction">
+            <Center h={"100%"}>
+              <Group position="center">
+                <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleViewImage(file)}>
+                  <IconEye />
+                </ActionIcon>
+                <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleDeleteFile(index)}>
+                  <IconTrash />
+                </ActionIcon>
+              </Group>
+            </Center>
+          </Box>
+          <Box className="innerBox">
+            <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
+          </Box>
+        </Paper>
+      </Paper>
     )
   })
 
