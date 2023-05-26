@@ -1,4 +1,5 @@
 import {
+  IconBrandRedux,
   IconCompass,
   IconError404,
   IconFileAnalytics,
@@ -52,6 +53,18 @@ export const mockdata = [
     label: "CRM",
     icon: IconUsers,
     links: [{ label: "Customer", link: "/crm/customer" }],
+  },
+
+  {
+    label: "Redux",
+    icon: IconBrandRedux,
+    initiallyOpened: false,
+
+    links: [
+      { label: "Counter", link: "/redux/counter" },
+      { label: "Products", link: "/redux/products" },
+      { label: "Products Detail", link: "/redux/product/1" },
+    ],
   },
 
   {

@@ -25,6 +25,11 @@ import { AuthProvider } from "./context/AuthContext"
 import PrivateRoutes from "./middleware/PrivateRoutes"
 import UnAuthRoutes from "./middleware/UnAuthRoutes"
 import CustomerPage from "./views/CRM/Customer"
+import Providers from "./Providers"
+import { store } from "./store/store"
+import CounterPage from "./views/Redux/counter"
+import ProductReduxPage from "./views/Redux/Products"
+import ProductReduxDetailPage from "./views/Redux/ProductDetail"
 
 function App() {
   return (
@@ -32,48 +37,54 @@ function App() {
       <ThemeProvider>
         <MyGlobalStyles />
         <BrowserRouter>
-          <AuthProvider>
-            <Routes>
-              <Route element={<DashboardLayout />}>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Providers store={store}>
+            <AuthProvider>
+              <Routes>
+                <Route element={<DashboardLayout />}>
+                  <Route path="/" element={<Home />}></Route>
+                  <Route path="/dashboard" element={<Dashboard />}></Route>
 
-                <Route element={<PrivateRoutes />}>
-                  <Route path="/account" element={<AccountLayout />}>
-                    <Route path="/account/profile" element={<ProfilePage />}></Route>
-                    <Route path="/account/password" element={<PasswordPage />}></Route>
-                    <Route path="/account/notification" element={<NotificationPage />}></Route>
-                    <Route path="/account/billing" element={<BillingPage />}></Route>
+                  <Route element={<PrivateRoutes />}>
+                    <Route path="/account" element={<AccountLayout />}>
+                      <Route path="/account/profile" element={<ProfilePage />}></Route>
+                      <Route path="/account/password" element={<PasswordPage />}></Route>
+                      <Route path="/account/notification" element={<NotificationPage />}></Route>
+                      <Route path="/account/billing" element={<BillingPage />}></Route>
+                    </Route>
                   </Route>
+
+                  <Route path="/crm/customer" element={<CustomerPage />}></Route>
+
+                  <Route path="/exeception/403" element={<NoPermisstionPage />}></Route>
+                  <Route path="/exeception/404" element={<NotFoundPage />}></Route>
+                  <Route path="/exeception/503" element={<ServerOverload />}></Route>
+
+                  <Route path="/components/button" element={<ButtonPage />}></Route>
+
+                  <Route path="/products" element={<ProductListPage />}></Route>
+                  <Route path="/products/new" element={<ProductNewPage />}></Route>
+                  <Route path="/products/:id" element={<ProductNewPage />}></Route>
+
+                  <Route path="/redux/counter" element={<CounterPage />}></Route>
+                  <Route path="/redux/products" element={<ProductReduxPage />}></Route>
+                  <Route path="/redux/product/:id" element={<ProductReduxDetailPage />}></Route>
                 </Route>
 
-                <Route path="/crm/customer" element={<CustomerPage />}></Route>
+                <Route element={<EmptyLayout />}>
+                  <Route element={<UnAuthRoutes />}>
+                    <Route path="/signin" element={<SigninPage />}></Route>
+                    <Route path="/signup" element={<SignupPage />}></Route>
+                  </Route>
 
-                <Route path="/exeception/403" element={<NoPermisstionPage />}></Route>
-                <Route path="/exeception/404" element={<NotFoundPage />}></Route>
-                <Route path="/exeception/503" element={<ServerOverload />}></Route>
-
-                <Route path="/components/button" element={<ButtonPage />}></Route>
-
-                <Route path="/products" element={<ProductListPage />}></Route>
-                <Route path="/products/new" element={<ProductNewPage />}></Route>
-                <Route path="/products/:id" element={<ProductNewPage />}></Route>
-              </Route>
-
-              <Route element={<EmptyLayout />}>
-                <Route element={<UnAuthRoutes />}>
-                  <Route path="/signin" element={<SigninPage />}></Route>
-                  <Route path="/signup" element={<SignupPage />}></Route>
+                  <Route path="/forgotpassword" element={<ForgotPasswordPage />}></Route>
+                  <Route path="/resetpassword" element={<ResetPasswordPage />}></Route>
+                  <Route path="/verify/email/:code" element={<VerifyEmailPage />}></Route>
                 </Route>
 
-                <Route path="/forgotpassword" element={<ForgotPasswordPage />}></Route>
-                <Route path="/resetpassword" element={<ResetPasswordPage />}></Route>
-                <Route path="/verify/email/:code" element={<VerifyEmailPage />}></Route>
-              </Route>
-
-              <Route path="*" element={<NotFoundPage />}></Route>
-            </Routes>
-          </AuthProvider>
+                <Route path="*" element={<NotFoundPage />}></Route>
+              </Routes>
+            </AuthProvider>
+          </Providers>
         </BrowserRouter>
       </ThemeProvider>
     </>
