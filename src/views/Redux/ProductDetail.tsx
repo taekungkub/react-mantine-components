@@ -1,23 +1,46 @@
-import { useSelector } from "react-redux"
-import { fetchOneProducts, productSelector } from "../../store/slices/productSlice"
-import { useAppDispatch } from "../../store/store"
-import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useSelector } from "react-redux";
+import { fetchOneProducts, productSelector, getOneProduct } from "../../store/slices/productSlice";
+import { RootState, useAppDispatch } from "../../store/store";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function ProductReduxDetailPage() {
-  const productReducer = useSelector(productSelector)
-  const dispatch = useAppDispatch()
-  const { id } = useParams()
-  const product = productReducer.productData
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const product = useSelector(getOneProduct);
+  const productReducer = useSelector(productSelector);
+
+  const productStatus = productReducer.productDataStatus;
+
   useEffect(() => {
-    dispatch(fetchOneProducts(id as string))
-  }, [])
+    dispatch(fetchOneProducts(id as string));
+  }, []);
+
+  function ProductSection() {
+    if (productStatus === "loading") {
+      return (
+        <>
+          <div>Loading</div>
+        </>
+      );
+    } else if(productStatus === 'succeeded') {
+      return (
+        <>
+          <div>
+            <div>{product?.title}</div>
+          </div>
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <div>Product Detail Page</div>
-      <div>{product?.title}</div>
+      {ProductSection()}
+    
     </>
-  )
+  );
 }
 
-export default ProductReduxDetailPage
+export default ProductReduxDetailPage;

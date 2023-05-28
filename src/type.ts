@@ -94,4 +94,17 @@ export interface CustomerTy {
 
 
 
+
 export type FetchStatusTy = "idle" | "loading" | "succeeded" | "failed";
+
+
+export interface CartItemTy {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  total: number;
+  discountPercentage: number;
+  discountedPrice: number;
+}
+ 

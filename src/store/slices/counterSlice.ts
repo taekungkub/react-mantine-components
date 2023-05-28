@@ -21,5 +21,5 @@ export const counterSlice = createSlice({
 })
 
 export const { increase, decrease } = counterSlice.actions
-export const counterSelector = (store: RootState) => store.counterReducer
+export const counterSelector = (store: RootState) => store.couter
 export default counterSlice.reducer

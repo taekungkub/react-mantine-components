@@ -1,37 +1,68 @@
-import { useSelector } from "react-redux"
-import { fetchProducts, productSelector } from "../../store/slices/productSlice"
-import { useAppDispatch } from "../../store/store"
-import { useEffect } from "react"
-import {  fetchCategories, getAllCategories } from "@/store/slices/categorySlice"
+import { useSelector } from "react-redux";
+import { fetchProducts, getAllProducts} from "../../store/slices/productSlice";
+import { useAppDispatch } from "../../store/store";
+import { useEffect, useState } from "react";
+import { fetchCategories, getAllCategories } from "@/store/slices/categorySlice";
+import { Badge, Box, Button, Card, Flex, Grid, Group, SimpleGrid } from "@mantine/core";
+import { ProductTy } from "@/type";
+import { useNavigate } from "react-router-dom";
+import CardProduct from "@/components/Cards/CardProduct";
 
 function ProductReduxPage() {
-  const productReducer = useSelector(productSelector)
-  const dispatch = useAppDispatch()
-  const products = productReducer.products
+  const dispatch = useAppDispatch();
+  const products = useSelector(getAllProducts);
+  const categories = useSelector(getAllCategories);
 
-  const categories = useSelector(getAllCategories)
+  
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchProducts())
-    dispatch(fetchCategories())
-  }, [dispatch])
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
-  const renderedProduct = products.map((product) => (
-    <ul key={product.id}>
-      <li>{product.id}</li>
-    </ul>
-  ))
+  function CategoryList() {
+    return (
+     <Card py={20}  sx={{position:'sticky' , top:'60px' , zIndex:5}}>
+       <Flex gap={10}  wrap={'wrap'} >
+        {categories.map((v:string) => (
+          <Badge onClick={()=>{
+             navigate('/redux/product/category/' + v)
+          }}> {v} </Badge>
+        ))}
+      </Flex>
+     </Card>
+    );
+  }
 
-
+  function ProductList() {
+    return (
+      <>
+        <Grid>
+          {products.map((product) => (
+            <>
+              <Grid.Col md={6} lg={3}>
+                <CardProduct key={product.id} data={product} onToggle={()=> navigate('/redux/product/' + product.id)} />
+              </Grid.Col>
+            </>
+          ))}
+        </Grid>
+      </>
+    );
+  }
 
   return (
     <>
       <div>
-        <ul>{renderedProduct}</ul>
-        {categories ? categories[0] : 'No categories'}
+        <CategoryList />
+        <ProductList />
+        {categories ? categories[0] : "No categories"}
       </div>
+
+      <div></div>
     </>
-  )
+  );
 }
 
-export default ProductReduxPage
+export default ProductReduxPage;

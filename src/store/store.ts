@@ -9,10 +9,10 @@ import categoryReducer from "./slices/categorySlice"
 
 
 const reducer = {
-  counterReducer,
-  productReducer,
-  cartReducer,
-  categoryReducer
+  couter:counterReducer,
+  product:productReducer,
+  cart:cartReducer,
+  category:categoryReducer
 }
 
 
