@@ -1,5 +1,5 @@
 import { IconHeart } from "@tabler/icons-react"
-import { Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles, rem, Title } from "@mantine/core"
+import { Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles, rem, Title, Flex } from "@mantine/core"
 import { ProductTy } from "@/type"
 import "./CardProduct.scss"
 
@@ -49,9 +49,13 @@ export default function CardProduct(product: BadgeCardProps) {
         <Text fz="sm" mt="xs" className="desc">
           {product.data.description}
         </Text>
+       <Flex align={'center'}>
+       <Badge color="yellow">-{product.data.discountPercentage}%</Badge>
+
         <Text fz="lg" fw={500} className="title">
           ${product.data.price}
         </Text>
+       </Flex>
       </Card.Section>
 
       <Group mt="xs">

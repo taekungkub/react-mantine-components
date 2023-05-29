@@ -24,6 +24,8 @@ transition: "all 200ms ease",
 
 const { classes } = useStyles();
 
+className={cx(classes.link, { [classes.linkActive]: link.link === active })}
+
 uef
 usf
 

@@ -31,8 +31,8 @@ function DashboardLayout() {
                 </Box>
               </Flex>
               <Flex gap={20} align={"center"}>
-                <ActionIcon variant="subtle" radius={"lg"} color="blue">
-                  <IconShoppingCart size="1.125rem" />
+                <ActionIcon variant="light"  color="blue" size={'lg'}>
+                  <IconShoppingCart size="1.125rem"  />
                 </ActionIcon>
                 <ButtonToggleTheme />
 
