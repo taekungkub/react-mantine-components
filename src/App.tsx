@@ -31,6 +31,8 @@ import CounterPage from "./views/Redux/counter"
 import ProductReduxPage from "./views/Redux/Products"
 import ProductReduxDetailPage from "./views/Redux/ProductDetail"
 import ProductCategory from "./views/Redux/ProductCategory"
+import EcommerceLayout from "./layout/EcommerceLayout"
+import ProductLayout from "./layout/ProductLayout"
 
 function App() {
   return (
@@ -66,11 +68,15 @@ function App() {
                   <Route path="/products/new" element={<ProductNewPage />}></Route>
                   <Route path="/products/:id" element={<ProductNewPage />}></Route>
 
-                  <Route path="/redux/counter" element={<CounterPage />}></Route>
-                  <Route path="/redux/products" element={<ProductReduxPage />}></Route>
-                  <Route path="/redux/product/:id" element={<ProductReduxDetailPage />}></Route>
-                  <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>
+                  <Route element={<EcommerceLayout />}>
+                    <Route path="/redux/counter" element={<CounterPage />}></Route>
+                    <Route element={<ProductLayout />}>
+                      <Route path="/redux/products" element={<ProductReduxPage />}></Route>
+                      <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>
+                    </Route>
 
+                    <Route path="/redux/product/:id" element={<ProductReduxDetailPage />}></Route>
+                  </Route>
                 </Route>
 
                 <Route element={<EmptyLayout />}>

@@ -1,10 +1,11 @@
-import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button } from "@mantine/core"
+import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button, ActionIcon, ThemeIcon } from "@mantine/core"
 import { Outlet } from "react-router-dom"
 import { TheNavbar, TheDrawer } from "./TheNavbar"
 import MenuLang from "../components/MenuLangs"
 import ButtonToggleTheme from "../components/ButtonToggleTheme"
 import MenuDropdownProfile from "../components/MenuDropdownProfile"
 import useSidebar from "../hooks/useSidebar"
+import { IconShoppingCart } from "@tabler/icons-react"
 
 function DashboardLayout() {
   const { opened, setOpened, handleOpened } = useSidebar()
@@ -30,6 +31,9 @@ function DashboardLayout() {
                 </Box>
               </Flex>
               <Flex gap={20} align={"center"}>
+                <ActionIcon variant="subtle" radius={"lg"} color="blue">
+                  <IconShoppingCart size="1.125rem" />
+                </ActionIcon>
                 <ButtonToggleTheme />
 
                 <MenuDropdownProfile />
