@@ -1,43 +1,72 @@
-import { Badge, Button, Card, Flex, Title } from "@mantine/core"
+import { ActionIcon, Badge, Button, Card, Flex, Title } from "@mantine/core"
 import { FilterLinkGroup } from "./FilterLinkGroup"
+import { useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
+import { IconClearAll, IconX } from "@tabler/icons-react"
 
 function FilterProducts() {
   const mockdata = [
     {
-      label: "Brand",
-      links: [
-        { label: "Upcoming releases", value: "/1" },
-        { label: "Previous releases", value: "/2" },
-        { label: "Releases schedule", value: "/3" },
-      ],
+      label: "Price",
+      isPrice: true,
+      minPrice: 0,
+      maxPrice: 2000,
+      links: [{ label: "Upcoming releases", value: "/1" }],
+      initiallyOpened: false,
     },
+
     {
-      label: "Brand",
-      links: [
-        { label: "Upcoming releases", value: "/4" },
-        { label: "Previous releases", value: "/5" },
-        { label: "Releases schedule", value: "/6" },
-      ],
+      label: "Rating",
+      isRating: true,
+      links: [{ label: "Upcoming releases", value: "/4" }],
+      initiallyOpened: false,
     },
   ]
 
   const links = mockdata.map((item, i) => <FilterLinkGroup {...item} key={i} />)
+  const [searchParams, setSearchParams] = useSearchParams()
 
+  const params: string[] = []
+
+  for (let entry of searchParams.entries()) {
+    params.push(entry[0])
+  }
+  function handleClearFilterAll() {
+    console.log("toggle")
+    for (let v of params) {
+      console.log(v)
+      searchParams.delete(v)
+      setSearchParams(searchParams)
+    }
+  }
   return (
     <Card>
       <Card.Section>
         <Flex justify={"space-between"}>
           <Title order={4}>Filter</Title>
-          {/* <Button variant="subtle" size="xs">
-            Clear
-          </Button> */}
+          {params.length >= 1 && (
+            <Button variant="subtle" size="xs" onClick={() => handleClearFilterAll()}>
+              Clear
+            </Button>
+          )}
         </Flex>
-        {/* <Flex wrap={"wrap"} gap={4} my={5}>
-          <Badge>asd</Badge> <Badge>asd</Badge>
-          <Badge>asd</Badge>
-          <Badge>asdasdasd</Badge> <Badge>asd</Badge>
-          <Badge>asd</Badge>
-        </Flex> */}
+
+        <Flex wrap={"wrap"} gap={10} mt={12}>
+          {params.map((v, i) => (
+            <Button
+              variant="light"
+              size="xs"
+              rightIcon={<IconX size="1.125rem" />}
+              onClick={() => {
+                searchParams.delete(v)
+                setSearchParams(searchParams)
+              }}
+              key={i}
+            >
+              {v}
+            </Button>
+          ))}
+        </Flex>
       </Card.Section>
       <Card.Section>{links}</Card.Section>
     </Card>

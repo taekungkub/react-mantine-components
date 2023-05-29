@@ -5,12 +5,25 @@ import { useEffect, useState } from "react"
 import { fetchCategories, getAllCategories } from "@/store/slices/categorySlice"
 import { Badge, Box, Button, Card, Flex, Grid, Group, SimpleGrid } from "@mantine/core"
 import { ProductTy } from "@/type"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import CardProduct from "@/components/Cards/CardProduct"
+import useFilterProducts from "./hooks/useFilterProducts"
 
 function ProductReduxPage() {
   const dispatch = useAppDispatch()
   const products = useSelector(getAllProducts)
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const { productFilter } = useFilterProducts({
+    data: products,
+    sort: {
+      price: searchParams.get("sortBy") ?? "",
+      minPrice: searchParams.get("minPrice") ?? "",
+      maxPrice: searchParams.get("maxPrice") ?? "",
+      rating: searchParams.get("rating") ?? "",
+    },
+  })
 
   const navigate = useNavigate()
 
@@ -22,12 +35,10 @@ function ProductReduxPage() {
     return (
       <>
         <Grid>
-          {products.map((product) => (
-            <>
-              <Grid.Col md={6} lg={3}>
-                <CardProduct key={product.id} data={product} onToggle={() => navigate("/redux/product/" + product.id)} />
-              </Grid.Col>
-            </>
+          {productFilter.map((product) => (
+            <Grid.Col md={6} lg={4} key={product.id}>
+              <CardProduct key={product.id} data={product} onToggle={() => navigate("/redux/product/" + product.id)} />
+            </Grid.Col>
           ))}
         </Grid>
       </>

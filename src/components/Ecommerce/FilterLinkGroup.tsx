@@ -1,7 +1,26 @@
 import { useEffect, useState } from "react"
-import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea, Checkbox, Divider } from "@mantine/core"
-import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react"
-import { useLocation, useNavigate } from "react-router-dom"
+import {
+  Group,
+  Box,
+  Collapse,
+  ThemeIcon,
+  Text,
+  UnstyledButton,
+  createStyles,
+  rem,
+  getStylesRef,
+  Navbar,
+  ScrollArea,
+  Checkbox,
+  Divider,
+  RangeSlider,
+  Rating,
+  Button,
+  Flex,
+} from "@mantine/core"
+import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout, IconStar } from "@tabler/icons-react"
+import { createSearchParams, useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import { link } from "joi"
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -43,19 +62,107 @@ interface LinksGroupProps {
   label: string
   initiallyOpened?: boolean
   links?: { label: string; value: string }[]
+  isPrice?: boolean
+  maxPrice?: number
+  minPrice?: number
+  isRating?: boolean
 }
 
-export function FilterLinkGroup({ label, initiallyOpened, links }: LinksGroupProps) {
+export function FilterLinkGroup({ label, initiallyOpened, links, isPrice, maxPrice, minPrice, isRating }: LinksGroupProps) {
   const { classes, theme, cx } = useStyles()
   const hasLinks = Array.isArray(links)
   const [opened, setOpened] = useState(initiallyOpened || false)
   const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const items = (hasLinks ? links : []).map((link, index) => (
-    <Box className={cx(classes.link)} key={index}>
-      <Checkbox label={link.label} value={link.value} />
-    </Box>
-  ))
+  const [rangeValue, setRangeValue] = useState<[number, number]>([
+    Number(searchParams.get("minPrice")) ?? minPrice,
+    Number(searchParams.get("maxPrice")) ?? maxPrice,
+  ])
+
+  const [rating, setRating] = useState(searchParams.get("rating") ?? "")
+
+  useEffect(() => {
+    if (rangeValue[0]) {
+      setSearchParams((prevParams) => {
+        return new URLSearchParams({
+          ...Object.fromEntries(prevParams.entries()),
+          ...{
+            minPrice: rangeValue[0].toString(),
+          },
+        })
+      })
+    }
+  }, [rangeValue[0]])
+
+  useEffect(() => {
+    if (rangeValue[1]) {
+      setSearchParams((prevParams) => {
+        return new URLSearchParams({
+          ...Object.fromEntries(prevParams.entries()),
+          ...{
+            maxPrice: rangeValue[1].toString(),
+          },
+        })
+      })
+    }
+  }, [rangeValue[1]])
+
+  useEffect(() => {
+    if (rating) {
+      setSearchParams((prevParams) => {
+        return new URLSearchParams({
+          ...Object.fromEntries(prevParams.entries()),
+          ...{
+            rating: rating,
+          },
+        })
+      })
+    }
+  }, [rating])
+
+  const items = (hasLinks ? links : []).map((link, index) => {
+    if (isPrice) {
+      return (
+        <Box my={40} px={theme.spacing.md} key={index}>
+          <RangeSlider
+            thumbSize={17}
+            mt="xl"
+            defaultValue={[Number(searchParams.get("minPrice")) ?? minPrice, Number(searchParams.get("maxPrice"))] ?? maxPrice}
+            min={minPrice}
+            max={maxPrice}
+            onChange={setRangeValue}
+          />
+        </Box>
+      )
+    } else if (isRating) {
+      return (
+        <Flex wrap={"wrap"} gap={10} my={20} px={theme.spacing.md} key={index}>
+          <Button variant="outline" onClick={() => setRating("5")}>
+            5
+          </Button>
+          <Button variant="outline" onClick={() => setRating("4")}>
+            4
+          </Button>
+          <Button variant="outline" onClick={() => setRating("3")}>
+            3
+          </Button>
+          <Button variant="outline" onClick={() => setRating("2")}>
+            2
+          </Button>
+          <Button variant="outline" onClick={() => setRating("1")}>
+            1
+          </Button>
+        </Flex>
+      )
+    } else {
+      return (
+        <Box className={cx(classes.link)} key={index}>
+          <Checkbox label={link.label} value={link.value} />
+        </Box>
+      )
+    }
+  })
 
   return (
     <>

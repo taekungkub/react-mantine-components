@@ -1,16 +1,43 @@
 import { Button, Flex, Grid, Menu, Text, Title } from "@mantine/core"
-import { Outlet, useParams } from "react-router-dom"
+import { Outlet, createSearchParams, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import FilterProducts from "../components/Ecommerce/FilterProducts"
 import { IconSortAscending2 } from "@tabler/icons-react"
 import { useSelector } from "react-redux"
 import { productSelector } from "../store/slices/productSlice"
 import { categorySelector } from "../store/slices/categorySlice"
+import { useEffect, useState } from "react"
 
 export default function ProductLayout() {
   const productReducer = useSelector(productSelector)
   const categoryReducer = useSelector(categorySelector)
-
   const { name } = useParams()
+
+  const [sortBy, setSortBy] = useState<string>()
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const options = {
+    search: `?${createSearchParams({
+      sortBy: sortBy ?? "",
+    })}`,
+  }
+
+  useEffect(() => {
+    if (sortBy) {
+      setSearchParams((prevParams) => {
+        return new URLSearchParams({
+          ...Object.fromEntries(prevParams.entries()),
+          ...{
+            sortBy: sortBy,
+          },
+        })
+      })
+    }
+  }, [sortBy])
+
+  function handleSort(sort: string) {
+    setSortBy(sort)
+  }
 
   return (
     <Grid>
@@ -32,9 +59,10 @@ export default function ProductLayout() {
                 </Menu.Target>
 
                 <Menu.Dropdown>
-                  <Menu.Item>Date</Menu.Item>
-                  <Menu.Item>Best Seller</Menu.Item>
-                  <Menu.Item>Price</Menu.Item>
+                  <Menu.Item onClick={() => handleSort("date")}>Date</Menu.Item>
+                  <Menu.Item onClick={() => handleSort("best")}>Best Seller</Menu.Item>
+                  <Menu.Item onClick={() => handleSort("lowest_price")}>Low price</Menu.Item>
+                  <Menu.Item onClick={() => handleSort("highest_price")}>High price</Menu.Item>
                 </Menu.Dropdown>
               </Menu>
             </Flex>
