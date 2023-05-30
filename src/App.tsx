@@ -69,8 +69,10 @@ function App() {
                   <Route path="/products/new" element={<ProductNewPage />}></Route>
                   <Route path="/products/:id" element={<ProductNewPage />}></Route>
 
+
+                  <Route path="/redux/counter" element={<CounterPage />}></Route>
+
                   <Route element={<EcommerceLayout />}>
-                    <Route path="/redux/counter" element={<CounterPage />}></Route>
                     <Route element={<ProductLayout />}>
                       <Route path="/redux/products" element={<ProductReduxPage />}></Route>
                       <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>

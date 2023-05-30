@@ -3,11 +3,12 @@ import { cartSelector } from "../../../store/slices/cartSlice"
 import { Box, Card, Grid } from "@mantine/core"
 import TableCartList from "./TableCartList"
 import SummarySection from "./SummarySection"
+import { useState } from "react"
 
 function CartPage() {
   const cartReducer = useSelector(cartSelector)
   const carts = cartReducer.carts
-
+ 
   const items = carts.map((v, i) => (
     <>
       <Card withBorder key={i} mt={12}>
@@ -21,10 +22,10 @@ function CartPage() {
     <Box>
       <Grid>
         <Grid.Col md={8}>
-          <TableCartList data={carts} />
+          <TableCartList data={carts}  />
         </Grid.Col>
         <Grid.Col md={4}>
-          <SummarySection />
+          <SummarySection  />
         </Grid.Col>
       </Grid>
     </Box>

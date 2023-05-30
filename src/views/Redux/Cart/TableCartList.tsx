@@ -1,24 +1,25 @@
-import { useEffect, useState } from "react"
-import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, Flex, Box, ActionIcon } from "@mantine/core"
-import { CartItemTy } from "../../../type"
-import InputQty from "../ProductDetail/InputQty"
-import { useAppDispatch } from "../../../store/store"
-import { addtoCart, editCartItemQuantity, removeFromCart } from "../../../store/slices/cartSlice"
-import { IconTrash } from "@tabler/icons-react"
+import { useEffect, useState } from "react";
+import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, Flex, Box, ActionIcon } from "@mantine/core";
+import { CartItemTy } from "../../../type";
+import InputQty from "../ProductDetail/InputQty";
+import { useAppDispatch } from "../../../store/store";
+import { addtoCart, editCartItemQuantity, removeFromCart, setSelected } from "../../../store/slices/cartSlice";
+import { IconTrash } from "@tabler/icons-react";
 
-const useStyles = createStyles((theme) => ({}))
+const useStyles = createStyles((theme) => ({}));
 
 interface TableSelectionProps {
-  data: CartItemTy[]
+  data: CartItemTy[];
 }
 
 export default function TableCartList({ data }: TableSelectionProps) {
-  const { classes, cx } = useStyles()
-  const [selection, setSelection] = useState(data.map((v) => v.id))
+  const { classes, cx } = useStyles();
+  const [selection, setSelection] = useState(data.map((v) => v.id));
 
-  const toggleRow = (id: number) => setSelection((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))
-  const toggleAll = () => setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.id)))
-  const dispatch = useAppDispatch()
+  const toggleRow = (id: number) =>
+    setSelection((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
+  const toggleAll = () => setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.id)));
+  const dispatch = useAppDispatch();
 
   function handleChange(value: number, item: CartItemTy) {
     dispatch(
@@ -26,17 +27,15 @@ export default function TableCartList({ data }: TableSelectionProps) {
         ...item,
         quantity: value,
       })
-    )
+    );
   }
 
   useEffect(() => {
-    // selection.map((id:number)=>    dispatch(removeFromCart(id))
-
-    console.log(selection)
-  }, [selection])
+    dispatch(setSelected(selection));
+  }, [selection]);
 
   const rows = data.map((item) => {
-    const selected = selection.includes(item.id)
+    const selected = selection.includes(item.id);
     return (
       <tr key={item.id}>
         <td>
@@ -63,8 +62,8 @@ export default function TableCartList({ data }: TableSelectionProps) {
           </ActionIcon>
         </td>
       </tr>
-    )
-  })
+    );
+  });
 
   return (
     <ScrollArea>
@@ -93,5 +92,5 @@ export default function TableCartList({ data }: TableSelectionProps) {
         </Box>
       )}
     </ScrollArea>
-  )
+  );
 }

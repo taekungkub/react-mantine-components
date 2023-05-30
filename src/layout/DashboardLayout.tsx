@@ -6,6 +6,7 @@ import ButtonToggleTheme from "../components/ButtonToggleTheme"
 import MenuDropdownProfile from "../components/MenuDropdownProfile"
 import useSidebar from "../hooks/useSidebar"
 import { IconShoppingCart } from "@tabler/icons-react"
+import LanguagePicker from "@/components/LanguagePicker"
 
 function DashboardLayout() {
   const { opened, setOpened, handleOpened } = useSidebar()
@@ -39,9 +40,9 @@ function DashboardLayout() {
                 <MenuDropdownProfile />
 
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                  <div>
-                    <MenuLang />
-                  </div>
+                
+                    {/* <MenuLang /> */}
+                 <LanguagePicker/>
                 </MediaQuery>
               </Flex>
             </Flex>

@@ -84,7 +84,7 @@ export default function ProductLayout() {
         <Grid.Col sm={9} xl={10}>
           <Grid>
             <Grid.Col span={12}>
-              <Flex justify={"space-between"}>
+              <Flex justify={"space-between"} align={'center'}>
                 <Title order={4}>
                   {name ? name : "Product All"} ({name ? categoryReducer.categoryProducts.length : productReducer.products.length})
                 </Title>
@@ -95,7 +95,7 @@ export default function ProductLayout() {
                       <IconSortAscending2 />
                     </ActionIcon>
                   </MediaQuery>
-                  <Menu width={200} shadow="md">
+                  <Menu width={200} >
                     <Menu.Target>
                       <Button variant="outline" leftIcon={<IconSortAscending2 />}>
                         Filter

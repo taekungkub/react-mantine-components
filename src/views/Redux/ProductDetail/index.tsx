@@ -18,7 +18,7 @@ function ProductReduxDetailPage() {
 
   useEffect(() => {
     dispatch(fetchOneProducts(id as string))
-  }, [])
+  }, [id])
 
   // function ProductSection() {
   //   if (productStatus === "loading") {
