@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 import { cartSelector } from "../../../store/slices/cartSlice"
 import { Box, Card, Grid } from "@mantine/core"
 import TableCartList from "./TableCartList"
+import SummarySection from "./SummarySection"
 
 function CartPage() {
   const cartReducer = useSelector(cartSelector)
@@ -22,7 +23,9 @@ function CartPage() {
         <Grid.Col md={8}>
           <TableCartList data={carts} />
         </Grid.Col>
-        <Grid.Col md={4}></Grid.Col>
+        <Grid.Col md={4}>
+          <SummarySection />
+        </Grid.Col>
       </Grid>
     </Box>
   )

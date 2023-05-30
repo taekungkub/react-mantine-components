@@ -58,9 +58,7 @@ export const cartSlice = createSlice({
       state.carts = []
     },
     getCartTotal: (state) => {
-      state.totalAmount = state.carts.reduce((cartTotal: any, cartItem: any) => {
-        return (cartTotal += cartItem.totalPrice)
-      }, 0)
+      state.totalAmount = state.carts.reduce((total, item: CartItemTy) => total + item.price * item.quantity, 0)
       state.itemsCount = state.carts.length
     },
     editCartItemQuantity(state, action: PayloadAction<CartItemTy>) {
@@ -80,7 +78,7 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addtoCart, setCartMessageOn, setCartMessageOff, editCartItemQuantity, removeFromCart } = cartSlice.actions
+export const { addtoCart, setCartMessageOn, setCartMessageOff, editCartItemQuantity, removeFromCart, getCartTotal } = cartSlice.actions
 
 export const cartSelector = (state: RootState) => state.cart
 

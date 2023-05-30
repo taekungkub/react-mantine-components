@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, rem, Flex, Box, ActionIcon } from "@mantine/core"
 import { CartItemTy } from "../../../type"
 import InputQty from "../ProductDetail/InputQty"
@@ -29,6 +29,12 @@ export default function TableCartList({ data }: TableSelectionProps) {
     )
   }
 
+  useEffect(() => {
+    // selection.map((id:number)=>    dispatch(removeFromCart(id))
+
+    console.log(selection)
+  }, [selection])
+
   const rows = data.map((item) => {
     const selected = selection.includes(item.id)
     return (
@@ -45,12 +51,16 @@ export default function TableCartList({ data }: TableSelectionProps) {
         </td>
         <td>{item.price}</td>
         <td>
-          <Flex align={"center"}>
-            <InputQty max={item.total} qty={item.quantity} handleChange={(value) => handleChange(value, item)} />
-            <ActionIcon ml={"md"} color="red" onClick={() => dispatch(removeFromCart(item))}>
-              <IconTrash />
-            </ActionIcon>
-          </Flex>
+          <Group position="center">
+            <Flex align={"center"}>
+              <InputQty max={item.total} qty={item.quantity} handleChange={(value) => handleChange(value, item)} />
+            </Flex>
+          </Group>
+        </td>
+        <td>
+          <ActionIcon ml={"md"} color="red" onClick={() => dispatch(removeFromCart(item))}>
+            <IconTrash />
+          </ActionIcon>
         </td>
       </tr>
     )
@@ -58,10 +68,10 @@ export default function TableCartList({ data }: TableSelectionProps) {
 
   return (
     <ScrollArea>
-      <Table miw={400} verticalSpacing="sm">
+      <Table miw={500} verticalSpacing="sm">
         <thead>
           <tr>
-            <th style={{ width: rem(40) }}>
+            <th style={{ width: rem(50) }}>
               <Checkbox
                 onChange={toggleAll}
                 checked={selection.length === data.length}
@@ -71,7 +81,8 @@ export default function TableCartList({ data }: TableSelectionProps) {
             </th>
             <th>Product</th>
             <th>Price</th>
-            <th>Qty</th>
+            <th style={{ textAlign: "center" }}>Qty</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
