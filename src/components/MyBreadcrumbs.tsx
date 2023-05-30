@@ -1,11 +1,17 @@
 import { Anchor, Breadcrumbs } from "@mantine/core"
 
-function MyBreadcrumbs() {
-  const items = [
-    { title: "Mantine", href: "#" },
-    { title: "Mantine hooks", href: "#" },
-    { title: "use-id", href: "#" },
-  ].map((item, index) => (
+interface Props {
+  items: { title: string | undefined; href: string }[]
+}
+
+const items = [
+  { title: "Mantine", href: "#" },
+  { title: "Mantine hooks", href: "#" },
+  { title: "use-id", href: "#" },
+]
+
+function MyBreadcrumbs(props: Props) {
+  const items = props.items.map((item, index) => (
     <Anchor href={item.href} key={index}>
       {item.title}
     </Anchor>
@@ -13,7 +19,7 @@ function MyBreadcrumbs() {
 
   return (
     <div>
-      <Breadcrumbs>{items}</Breadcrumbs>
+      <Breadcrumbs mb={20}>{items}</Breadcrumbs>
     </div>
   )
 }

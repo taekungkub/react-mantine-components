@@ -1,23 +1,24 @@
-import { useSelector } from "react-redux";
-import { fetchOneProducts, productSelector, getOneProduct } from "@/store/slices/productSlice";
-import { RootState, useAppDispatch } from "@/store/store";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import InfoSection from "./InfoSection";
-import { SimpleGrid } from "@mantine/core";
-import ImageSection from "./ImageSection";
+import { useSelector } from "react-redux"
+import { fetchOneProducts, productSelector, getOneProduct } from "@/store/slices/productSlice"
+import { RootState, useAppDispatch } from "@/store/store"
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
+import InfoSection from "./InfoSection"
+import { Anchor, Breadcrumbs, Grid, SimpleGrid } from "@mantine/core"
+import ImageSection from "./ImageSection"
+import MyBreadcrumbs from "../../../components/MyBreadcrumbs"
 
 function ProductReduxDetailPage() {
-  const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const dispatch = useAppDispatch()
+  const { id } = useParams()
 
-  const productReducer = useSelector(productSelector);
-  const product = useSelector(getOneProduct);
-  const productStatus = productReducer.productDataStatus;
+  const productReducer = useSelector(productSelector)
+  const product = useSelector(getOneProduct)
+  const productStatus = productReducer.productDataStatus
 
   useEffect(() => {
-    dispatch(fetchOneProducts(id as string));
-  }, []);
+    dispatch(fetchOneProducts(id as string))
+  }, [])
 
   // function ProductSection() {
   //   if (productStatus === "loading") {
@@ -41,18 +42,23 @@ function ProductReduxDetailPage() {
 
   return (
     <>
- 
-      <SimpleGrid cols={4} breakpoints={[
-        { maxWidth: 'xl', cols: 3, },
-        { maxWidth: 'md', cols: 2, },
-        { maxWidth: 'sm', cols: 2,  },
-        { maxWidth: 'xs', cols: 1, },
-      ]}>
-        <ImageSection />
-        <InfoSection data={product} />
-      </SimpleGrid>
+      <MyBreadcrumbs
+        items={[
+          { title: "Products", href: "/redux/products" },
+          { title: product?.category, href: `/redux/product/category/${product?.category}` },
+          { title: product?.title, href: "" },
+        ]}
+      />
+      <Grid>
+        <Grid.Col md={4}>
+          <ImageSection data={product} loading={productStatus} />
+        </Grid.Col>
+        <Grid.Col md={4}>
+          <InfoSection data={product} />
+        </Grid.Col>
+      </Grid>
     </>
-  );
+  )
 }
 
-export default ProductReduxDetailPage;
+export default ProductReduxDetailPage

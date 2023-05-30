@@ -33,6 +33,7 @@ import ProductReduxDetailPage from "./views/Redux/ProductDetail"
 import ProductCategory from "./views/Redux/ProductCategory"
 import EcommerceLayout from "./layout/EcommerceLayout"
 import ProductLayout from "./layout/ProductLayout"
+import CartPage from "./views/Redux/Cart"
 
 function App() {
   return (
@@ -74,9 +75,9 @@ function App() {
                       <Route path="/redux/products" element={<ProductReduxPage />}></Route>
                       <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>
                     </Route>
-
-                    <Route path="/redux/product/:id" element={<ProductReduxDetailPage />}></Route>
+                    <Route path="/redux/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
                   </Route>
+                  <Route path="/cart/" element={<CartPage />}></Route>
                 </Route>
 
                 <Route element={<EmptyLayout />}>

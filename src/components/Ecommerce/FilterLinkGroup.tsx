@@ -166,8 +166,9 @@ export function FilterLinkGroup({ label, initiallyOpened, links, isPrice, maxPri
 
   return (
     <>
-      <Divider my={10} />
+      <Divider />
       <UnstyledButton
+        py={20}
         onClick={() => {
           setOpened((o) => !o)
         }}

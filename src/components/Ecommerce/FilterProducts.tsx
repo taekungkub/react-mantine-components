@@ -11,19 +11,19 @@ function FilterProducts() {
       isPrice: true,
       minPrice: 0,
       maxPrice: 2000,
-      links: [{ label: "Upcoming releases", value: "/1" }],
       initiallyOpened: false,
+      links: [{ label: "", value: "" }],
     },
-
     {
       label: "Rating",
       isRating: true,
-      links: [{ label: "Upcoming releases", value: "/4" }],
       initiallyOpened: false,
+      links: [{ label: "", value: "" }],
     },
   ]
 
   const links = mockdata.map((item, i) => <FilterLinkGroup {...item} key={i} />)
+
   const [searchParams, setSearchParams] = useSearchParams()
 
   const params: string[] = []
@@ -32,7 +32,6 @@ function FilterProducts() {
     params.push(entry[0])
   }
   function handleClearFilterAll() {
-    console.log("toggle")
     for (let v of params) {
       console.log(v)
       searchParams.delete(v)
@@ -68,7 +67,7 @@ function FilterProducts() {
           ))}
         </Flex>
       </Card.Section>
-      <Card.Section>{links}</Card.Section>
+      <Card.Section mt={20}>{links}</Card.Section>
     </Card>
   )
 }

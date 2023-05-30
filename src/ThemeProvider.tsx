@@ -47,7 +47,7 @@ function ThemeProvider({ children }: Props) {
           withGlobalStyles
           withNormalizeCSS
         >
-          <Notifications position="top-right" />
+          <Notifications position="top-center" />
 
           <ModalsProvider>{children}</ModalsProvider>
         </MantineProvider>

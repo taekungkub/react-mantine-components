@@ -1,12 +1,13 @@
-import { ActionIcon, Box, Button, Drawer, Flex, Grid, Group, MediaQuery, Menu, Text, Title, createStyles, rem } from "@mantine/core";
-import { Outlet, useParams, useSearchParams } from "react-router-dom";
-import FilterProducts from "../components/Ecommerce/FilterProducts";
-import { IconSortAscending2 } from "@tabler/icons-react";
-import { useSelector } from "react-redux";
-import { productSelector } from "../store/slices/productSlice";
-import { categorySelector } from "../store/slices/categorySlice";
-import { useEffect, useState } from "react";
-import { useDisclosure } from "@mantine/hooks";
+import { ActionIcon, Box, Button, Drawer, Flex, Grid, Group, MediaQuery, Menu, Text, Title, createStyles, rem } from "@mantine/core"
+import { Outlet, useParams, useSearchParams } from "react-router-dom"
+import FilterProducts from "../components/Ecommerce/FilterProducts"
+import { IconSortAscending2 } from "@tabler/icons-react"
+import { useSelector } from "react-redux"
+import { productSelector } from "../store/slices/productSlice"
+import { categorySelector } from "../store/slices/categorySlice"
+import { useEffect, useState } from "react"
+import { useDisclosure } from "@mantine/hooks"
+import MyBreadcrumbs from "../components/MyBreadcrumbs"
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -19,17 +20,17 @@ const useStyles = createStyles((theme) => ({
       color: theme.colors.blue[4],
     },
   },
-}));
+}))
 
 export default function ProductLayout() {
-  const productReducer = useSelector(productSelector);
-  const categoryReducer = useSelector(categorySelector);
-  const { name } = useParams();
+  const productReducer = useSelector(productSelector)
+  const categoryReducer = useSelector(categorySelector)
+  const { name } = useParams()
 
-  const [sortBy, setSortBy] = useState<string>();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [sortBy, setSortBy] = useState<string>()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const { classes, cx } = useStyles();
+  const { classes, cx } = useStyles()
 
   useEffect(() => {
     if (sortBy) {
@@ -39,19 +40,34 @@ export default function ProductLayout() {
           ...{
             sortBy: sortBy,
           },
-        });
-      });
+        })
+      })
     }
-  }, [sortBy]);
+  }, [sortBy])
 
   function handleSort(sort: string) {
-    setSortBy(sort);
+    setSortBy(sort)
   }
 
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false)
 
   return (
     <>
+      <MyBreadcrumbs
+        items={
+          name
+            ? [
+                { title: "Home", href: "/" },
+                { title: "Products", href: "/redux/products" },
+                { title: name, href: "#" },
+              ]
+            : [
+                { title: "Home", href: "/" },
+                { title: "Products", href: "/redux/products" },
+              ]
+        }
+      />
+
       <MediaQuery largerThan="sm" styles={{ display: "none" }}>
         <Drawer opened={opened} onClose={close} overlayProps={{ opacity: 0.5, blur: 4 }}>
           <FilterProducts />
@@ -109,5 +125,5 @@ export default function ProductLayout() {
         </Grid.Col>
       </Grid>
     </>
-  );
+  )
 }

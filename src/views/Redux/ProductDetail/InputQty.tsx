@@ -1,57 +1,62 @@
-import { useRef, useState } from 'react';
-import { createStyles, NumberInput, NumberInputHandlers, ActionIcon, rem } from '@mantine/core';
-import { IconPlus, IconMinus } from '@tabler/icons-react';
+import { useEffect, useRef, useState } from "react"
+import { createStyles, NumberInput, NumberInputHandlers, ActionIcon, rem } from "@mantine/core"
+import { IconPlus, IconMinus } from "@tabler/icons-react"
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
     padding: `${rem(6)} ${theme.spacing.xs}`,
     borderRadius: theme.radius.sm,
-    border: `${rem(1)} solid ${
-      theme.colorScheme === 'dark' ? 'transparent' : theme.colors.gray[3]
-    }`,
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.white,
+    border: `${rem(1)} solid ${theme.colorScheme === "dark" ? "transparent" : theme.colors.gray[3]}`,
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.white,
 
-    '&:focus-within': {
+    "&:focus-within": {
       borderColor: theme.colors[theme.primaryColor][6],
     },
-    maxWidth:'150px'
+    maxWidth: "150px",
   },
 
   control: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-   
+    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
 
-    '&:disabled': {
+    "&:disabled": {
       opacity: 0.8,
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
     },
   },
 
   input: {
-    textAlign: 'center',
+    textAlign: "center",
     paddingRight: `${theme.spacing.sm} !important`,
     paddingLeft: `${theme.spacing.sm} !important`,
     height: rem(28),
     flex: 1,
   },
-}));
+}))
 
 interface QuantityInputProps {
-  min?: number;
-  max?: number;
+  min?: number
+  max?: number
+  handleChange?: (value: number) => void
+  qty?: number
 }
 
-export default function InputQty({ min = 1, max = 10 }: QuantityInputProps) {
-  const { classes } = useStyles();
-  const handlers = useRef<NumberInputHandlers>(null);
-  const [value, setValue] = useState<number | ''>(1);
+export default function InputQty({ min = 1, max = 10, handleChange, qty }: QuantityInputProps) {
+  const { classes } = useStyles()
+  const handlers = useRef<NumberInputHandlers>(null)
+  const [value, setValue] = useState<number | "">(qty ?? 1)
+
+  useEffect(() => {
+    if (handleChange) {
+      handleChange(value ? value : 1)
+    }
+  }, [value])
 
   return (
     <div className={classes.wrapper}>
-      <ActionIcon<'button'>
+      <ActionIcon<"button">
         size={28}
         variant="transparent"
         onClick={() => handlers.current?.decrement()}
@@ -62,17 +67,9 @@ export default function InputQty({ min = 1, max = 10 }: QuantityInputProps) {
         <IconMinus size="1rem" stroke={1.5} />
       </ActionIcon>
 
-      <NumberInput
-        variant="unstyled"
-        min={min}
-        max={max}
-        handlersRef={handlers}
-        value={value}
-        onChange={setValue}
-        classNames={{ input: classes.input }}
-      />
+      <NumberInput variant="unstyled" min={min} max={max} handlersRef={handlers} value={value} onChange={setValue} classNames={{ input: classes.input }} />
 
-      <ActionIcon<'button'>
+      <ActionIcon<"button">
         size={28}
         variant="transparent"
         onClick={() => handlers.current?.increment()}
@@ -83,5 +80,5 @@ export default function InputQty({ min = 1, max = 10 }: QuantityInputProps) {
         <IconPlus size="1rem" stroke={1.5} />
       </ActionIcon>
     </div>
-  );
+  )
 }

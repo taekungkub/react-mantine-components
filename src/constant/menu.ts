@@ -63,7 +63,7 @@ export const mockdata = [
     links: [
       { label: "Counter", link: "/redux/counter" },
       { label: "Products", link: "/redux/products" },
-      { label: "Products Detail", link: "/redux/product/1" },
+      { label: "Products Detail", link: "/redux/product/smartphones/1" },
     ],
   },
 

@@ -1,17 +1,30 @@
+import { Flex, Image } from "@mantine/core"
+import { func } from "joi"
+import { FetchStatusTy, ProductTy } from "../../../type"
 
-
-
-
-
-
-
-
-function ImageSection() {
-  return (
-    <>
-      <div>asdasdasd</div>
-    </>
-  );
+interface Props {
+  data: ProductTy | null
+  loading: FetchStatusTy
 }
 
-export default ImageSection;
+function ImageSection(props: Props) {
+  function imageList() {
+    return props.data?.images.map((image, i) => <Image src={image} fit="cover" key={i} />)
+  }
+  return (
+    <>
+      {props.loading === "loading" && "loading"}
+
+      {props.loading === "succeeded" && (
+        <Flex direction={"column"}>
+          <Image src={props.data?.thumbnail} />
+          <Flex gap={10} mt={20}>
+            {imageList()}
+          </Flex>
+        </Flex>
+      )}
+    </>
+  )
+}
+
+export default ImageSection

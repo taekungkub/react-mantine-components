@@ -1,20 +1,20 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
-import { categorySelector, fetchCategories, getAllCategories } from "../store/slices/categorySlice";
-import { useAppDispatch } from "../store/store";
-import { ActionIcon, Anchor, Badge, Box, Breadcrumbs, Button, Card, Flex, MediaQuery, ScrollArea, Skeleton } from "@mantine/core";
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
+import { Outlet, useNavigate } from "react-router-dom"
+import { categorySelector, fetchCategories, getAllCategories } from "../store/slices/categorySlice"
+import { useAppDispatch } from "../store/store"
+import { ActionIcon, Anchor, Badge, Box, Breadcrumbs, Button, Card, Flex, MediaQuery, ScrollArea, Skeleton } from "@mantine/core"
 
 function CategoryList() {
-  const categories = useSelector(getAllCategories);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const categoryReducer = useSelector(categorySelector);
-  const status = categoryReducer.categoriesStatus;
+  const categories = useSelector(getAllCategories)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const categoryReducer = useSelector(categorySelector)
+  const status = categoryReducer.categoriesStatus
 
   useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+    dispatch(fetchCategories())
+  }, [dispatch])
 
   return (
     <Flex gap={10} wrap={"wrap"}>
@@ -27,14 +27,14 @@ function CategoryList() {
             variant="light"
             key={i}
             onClick={() => {
-              navigate("/redux/product/category/" + v);
+              navigate("/redux/product/category/" + v)
             }}
           >
             {v}
           </Button>
         ))}
     </Flex>
-  );
+  )
 }
 
 function EcommerceLayout() {
@@ -49,7 +49,7 @@ function EcommerceLayout() {
         <Outlet />
       </Box>
     </div>
-  );
+  )
 }
 
-export default EcommerceLayout;
+export default EcommerceLayout
