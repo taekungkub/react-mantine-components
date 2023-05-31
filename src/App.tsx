@@ -34,6 +34,9 @@ import ProductCategory from "./views/Redux/ProductCategory"
 import EcommerceLayout from "./layout/EcommerceLayout"
 import ProductLayout from "./layout/ProductLayout"
 import CartPage from "./views/Redux/Cart"
+import AdminPage from "./views/Permission/Admin"
+import SecretPage from "./views/Permission/Secret"
+import AuthPage from "./views/Permission/Auth"
 
 function App() {
   return (
@@ -69,7 +72,6 @@ function App() {
                   <Route path="/products/new" element={<ProductNewPage />}></Route>
                   <Route path="/products/:id" element={<ProductNewPage />}></Route>
 
-
                   <Route path="/redux/counter" element={<CounterPage />}></Route>
 
                   <Route element={<EcommerceLayout />}>
@@ -80,6 +82,16 @@ function App() {
                     <Route path="/redux/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
                   </Route>
                   <Route path="/cart/" element={<CartPage />}></Route>
+
+                  <Route element={<PrivateRoutes />}>
+                    <Route path="/permission/auth" element={<AuthPage />}></Route>
+                  </Route>
+
+                  <Route element={<PrivateRoutes allowedRoles={["superadmin"]} />}>
+                    <Route path="/permission/admin" element={<AdminPage />}></Route>
+                  </Route>
+
+                  <Route path="/permission/secret" element={<SecretPage />}></Route>
                 </Route>
 
                 <Route element={<EmptyLayout />}>

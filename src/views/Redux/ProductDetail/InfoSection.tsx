@@ -1,7 +1,7 @@
 import { ActionIcon, Badge, Box, Button, Flex, Group, Text, Title } from "@mantine/core"
-import InputQty from "./InputQty"
+import InputQty from "./components/InputQty"
 import { CartItemTy, ProductTy } from "@/type"
-import { IconHeart, IconShoppingCart } from "@tabler/icons-react"
+import { IconHeart, IconShoppingCart, IconShoppingCartPlus } from "@tabler/icons-react"
 import { useSelector } from "react-redux"
 import { addtoCart, cartSelector } from "../../../store/slices/cartSlice"
 import { useAppDispatch } from "../../../store/store"
@@ -57,12 +57,12 @@ function InfoSection(props: Props) {
 
         <Group mt={20}>
           <ActionIcon variant="default" radius="md" size={36}>
-            <IconHeart size="1.1rem" stroke={1.5} />
+            <IconHeart size="1.1rem" stroke={1.5} color="red" />
           </ActionIcon>
           <Button radius="md" style={{ flex: 1 }} variant="outline">
             Buy now
           </Button>
-          <Button radius="md" style={{ flex: 1 }} leftIcon={<IconShoppingCart />} onClick={() => handleAddToCart()}>
+          <Button radius="md" style={{ flex: 1 }} leftIcon={<IconShoppingCartPlus />} onClick={() => handleAddToCart()}>
             Add cart
           </Button>
         </Group>

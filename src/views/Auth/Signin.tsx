@@ -9,7 +9,7 @@ import useAuth from "../../context/AuthContext"
 export default function SigninPage() {
   const navigate = useNavigate()
 
-  const { login, token } = useAuth()
+  const { login } = useAuth()
 
   const schema = Joi.object({
     email: Joi.string()

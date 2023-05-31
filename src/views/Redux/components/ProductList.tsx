@@ -7,6 +7,8 @@ import { useAppDispatch } from "@/store/store"
 import { Grid } from "@mantine/core"
 import CardProduct from "@/components/Cards/CardProduct"
 import { ProductTy } from "@/type"
+import { addtoCart, cartSelector } from "../../../store/slices/cartSlice"
+import useToast from "../../../hooks/useToast"
 
 interface Props {
   data: ProductTy[]
@@ -26,13 +28,34 @@ function ProductsList(props: Props) {
   })
 
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const toast = useToast()
 
   return (
     <>
       <Grid>
         {productFilter.map((product) => (
           <Grid.Col span={6} md={6} lg={4} xl={3} key={product.id}>
-            <CardProduct key={product.id} data={product} onToggle={() => navigate(`/redux/product/${product.category}/${product.id}`)} />
+            <CardProduct
+              key={product.id}
+              data={product}
+              onToggle={() => navigate(`/redux/product/${product.category}/${product.id}`)}
+              onAddToCart={() => {
+                if (product) {
+                  dispatch(
+                    addtoCart({
+                      id: product.id,
+                      title: product.title,
+                      price: product.price,
+                      quantity: 1,
+                      total: product.stock,
+                      discountPercentage: product.discountPercentage,
+                    })
+                  )
+                  toast.success(`Add product successfully !`)
+                }
+              }}
+            />
           </Grid.Col>
         ))}
       </Grid>

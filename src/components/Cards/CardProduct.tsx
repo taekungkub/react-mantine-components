@@ -1,4 +1,4 @@
-import { IconHeart } from "@tabler/icons-react"
+import { IconHeart, IconShoppingCartPlus } from "@tabler/icons-react"
 import { Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles, rem, Title, Flex } from "@mantine/core"
 import { ProductTy } from "@/type"
 import "./CardProduct.scss"
@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   like: {
-    color: theme.colors.red[6],
+    color: theme.colors.green[6],
   },
 
   label: {
@@ -28,6 +28,7 @@ const useStyles = createStyles((theme) => ({
 interface BadgeCardProps {
   data: ProductTy
   onToggle?: () => void
+  onAddToCart: () => void
 }
 
 export default function CardProduct(product: BadgeCardProps) {
@@ -49,21 +50,21 @@ export default function CardProduct(product: BadgeCardProps) {
         <Text fz="sm" mt="xs" className="desc">
           {product.data.description}
         </Text>
-       <Flex align={'center'}>
-       <Badge color="yellow">-{product.data.discountPercentage}%</Badge>
+        <Flex align={"center"}>
+          <Badge color="yellow">-{product.data.discountPercentage}%</Badge>
 
-        <Text fz="lg" fw={500} className="title">
-          ${product.data.price}
-        </Text>
-       </Flex>
+          <Text fz="lg" fw={500} className="title">
+            ${product.data.price}
+          </Text>
+        </Flex>
       </Card.Section>
 
       <Group mt="xs">
         <Button radius="md" style={{ flex: 1 }} onClick={product.onToggle}>
           Show details
         </Button>
-        <ActionIcon variant="default" radius="md" size={36}>
-          <IconHeart size="1.1rem" className={classes.like} stroke={1.5} />
+        <ActionIcon variant="light" color="green" radius="md" size={36} onClick={product.onAddToCart}>
+          <IconShoppingCartPlus size="1.1rem" className={classes.like} stroke={1.5} />
         </ActionIcon>
       </Group>
     </Card>

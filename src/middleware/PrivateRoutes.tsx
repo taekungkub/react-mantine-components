@@ -1,18 +1,52 @@
-import React, { useEffect } from "react"
-import { Outlet, Navigate } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Outlet, Navigate, useNavigate } from "react-router-dom"
 import useAuth from "../context/AuthContext"
 import { Group, Loader } from "@mantine/core"
+import LoadingScreen from "../components/LoadingScreen"
 
-export default function PrivateRoutes() {
-  const { user, token, loading } = useAuth()
+interface Props {
+  allowedRoles?: string[]
+}
 
-  // if (!token) {
-  //   return <Navigate to="/signin" />
+export default function PrivateRoutes({ allowedRoles }: Props) {
+  const { user, token, loading, loggedIn } = useAuth()
+  const navigate = useNavigate()
+
+  // const [Loading, setLoading] = useState(true)
+  // const [loggedIn, setLoggedIn] = useState(false)
+
+  // function getUser() {
+  //   setLoading(true)
+
+  //   setTimeout(() => {
+  //     setLoggedIn(false)
+  //     setLoading(false)
+  //   }, 2000)
   // }
 
-  return (
-    <div>
-      <Outlet />
-    </div>
-  )
+  // useEffect(() => {
+  //   getUser()
+  // }, [])
+
+  useEffect(() => {
+    if (!loading) {
+      if (!token) {
+        navigate("/signin")
+      }
+    }
+  }, [token])
+
+  if (loading && !loggedIn) {
+    return <LoadingScreen />
+  }
+
+  if (!loading && !loggedIn) {
+    return <Navigate to="/signin" />
+  }
+
+  if (allowedRoles) {
+    return user?.roles.find((role) => allowedRoles.includes(role)) ? <Outlet /> : <Navigate to={"/exeception/403"} />
+  }
+
+  return <Outlet />
 }

@@ -1,4 +1,5 @@
-import { Anchor, Breadcrumbs } from "@mantine/core"
+import { Anchor, Breadcrumbs, Text } from "@mantine/core"
+import { Link } from "react-router-dom"
 
 interface Props {
   items: { title: string | undefined; href: string }[]
@@ -12,9 +13,9 @@ const items = [
 
 function MyBreadcrumbs(props: Props) {
   const items = props.items.map((item, index) => (
-    <Anchor href={item.href} key={index}>
+    <Text component={Link} to={item.href} key={index}>
       {item.title}
-    </Anchor>
+    </Text>
   ))
 
   return (

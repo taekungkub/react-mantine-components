@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { createStyles, UnstyledButton, Menu, Image, Group, rem } from "@mantine/core";
-import { IconChevronDown } from "@tabler/icons-react";
-import english from "@/assets/media/english.png";
-import thai from "@/assets/media/thai.png";
-import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react"
+import { createStyles, UnstyledButton, Menu, Image, Group, rem } from "@mantine/core"
+import { IconChevronDown } from "@tabler/icons-react"
+import english from "@/assets/media/english.png"
+import thai from "@/assets/media/thai.png"
+import { useTranslation } from "react-i18next"
 
 const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
   control: {
@@ -31,36 +31,36 @@ const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
     transition: "transform 150ms ease",
     transform: opened ? "rotate(180deg)" : "rotate(0deg)",
   },
-}));
+}))
 
 export default function LanguagePicker() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation()
 
   const data = [
-    { label: 'english', image: english, value: "en" },
+    { label: "english", image: english, value: "en" },
     { label: "thai", image: thai, value: "th" },
-  ];
+  ]
 
-  const [opened, setOpened] = useState(false);
-  const { classes } = useStyles({ opened });
-  const [selected, setSelected] = useState(i18n.language === "en" ? data[0] : data[1]);
+  const [opened, setOpened] = useState(false)
+  const { classes } = useStyles({ opened })
+  const [selected, setSelected] = useState(i18n.language === "en" ? data[0] : data[1])
 
   const changeLanguage = (lng: any) => {
-    i18n.changeLanguage(lng);
-  };
+    i18n.changeLanguage(lng)
+  }
 
   const items = data.map((item) => (
     <Menu.Item
       icon={<Image src={item.image} width={18} height={18} />}
       onClick={() => {
-        setSelected(item);
-        changeLanguage(item.value);
+        setSelected(item)
+        changeLanguage(item.value)
       }}
       key={item.label}
     >
-    {t(item.label)}
+      {t(item.label)}
     </Menu.Item>
-  ));
+  ))
 
   return (
     <Menu onOpen={() => setOpened(true)} onClose={() => setOpened(false)} radius="md" width="target" withinPortal>
@@ -75,5 +75,5 @@ export default function LanguagePicker() {
       </Menu.Target>
       <Menu.Dropdown>{items}</Menu.Dropdown>
     </Menu>
-  );
+  )
 }

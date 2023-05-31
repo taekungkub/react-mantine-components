@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../store"
 import { FetchStatusTy, ProductTy } from "@/type"
-import ProductServices from "../../services/ProductServices"
+import DummyServices from "../../services/DummyServices"
 
 interface SliceState {
   products: ProductTy[]
@@ -18,12 +18,12 @@ const initialState: SliceState = {
 }
 
 export const fetchProducts = createAsyncThunk("users/fetchProducts", async () => {
-  const response = await ProductServices.products()
+  const response = await DummyServices.products()
   return response.data.products
 })
 
 export const fetchOneProducts = createAsyncThunk("users/fetchOneProduct", async (id: string) => {
-  const response = await ProductServices.product(id)
+  const response = await DummyServices.product(id)
   return response.data
 })
 

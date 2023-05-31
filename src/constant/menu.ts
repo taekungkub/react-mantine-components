@@ -4,6 +4,7 @@ import {
   IconError404,
   IconFileAnalytics,
   IconHome,
+  IconLockAccess,
   IconLogin,
   IconNotes,
   IconShoppingCart,
@@ -33,10 +34,7 @@ export const mockdata = [
   {
     label: "Components",
     icon: IconCompass,
-    links: [
-      { label: "Button", link: "/components/button" },
-      { label: "Card", link: "/components/card" },
-    ],
+    links: [{ label: "Button", link: "/components/button" }],
   },
   {
     label: "Sales",
@@ -91,4 +89,15 @@ export const mockdata = [
     ],
   },
   { label: "Contracts", icon: IconFileAnalytics, link: "/contracts" },
+  {
+    label: "Permission",
+    icon: IconLockAccess,
+    initiallyOpened: false,
+
+    links: [
+      { label: "Auth", link: "/permission/auth" },
+      { label: "Admin", link: "/permission/admin" },
+      { label: "Super Secret", link: "/permission/secret" },
+    ],
+  },
 ]

@@ -1,30 +1,26 @@
-import { Button, ColorScheme, Switch, useMantineColorScheme, useMantineTheme } from "@mantine/core";
-import { IconMoon, IconMoonStars, IconSun } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
-import { useHotkeys, useLocalStorage } from "@mantine/hooks";
-
-type EnumTheme = "light" | "dark";
+import { ActionIcon, ColorScheme, Tooltip, useMantineColorScheme, useMantineTheme } from "@mantine/core"
+import { IconMoonStars, IconSun } from "@tabler/icons-react"
+import { useLocalStorage } from "@mantine/hooks"
 
 function ButtonToggleTheme() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
     defaultValue: "light",
     getInitialValueInEffect: true,
-  });
+  })
 
-  const { toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === "dark";
-  const theme = useMantineTheme();
+  const { toggleColorScheme } = useMantineColorScheme()
+  const dark = colorScheme === "dark"
+  const theme = useMantineTheme()
 
   return (
-    <Switch
-      checked={colorScheme === "dark"}
-      onChange={() => toggleColorScheme()}
-      size="lg"
-      onLabel={<IconSun color={theme.white} size="1.25rem" stroke={1.5} />}
-      offLabel={<IconMoonStars color={theme.colors.gray[6]} size="1.25rem" stroke={1.5} />}
-    />
-  );
+    <Tooltip label="Change Theme" withArrow>
+      <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => toggleColorScheme()}>
+        {colorScheme === "dark" && <IconSun size={"1.125rem"} />}
+        {colorScheme === "light" && <IconMoonStars size={"1.125rem"} />}
+      </ActionIcon>
+    </Tooltip>
+  )
 }
 
-export default ButtonToggleTheme;
+export default ButtonToggleTheme

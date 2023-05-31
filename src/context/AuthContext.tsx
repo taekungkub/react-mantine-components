@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { UserTy } from "../type"
 import AuthServices from "../services/AuthServices"
 import useToast from "../hooks/useToast"
+import DummyServices from "../services/DummyServices"
 
 interface AuthContextType {
   // We defined the user type in `index.d.ts`, but it's
@@ -14,6 +15,7 @@ interface AuthContextType {
   login: (email: string, password: string) => void
   signUp: (email: string, name: string, password: string) => void
   logout: () => void
+  loggedIn: boolean
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -22,26 +24,40 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   const [token, setToken] = useState("")
   const [user, setUser] = useState<UserTy>()
   const [error, setError] = useState<any>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [loadingInitial, setLoadingInitial] = useState<boolean>(false)
   const navigate = useNavigate()
   const location = useLocation()
   const toast = useToast()
 
+  const [loggedIn, setLoggedIn] = useState(false)
+
   useEffect(() => {
     if (error) setError(undefined)
   }, [location.pathname])
 
-  // useEffect(() => {
-  //   getUserInfo()
-  // }, [token])
+  useEffect(() => {
+    let token = localStorage.getItem("token")
+    if (token) {
+      setToken(token)
+      getUserInfo()
+    } else {
+      setLoggedIn(false)
+      setLoading(false)
+    }
+  }, [])
 
   async function getUserInfo() {
     try {
       setLoading(true)
-      const res = await AuthServices.profile()
-      setUser(res.data.data)
+      const res = await DummyServices.login()
+      setUser({
+        ...res.data,
+        roles: ["admin"],
+      })
+      setLoggedIn(true)
     } catch (error) {
+      setLoggedIn(false)
     } finally {
       setLoading(false)
     }
@@ -50,13 +66,19 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   async function login(email: string, password: string) {
     try {
       setLoading(true)
-      const res = await AuthServices.login(email, password)
-      setToken(res.data.data.access_token)
-      localStorage.setItem("token", res.data.data.access_token)
+      const res = await DummyServices.login()
+      setToken(res.data.token)
+      localStorage.setItem("token", res.data.token)
+      setUser({
+        ...res.data,
+        roles: ["admin"],
+      })
       navigate("/dashboard")
       toast.success()
+      setLoggedIn(true)
     } catch (error: any) {
       toast.error(error, "")
+      setLoggedIn(false)
     } finally {
       setLoading(false)
     }
@@ -70,6 +92,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     localStorage.removeItem("token")
     setUser(undefined)
     setToken("")
+    setLoggedIn(false)
   }
 
   // Make the provider update only when it should.
@@ -90,8 +113,9 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       login,
       signUp,
       logout,
+      loggedIn,
     }),
-    [token, user, loading, error]
+    [token, user, loading, error, loggedIn]
   )
 
   // We only want to render the underlying app after we

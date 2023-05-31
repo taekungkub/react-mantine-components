@@ -31,7 +31,7 @@ function DashboardLayout() {
                   </Text>
                 </Box>
               </Flex>
-              <Flex gap={20} align={"center"}>
+              <Flex gap={15} align={"center"}>
                 <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => navigate("/cart")}>
                   <IconShoppingCart size="1.125rem" />
                 </ActionIcon>
@@ -40,9 +40,8 @@ function DashboardLayout() {
                 <MenuDropdownProfile />
 
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                
-                    {/* <MenuLang /> */}
-                 <LanguagePicker/>
+                  {/* <MenuLang /> */}
+                  <LanguagePicker />
                 </MediaQuery>
               </Flex>
             </Flex>

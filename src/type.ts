@@ -14,17 +14,14 @@ export interface ProductTy {
 
 export interface UserTy {
   id: number
-  user_email: string
-  user_password: string
-  user_displayname: string
-  user_tel: string
-  is_verify: false
-  reset_password_token: string
-  user_created: string
-  user_updated: string
-  role_id: number
-  user_id: number
-  role_title: string
+  username: string
+  email: string
+  firstName: string
+  lastName: string
+  gender: string
+  image: string
+  token: string
+  roles: string[]
 }
 
 export interface CustomerTy {

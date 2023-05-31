@@ -1,6 +1,5 @@
 import { useState } from "react"
-import ProductServices from "../../../services/ProductServices"
-import useToast from "../../../hooks/useToast"
+import DummyServices from "../../../services/DummyServices"
 
 export default function useOneProduct() {
   const initProduct = {
@@ -21,7 +20,7 @@ export default function useOneProduct() {
 
   async function getProduct(id: string) {
     try {
-      const res = await ProductServices.product(id)
+      const res = await DummyServices.product(id)
       setData({
         ...res.data,
         images: res.data.images,
@@ -31,7 +30,7 @@ export default function useOneProduct() {
 
   async function getCategory() {
     try {
-      const res = await ProductServices.categories()
+      const res = await DummyServices.categories()
       const newMap = res.data.map((v: string) => {
         return {
           value: v,

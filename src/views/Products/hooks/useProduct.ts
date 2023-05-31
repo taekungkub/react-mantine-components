@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import ProductServices from "../../../services/ProductServices"
 import { ProductTy } from "../../../type"
+import DummyServices from "../../../services/DummyServices"
 
 function useProduct() {
   const [products, setProducts] = useState<Array<ProductTy>>([])
@@ -13,7 +13,7 @@ function useProduct() {
 
   async function getProducts() {
     try {
-      const res = await ProductServices.products()
+      const res = await DummyServices.products()
       setProducts(res.data.products)
     } catch (error) {}
   }

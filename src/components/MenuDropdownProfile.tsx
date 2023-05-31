@@ -6,9 +6,11 @@ import useAuth from "../context/AuthContext"
 export default function MenuDropdownProfile() {
   const navigate = useNavigate()
 
+  const { logout, loggedIn } = useAuth()
   return (
     <div>
       <Group position="center">
+        {loggedIn.toString()}
         <Menu withArrow width={250} position="bottom" transitionProps={{ transition: "pop" }}>
           <Menu.Target>
             <ActionIcon>
@@ -36,7 +38,7 @@ export default function MenuDropdownProfile() {
             </Menu.Item>
 
             <Menu.Divider />
-            <Menu.Item color="red" icon={<IconTrash size="0.9rem" stroke={1.5} />}>
+            <Menu.Item color="red" icon={<IconTrash size="0.9rem" stroke={1.5} />} onClick={() => logout()}>
               Logout
             </Menu.Item>
           </Menu.Dropdown>
