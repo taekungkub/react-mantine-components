@@ -97,3 +97,15 @@ export interface CartItemTy {
   discountPercentage: number
   totalPrice?: number
 }
+
+export interface CommentTy {
+  id: number
+  body: string
+  postId: number
+  user: UserCommentTy
+}
+
+interface UserCommentTy {
+  id: number
+  username: string
+}

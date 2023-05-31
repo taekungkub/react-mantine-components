@@ -15,12 +15,12 @@ const initialState: SliceState = {
   searchTerms: "",
 }
 
-export const fetchSearchProducts = createAsyncThunk("users/fetchSearchProducts", async (keyword: string) => {
+export const fetchSearchProducts = createAsyncThunk("search/fetchSearchProducts", async (keyword: string) => {
   const response = await DummyServices.searchProduct(keyword)
   return response.data.products
 })
 
-export const productSlice = createSlice({
+export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
@@ -42,7 +42,7 @@ export const productSlice = createSlice({
       })
   },
 })
-export const { setSearchTerms } = productSlice.actions
+export const { setSearchTerms } = searchSlice.actions
 
 export const searchSelector = (store: RootState) => store.product
 
@@ -50,4 +50,4 @@ export const getAllProducts = (state: RootState) => state.search.products
 
 export const getProductStatus = (state: RootState) => state.search.productsStatus
 
-export default productSlice.reducer
+export default searchSlice.reducer

@@ -17,12 +17,12 @@ const initialState: SliceState = {
   productDataStatus: "idle",
 }
 
-export const fetchProducts = createAsyncThunk("users/fetchProducts", async () => {
+export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
   const response = await DummyServices.products()
   return response.data.products
 })
 
-export const fetchOneProducts = createAsyncThunk("users/fetchOneProduct", async (id: string) => {
+export const fetchOneProducts = createAsyncThunk("products/fetchOneProduct", async (id: string) => {
   const response = await DummyServices.product(id)
   return response.data
 })

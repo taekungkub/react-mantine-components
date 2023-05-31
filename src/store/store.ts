@@ -6,6 +6,7 @@ import productReducer from "./slices/productSlice"
 import cartReducer from "./slices/cartSlice"
 import categoryReducer from "./slices/categorySlice"
 import searchReducer from "./slices/searchSlice"
+import commentReducer from "./slices/commentSlice"
 
 const reducer = {
   couter: counterReducer,
@@ -13,6 +14,7 @@ const reducer = {
   cart: cartReducer,
   category: categoryReducer,
   search: searchReducer,
+  comment: commentReducer,
 }
 
 export const store = configureStore({
