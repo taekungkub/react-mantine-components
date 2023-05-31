@@ -23,4 +23,7 @@ export default {
       password: "0lelplR",
     })
   },
+  searchProduct(search: string) {
+    return Api.get(`/products/search?q=${search}`)
+  },
 }

@@ -1,5 +1,5 @@
-import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button, ActionIcon, ThemeIcon } from "@mantine/core"
-import { Outlet, useNavigate } from "react-router-dom"
+import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button, ActionIcon, ThemeIcon, TextInput } from "@mantine/core"
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
 import { TheNavbar, TheDrawer } from "./TheNavbar"
 import MenuLang from "../components/MenuLangs"
 import ButtonToggleTheme from "../components/ButtonToggleTheme"
@@ -8,6 +8,8 @@ import useSidebar from "../hooks/useSidebar"
 import { IconAlignJustified, IconSearch, IconShoppingCart } from "@tabler/icons-react"
 import LanguagePicker from "@/components/LanguagePicker"
 import { useState } from "react"
+import { useAppDispatch } from "../store/store"
+import { setSearchTerms } from "../store/slices/searchSlice"
 
 const useStyles = createStyles((theme) => ({
   main: {
@@ -18,9 +20,16 @@ const useStyles = createStyles((theme) => ({
 function DashboardLayout() {
   const { opened, setOpened, handleOpened } = useSidebar()
   const [isCollapse, setIsCollapse] = useState(false)
-  const navigate = useNavigate()
-
   const { classes } = useStyles()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [keyword, setKeyword] = useState("")
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  function handleSearchTerms() {
+    dispatch(setSearchTerms(keyword))
+    navigate(`/redux/search?keyword=${keyword}`)
+  }
 
   return (
     <>
@@ -51,9 +60,17 @@ function DashboardLayout() {
                 </Flex>
               </Flex>
               <Flex gap={15} align={"center"}>
-                <ActionIcon variant="light" color="blue" size={"lg"}>
-                  <IconSearch size="1.125rem" />
-                </ActionIcon>
+                <TextInput
+                  onChange={(e) => setKeyword(e.target.value)}
+                  placeholder="Search product"
+                  rightSection={
+                    <ActionIcon variant="light" color="blue" size={"md"} onClick={() => handleSearchTerms()}>
+                      <IconSearch size="1.125rem" />
+                    </ActionIcon>
+                  }
+                  rightSectionWidth={36}
+                />
+
                 <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => navigate("/cart")}>
                   <IconShoppingCart size="1.125rem" />
                 </ActionIcon>

@@ -37,6 +37,7 @@ import CartPage from "./views/Redux/Cart"
 import AdminPage from "./views/Permission/Admin"
 import SecretPage from "./views/Permission/Secret"
 import AuthPage from "./views/Permission/Auth"
+import SearchProductPage from "./views/Redux/Search"
 
 function App() {
   return (
@@ -80,7 +81,9 @@ function App() {
                       <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>
                     </Route>
                     <Route path="/redux/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
+                    <Route path="/redux/search" element={<SearchProductPage />}></Route>
                   </Route>
+
                   <Route path="/cart/" element={<CartPage />}></Route>
 
                   <Route element={<PrivateRoutes />}>

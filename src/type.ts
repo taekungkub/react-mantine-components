@@ -95,5 +95,5 @@ export interface CartItemTy {
   quantity: number
   total: number
   discountPercentage: number
-  totalPrice: number
+  totalPrice?: number
 }
