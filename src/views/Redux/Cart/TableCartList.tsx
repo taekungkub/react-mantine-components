@@ -55,6 +55,7 @@ export default function TableCartList({ data }: TableSelectionProps) {
             </Flex>
           </Group>
         </td>
+        <td>{item.totalPrice}</td>
         <td>
           <ActionIcon ml={"md"} color="red" onClick={() => dispatch(removeFromCart(item))}>
             <IconTrash />
@@ -78,8 +79,10 @@ export default function TableCartList({ data }: TableSelectionProps) {
               />
             </th>
             <th>Product</th>
-            <th>Price</th>
+            <th>Unit Price</th>
             <th style={{ textAlign: "center" }}>Qty</th>
+            <th>Total Price</th>
+
             <th></th>
           </tr>
         </thead>

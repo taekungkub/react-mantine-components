@@ -5,19 +5,33 @@ import MenuLang from "../components/MenuLangs"
 import ButtonToggleTheme from "../components/ButtonToggleTheme"
 import MenuDropdownProfile from "../components/MenuDropdownProfile"
 import useSidebar from "../hooks/useSidebar"
-import { IconShoppingCart } from "@tabler/icons-react"
+import { IconAlignJustified, IconSearch, IconShoppingCart } from "@tabler/icons-react"
 import LanguagePicker from "@/components/LanguagePicker"
+import { useState } from "react"
+
+const useStyles = createStyles((theme) => ({
+  main: {
+    transition: "padding-left 400ms ease",
+  },
+}))
 
 function DashboardLayout() {
   const { opened, setOpened, handleOpened } = useSidebar()
+  const [isCollapse, setIsCollapse] = useState(false)
   const navigate = useNavigate()
+
+  const { classes } = useStyles()
+
   return (
     <>
       <AppShell
+        classNames={{
+          main: classes.main,
+        }}
         padding="lg"
         navbarOffsetBreakpoint="sm"
         asideOffsetBreakpoint="sm"
-        navbar={<TheNavbar />}
+        navbar={<TheNavbar isCollapse={isCollapse} />}
         header={
           <Header height={60} p="xs">
             <Flex justify={"space-between"} align={"center"} px={"sm"}>
@@ -25,13 +39,21 @@ function DashboardLayout() {
                 <MediaQuery largerThan={"sm"} styles={{ display: "none" }}>
                   <Burger opened={opened} onClick={handleOpened} title={"title"} size="sm" />
                 </MediaQuery>
-                <Box>
+                <Flex gap={20} align={"center"}>
+                  <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                    <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => setIsCollapse(!isCollapse)}>
+                      <IconAlignJustified size="1.125rem" />
+                    </ActionIcon>
+                  </MediaQuery>
                   <Text fz="lg" weight={"bold"}>
                     My App
                   </Text>
-                </Box>
+                </Flex>
               </Flex>
               <Flex gap={15} align={"center"}>
+                <ActionIcon variant="light" color="blue" size={"lg"}>
+                  <IconSearch size="1.125rem" />
+                </ActionIcon>
                 <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => navigate("/cart")}>
                   <IconShoppingCart size="1.125rem" />
                 </ActionIcon>
@@ -40,7 +62,6 @@ function DashboardLayout() {
                 <MenuDropdownProfile />
 
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                  {/* <MenuLang /> */}
                   <LanguagePicker />
                 </MediaQuery>
               </Flex>

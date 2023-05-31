@@ -10,7 +10,6 @@ export default function MenuDropdownProfile() {
   return (
     <div>
       <Group position="center">
-        {loggedIn.toString()}
         <Menu withArrow width={250} position="bottom" transitionProps={{ transition: "pop" }}>
           <Menu.Target>
             <ActionIcon>
