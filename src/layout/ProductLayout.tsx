@@ -74,17 +74,17 @@ export default function ProductLayout() {
         </Drawer>
       </MediaQuery>
       <Grid>
-        <Grid.Col sm={3} xl={2}>
+        <Grid.Col sm={3} xl={3}>
           <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
             <Box>
               <FilterProducts />
             </Box>
           </MediaQuery>
         </Grid.Col>
-        <Grid.Col sm={9} xl={10}>
+        <Grid.Col sm={9} xl={9}>
           <Grid>
             <Grid.Col span={12}>
-              <Flex justify={"space-between"} align={'center'}>
+              <Flex justify={"space-between"} align={"center"}>
                 <Title order={4}>
                   {name ? name : "Product All"} ({name ? categoryReducer.categoryProducts.length : productReducer.products.length})
                 </Title>
@@ -95,7 +95,7 @@ export default function ProductLayout() {
                       <IconSortAscending2 />
                     </ActionIcon>
                   </MediaQuery>
-                  <Menu width={200} >
+                  <Menu width={200}>
                     <Menu.Target>
                       <Button variant="outline" leftIcon={<IconSortAscending2 />}>
                         Filter

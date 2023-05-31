@@ -42,15 +42,15 @@ export default function CardProduct(product: BadgeCardProps) {
 
       <Card.Section className={classes.section} mt="md">
         <Group position="apart">
-          <Text fz="lg" fw={500} className="title">
+          <Text fz="lg" fw={500} lineClamp={1}>
             {product.data.title}
           </Text>
         </Group>
 
-        <Text fz="sm" mt="xs" className="desc">
+        <Text fz="sm" mt="xs" lineClamp={2}>
           {product.data.description}
         </Text>
-        <Flex align={"center"}>
+        <Flex align={"center"} mt={12}>
           <Badge color="yellow">-{product.data.discountPercentage}%</Badge>
 
           <Text fz="lg" fw={500} className="title">

@@ -35,7 +35,7 @@ function ProductsList(props: Props) {
     <>
       <Grid>
         {productFilter.map((product) => (
-          <Grid.Col span={6} md={6} lg={4} xl={3} key={product.id}>
+          <Grid.Col span={6} md={6} lg={4} xl={4} key={product.id}>
             <CardProduct
               key={product.id}
               data={product}

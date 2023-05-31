@@ -1,4 +1,4 @@
-import { Anchor, Breadcrumbs, Text } from "@mantine/core"
+import { Anchor, Box, Breadcrumbs, Flex, Text } from "@mantine/core"
 import { Link } from "react-router-dom"
 
 interface Props {
@@ -19,9 +19,9 @@ function MyBreadcrumbs(props: Props) {
   ))
 
   return (
-    <div>
+    <Flex>
       <Breadcrumbs mb={20}>{items}</Breadcrumbs>
-    </div>
+    </Flex>
   )
 }
 

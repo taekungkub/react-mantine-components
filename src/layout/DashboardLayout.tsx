@@ -48,13 +48,13 @@ function DashboardLayout() {
                 <MediaQuery largerThan={"sm"} styles={{ display: "none" }}>
                   <Burger opened={opened} onClick={handleOpened} title={"title"} size="sm" />
                 </MediaQuery>
-                <Flex gap={20} align={"center"}>
+                <Flex wrap={"nowrap"} gap={20} align={"center"}>
                   <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                     <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => setIsCollapse(!isCollapse)}>
                       <IconAlignJustified size="1.125rem" />
                     </ActionIcon>
                   </MediaQuery>
-                  <Text fz="lg" weight={"bold"}>
+                  <Text fz="lg" weight={"bold"} sx={{ whiteSpace: "nowrap" }}>
                     My App
                   </Text>
                 </Flex>
