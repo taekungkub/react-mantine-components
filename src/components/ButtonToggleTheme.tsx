@@ -15,7 +15,7 @@ function ButtonToggleTheme() {
 
   return (
     <Tooltip label="Change Theme" withArrow>
-      <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => toggleColorScheme()}>
+      <ActionIcon variant="default" color="blue" size={"lg"} onClick={() => toggleColorScheme()}>
         {colorScheme === "dark" && <IconSun size={"1.125rem"} />}
         {colorScheme === "light" && <IconMoonStars size={"1.125rem"} />}
       </ActionIcon>

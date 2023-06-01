@@ -4,6 +4,7 @@ import { UserTy } from "../type"
 import AuthServices from "../services/AuthServices"
 import useToast from "../hooks/useToast"
 import DummyServices from "../services/DummyServices"
+import jwt_decode from "jwt-decode"
 
 interface AuthContextType {
   // We defined the user type in `index.d.ts`, but it's
@@ -25,7 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   const [user, setUser] = useState<UserTy>()
   const [error, setError] = useState<any>()
   const [loading, setLoading] = useState<boolean>(true)
-  const [loadingInitial, setLoadingInitial] = useState<boolean>(false)
+  const [loadingInitial, setLoadingInitial] = useState<boolean>(true)
   const navigate = useNavigate()
   const location = useLocation()
   const toast = useToast()
@@ -44,8 +45,15 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     } else {
       setLoggedIn(false)
       setLoading(false)
+      setLoadingInitial(false)
     }
   }, [])
+
+  useEffect(() => {
+    if (token) {
+      checkExpired()
+    }
+  }, [token])
 
   async function getUserInfo() {
     try {
@@ -57,9 +65,23 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       })
       setLoggedIn(true)
     } catch (error) {
+      console.log(error)
       setLoggedIn(false)
     } finally {
       setLoading(false)
+      setLoadingInitial(false)
+    }
+  }
+
+  async function checkExpired() {
+    try {
+      var decodedToken = jwt_decode(token)
+      const { exp } = decodedToken as any
+      if (Date.now() > exp * 1000) {
+        logout()
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -69,18 +91,11 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       const res = await DummyServices.login()
       setToken(res.data.token)
       localStorage.setItem("token", res.data.token)
-      setUser({
-        ...res.data,
-        roles: ["admin"],
-      })
+      toast.success("Login successfully !")
       navigate("/dashboard")
-      toast.success()
-      setLoggedIn(true)
+      await getUserInfo()
     } catch (error: any) {
       toast.error(error, "")
-      setLoggedIn(false)
-    } finally {
-      setLoading(false)
     }
   }
 

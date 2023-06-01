@@ -50,7 +50,7 @@ function DashboardLayout() {
                 </MediaQuery>
                 <Flex wrap={"nowrap"} gap={20} align={"center"}>
                   <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                    <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => setIsCollapse(!isCollapse)}>
+                    <ActionIcon variant="light" color="gray" size={"lg"} onClick={() => setIsCollapse(!isCollapse)}>
                       <IconAlignJustified size="1.125rem" />
                     </ActionIcon>
                   </MediaQuery>
@@ -71,7 +71,7 @@ function DashboardLayout() {
                   rightSectionWidth={36}
                 />
 
-                <ActionIcon variant="light" color="blue" size={"lg"} onClick={() => navigate("/cart")}>
+                <ActionIcon variant="default" color="blue" size={"lg"} onClick={() => navigate("/cart")}>
                   <IconShoppingCart size="1.125rem" />
                 </ActionIcon>
                 <ButtonToggleTheme />

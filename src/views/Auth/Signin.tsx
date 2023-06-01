@@ -9,7 +9,7 @@ import useAuth from "../../context/AuthContext"
 export default function SigninPage() {
   const navigate = useNavigate()
 
-  const { login } = useAuth()
+  const { login, loading } = useAuth()
 
   const schema = Joi.object({
     email: Joi.string()
@@ -56,7 +56,7 @@ export default function SigninPage() {
                 Forgot password?
               </Anchor>
             </Group>
-            <Button type="submit" fullWidth mt="xl">
+            <Button type="submit" fullWidth mt="xl" loading={loading}>
               Sign in
             </Button>
           </Paper>

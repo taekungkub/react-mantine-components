@@ -41,11 +41,11 @@ export default function PrivateRoutes({ allowedRoles }: Props) {
   }
 
   if (!loading && !loggedIn) {
-    return <Navigate to="/signin" />
+    return <Navigate to="/signin" replace />
   }
 
   if (allowedRoles) {
-    return user?.roles.find((role) => allowedRoles.includes(role)) ? <Outlet /> : <Navigate to={"/exeception/403"} />
+    return user?.roles.find((role) => allowedRoles.includes(role)) ? <Outlet /> : <Navigate to={"/exeception/403"} replace />
   }
 
   return <Outlet />

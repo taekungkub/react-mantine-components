@@ -21,6 +21,7 @@ export default {
     return Api.post("auth/login", {
       username: "kminchelle",
       password: "0lelplR",
+      expiresInMins: 60, // optional
     })
   },
   searchProduct(search: string) {
