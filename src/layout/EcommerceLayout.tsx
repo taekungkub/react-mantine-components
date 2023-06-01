@@ -41,7 +41,7 @@ function EcommerceLayout() {
   return (
     <div>
       <MediaQuery smallerThan={"xs"} styles={{ display: "none" }}>
-        <Card px={0} py={20} sx={{ position: "sticky", top: "60px", zIndex: 5 }}>
+        <Card px={0} py={20}>
           <CategoryList />
         </Card>
       </MediaQuery>

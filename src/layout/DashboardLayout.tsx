@@ -76,11 +76,11 @@ function DashboardLayout() {
                 </ActionIcon>
                 <ButtonToggleTheme />
 
-                <MenuDropdownProfile />
-
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                   <LanguagePicker />
                 </MediaQuery>
+
+                <MenuDropdownProfile />
               </Flex>
             </Flex>
           </Header>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { createStyles, UnstyledButton, Menu, Image, Group, rem, Box } from "@mantine/core"
-import { IconChevronDown } from "@tabler/icons-react"
+import { createStyles, UnstyledButton, Menu, Image, Group, rem, Box, ActionIcon } from "@mantine/core"
+import { IconChevronDown, IconShoppingCart } from "@tabler/icons-react"
 import english from "@/assets/media/english.png"
 import thai from "@/assets/media/thai.png"
 import { useTranslation } from "react-i18next"
@@ -64,15 +64,20 @@ export default function LanguagePicker() {
 
   return (
     <Box>
-      <Menu onOpen={() => setOpened(true)} onClose={() => setOpened(false)} radius="md" width="target" withinPortal>
+      <Menu onOpen={() => setOpened(true)} onClose={() => setOpened(false)} radius="md" width="200" withinPortal>
         <Menu.Target>
-          <UnstyledButton className={classes.control}>
+          {/* <UnstyledButton className={classes.control}>
             <Group spacing="xs">
               <Image src={selected.image} width={22} height={22} />
               <span className={classes.label}>{selected.label}</span>
             </Group>
             <IconChevronDown size="1rem" className={classes.icon} stroke={1.5} />
-          </UnstyledButton>
+          </UnstyledButton> */}
+          <ActionIcon variant="default" color="blue" size={"lg"}>
+            <Group spacing="xs">
+              <Image src={selected.image} width={22} height={22} />
+            </Group>
+          </ActionIcon>
         </Menu.Target>
         <Menu.Dropdown>{items}</Menu.Dropdown>
       </Menu>

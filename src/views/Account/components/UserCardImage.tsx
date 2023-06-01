@@ -1,4 +1,4 @@
-import { createStyles, Card, Avatar, Text, Group, Button, rem } from "@mantine/core";
+import { createStyles, Card, Avatar, Text, Group, Button, rem, ActionIcon, Box, Flex, ThemeIcon } from "@mantine/core"
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -8,34 +8,34 @@ const useStyles = createStyles((theme) => ({
   avatar: {
     border: `${rem(2)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white}`,
   },
-}));
+}))
 
 interface UserCardImageProps {
-  image: string;
-  avatar: string;
-  name: string;
-  job: string;
-  stats: { label: string; value: string }[];
+  image: string
+  avatar: string
+  name: string
+  job: string
+  stats: { label: string; icon: React.FC<any> }[]
 }
 
 export function UserCardImage({ image, avatar, name, job, stats }: UserCardImageProps) {
-  const { classes, theme } = useStyles();
+  const { classes, theme } = useStyles()
 
   const items = stats.map((stat) => (
-    <div key={stat.label}>
-      <Text ta="center" fz="lg" fw={500}>
-        {stat.value}
-      </Text>
-      <Text ta="center" fz="sm" c="dimmed">
+    <Flex key={stat.label} direction={"column"} justify={"center"} align={"center"}>
+      <ActionIcon variant="subtle" key={stat.label}>
+        <stat.icon size="1.225rem" color="gray" />
+      </ActionIcon>
+      <Text ta="center" fz="sm" c="dimmed" mt={5}>
         {stat.label}
       </Text>
-    </div>
-  ));
+    </Flex>
+  ))
 
   return (
     <Card withBorder padding="xl" radius="md" className={classes.card}>
-      <Card.Section sx={{ backgroundImage: `url(${image})`, height: 140 }} />
-      <Avatar src={avatar} size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
+      <Card.Section />
+      <Avatar src={avatar} size={120} radius={80} mx="auto" mt={30} className={classes.avatar} />
       <Text ta="center" fz="lg" fw={500} mt="sm">
         {name}
       </Text>
@@ -45,9 +45,6 @@ export function UserCardImage({ image, avatar, name, job, stats }: UserCardImage
       <Group mt="md" position="center" spacing={30}>
         {items}
       </Group>
-      <Button fullWidth radius="md" mt="xl" size="md" color={theme.colorScheme === "dark" ? undefined : "dark"}>
-        Follow
-      </Button>
     </Card>
-  );
+  )
 }

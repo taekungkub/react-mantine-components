@@ -7,12 +7,6 @@ import ProductsTable2 from "./components/ProductsTable2"
 import { useNavigate } from "react-router"
 import useFilterProduct from "../../hooks/useFilterProduct"
 
-function ProductList() {
-  const { products } = useProduct()
-  const listItems = products.map((v) => <li key={v.id.toString()}>{v.title}</li>)
-  return <ul>{listItems}</ul>
-}
-
 function ProductListPage() {
   const { products } = useProduct()
   const [searchQuery, setSearchQuery] = useState("")

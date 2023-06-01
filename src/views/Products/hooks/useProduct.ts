@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react"
 import { ProductTy } from "../../../type"
 import DummyServices from "../../../services/DummyServices"
+import useSWR from "swr"
 
 function useProduct() {
   const [products, setProducts] = useState<Array<ProductTy>>([])
+  const { data, isLoading } = useSWR("/api/products", DummyServices.products)
 
   useEffect(() => {
-    getProducts()
+    setProducts(data?.data.products)
+  }, [data])
 
-    return () => {}
-  }, [])
-
-  async function getProducts() {
-    try {
-      const res = await DummyServices.products()
-      setProducts(res.data.products)
-    } catch (error) {}
-  }
   return {
     products,
+    isLoading,
   }
 }
 

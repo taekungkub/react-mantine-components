@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea } from "@mantine/core"
+import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea, NavLink } from "@mantine/core"
 import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react"
 import { useLocation, useNavigate } from "react-router-dom"
+import useAuth from "../context/AuthContext"
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -63,6 +64,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
   const navigate = useNavigate()
   const location = useLocation()
   const [active, setActive] = useState(location.pathname ?? "")
+  const { user } = useAuth()
 
   useEffect(() => {
     setActive(location.pathname)
