@@ -1,4 +1,5 @@
-import { Box, Card, Divider, ScrollArea, Title, createStyles, rem } from "@mantine/core";
+import { Box, Card, Divider, Group, ScrollArea, Title, createStyles, rem } from "@mantine/core";
+import { IconUserCancel } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   item: {
@@ -45,11 +46,18 @@ function BoardTask({ children, title, background }: Props) {
 
   return (
     <>
-      <Card bg={background}>
-        <Title order={4} mb={20} color="white">
-          {title}
-        </Title>
-        <ScrollArea.Autosize mah={500}>{children}</ScrollArea.Autosize>
+      <Card withBorder bg={"gray.0"}>
+        <Card.Section withBorder inheritPadding py="xs" bg={background}>
+          <Title order={4} color="white">
+            {title}
+          </Title>
+        </Card.Section>
+
+        <Card.Section inheritPadding>
+          <ScrollArea.Autosize mah={500} mt={20}>
+            {children}
+          </ScrollArea.Autosize>
+        </Card.Section>
       </Card>
     </>
   );
