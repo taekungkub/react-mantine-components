@@ -5,7 +5,7 @@ export default function UnAuthRoutes() {
   const { user, token, loading, loggedIn } = useAuth()
 
   if (!loading && loggedIn) {
-    return <Navigate to="/" />
+    return <Navigate to="/" replace />
   }
 
   return <Outlet />

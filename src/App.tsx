@@ -38,6 +38,11 @@ import AdminPage from "./views/Permission/Admin"
 import SecretPage from "./views/Permission/Secret"
 import AuthPage from "./views/Permission/Auth"
 import SearchProductPage from "./views/Redux/Search"
+import CheckoutPage from "./views/Redux/Checkout"
+import CodeVerifyPage from "./views/Auth/CodeVerify"
+import ContactPage from "./views/Contact"
+import LandingPage from "./views/Landing"
+import ProjectsPage from "./views/Projects"
 
 function App() {
   return (
@@ -83,6 +88,7 @@ function App() {
                     <Route path="/redux/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
                     <Route path="/redux/search" element={<SearchProductPage />}></Route>
                   </Route>
+                  <Route path="/redux/checkout" element={<CheckoutPage />}></Route>
 
                   <Route path="/cart/" element={<CartPage />}></Route>
 
@@ -95,7 +101,12 @@ function App() {
                   </Route>
 
                   <Route path="/permission/secret" element={<SecretPage />}></Route>
+
+                  <Route path="/projects" element={<ProjectsPage />}></Route>
                 </Route>
+
+                <Route path="/contact" element={<ContactPage />}></Route>
+                <Route path="/landing" element={<LandingPage />}></Route>
 
                 <Route element={<EmptyLayout />}>
                   <Route element={<UnAuthRoutes />}>
@@ -106,6 +117,7 @@ function App() {
                   <Route path="/forgotpassword" element={<ForgotPasswordPage />}></Route>
                   <Route path="/resetpassword" element={<ResetPasswordPage />}></Route>
                   <Route path="/verify/email/:code" element={<VerifyEmailPage />}></Route>
+                  <Route path="/code-verify" element={<CodeVerifyPage />}></Route>
                 </Route>
 
                 <Route path="*" element={<NotFoundPage />}></Route>

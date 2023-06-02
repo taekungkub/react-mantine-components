@@ -1,4 +1,4 @@
-import { ButtonStylesParams, CardProps, ColorScheme, ColorSchemeProvider, MantineProvider } from "@mantine/core"
+import { ButtonStylesParams, CardProps, ColorScheme, ColorSchemeProvider, MantineProvider, useMantineTheme } from "@mantine/core"
 import { useHotkeys, useLocalStorage } from "@mantine/hooks"
 import { Notifications } from "@mantine/notifications"
 import { ModalsProvider } from "@mantine/modals"
@@ -18,11 +18,15 @@ function ThemeProvider({ children }: Props) {
 
   useHotkeys([["mod+J", () => toggleColorScheme()]])
 
+  const dark = colorScheme === "dark"
+  const theme = useMantineTheme()
+
   return (
     <>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
         <MantineProvider
           theme={{
+            primaryColor: dark ? "yellow" : "",
             loader: "bars",
             colorScheme,
             fontFamily: "Poppins",

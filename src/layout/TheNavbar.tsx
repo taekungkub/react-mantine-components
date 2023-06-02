@@ -11,6 +11,7 @@ const useStyles = createStyles((theme) => ({
 
 interface PropsTheNavbar {
   isCollapse?: boolean
+  opened?: boolean
 }
 
 //Sidebar

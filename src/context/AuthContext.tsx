@@ -17,6 +17,7 @@ interface AuthContextType {
   signUp: (email: string, name: string, password: string) => void
   logout: () => void
   loggedIn: boolean
+  checkExpired: () => void
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -75,6 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
 
   async function checkExpired() {
     try {
+      if (!token) return
       var decodedToken = jwt_decode(token)
       const { exp } = decodedToken as any
       if (Date.now() > exp * 1000) {
@@ -129,6 +131,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       signUp,
       logout,
       loggedIn,
+      checkExpired,
     }),
     [token, user, loading, error, loggedIn]
   )

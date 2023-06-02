@@ -15,7 +15,7 @@ const useStyles = createStyles((theme) => ({
 
     "&:hover": {
       backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
-      color: theme.colors.blue[4],
+      color: theme.colorScheme === "dark" ? theme.colors.yellow[4] : theme.colors.blue[4],
     },
   },
 
@@ -31,15 +31,15 @@ const useStyles = createStyles((theme) => ({
 
     "&:hover": {
       backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
-      color: theme.colors.blue[4],
+      color: theme.colorScheme === "dark" ? theme.colors.yellow[4] : theme.colors.blue[4],
     },
     transition: "color 200ms ease",
   },
 
   linkActive: {
-    color: theme.colors.blue[4],
+    color: theme.colorScheme === "dark" ? theme.colors.yellow[4] : theme.colors.blue[4],
     "&:hover": {
-      color: theme.colors.blue[4],
+      color: theme.colorScheme === "dark" ? theme.colors.yellow[4] : theme.colors.blue[4],
     },
   },
 

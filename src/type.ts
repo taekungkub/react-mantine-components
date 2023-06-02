@@ -109,3 +109,10 @@ interface UserCommentTy {
   id: number
   username: string
 }
+
+export interface TodoTy {
+  id: number
+  todo: string
+  completed: boolean
+  userId: number
+}

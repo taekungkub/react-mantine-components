@@ -1,15 +1,16 @@
-import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button, ActionIcon, ThemeIcon, TextInput } from "@mantine/core"
+import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button, ActionIcon, ThemeIcon, TextInput, Indicator } from "@mantine/core"
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
 import { TheNavbar, TheDrawer } from "./TheNavbar"
 import MenuLang from "../components/MenuLangs"
 import ButtonToggleTheme from "../components/ButtonToggleTheme"
 import MenuDropdownProfile from "../components/MenuDropdownProfile"
 import useSidebar from "../hooks/useSidebar"
-import { IconAlignJustified, IconSearch, IconShoppingCart } from "@tabler/icons-react"
+import { IconAlignJustified, IconSearch } from "@tabler/icons-react"
 import LanguagePicker from "@/components/LanguagePicker"
 import { useState } from "react"
 import { useAppDispatch } from "../store/store"
 import { setSearchTerms } from "../store/slices/searchSlice"
+import ButtonCart from "../components/ButtonCart"
 
 const useStyles = createStyles((theme) => ({
   main: {
@@ -21,12 +22,13 @@ function DashboardLayout() {
   const { opened, setOpened, handleOpened } = useSidebar()
   const [isCollapse, setIsCollapse] = useState(false)
   const { classes } = useStyles()
-  const [searchParams, setSearchParams] = useSearchParams()
+
   const [keyword, setKeyword] = useState("")
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   function handleSearchTerms() {
+    if (!keyword) return
     dispatch(setSearchTerms(keyword))
     navigate(`/redux/search?keyword=${keyword}`)
   }
@@ -71,9 +73,8 @@ function DashboardLayout() {
                   rightSectionWidth={36}
                 />
 
-                <ActionIcon variant="default" color="blue" size={"lg"} onClick={() => navigate("/cart")}>
-                  <IconShoppingCart size="1.125rem" />
-                </ActionIcon>
+                <ButtonCart />
+
                 <ButtonToggleTheme />
 
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function PrivateRoutes({ allowedRoles }: Props) {
-  const { user, token, loading, loggedIn } = useAuth()
+  const { user, token, loading, loggedIn, checkExpired } = useAuth()
   const navigate = useNavigate()
 
   // const [Loading, setLoading] = useState(true)
@@ -27,6 +27,10 @@ export default function PrivateRoutes({ allowedRoles }: Props) {
   // useEffect(() => {
   //   getUser()
   // }, [])
+
+  useEffect(() => {
+    checkExpired()
+  }, [])
 
   useEffect(() => {
     if (!loading) {

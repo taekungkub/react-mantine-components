@@ -1,5 +1,6 @@
 import {
   IconBrandRedux,
+  IconBrandWebflow,
   IconCompass,
   IconError404,
   IconFileAnalytics,
@@ -7,6 +8,7 @@ import {
   IconLockAccess,
   IconLogin,
   IconNotes,
+  IconProgressCheck,
   IconShoppingCart,
   IconUser,
   IconUsers,
@@ -62,6 +64,7 @@ export const mockdata = [
       { label: "Counter", link: "/redux/counter" },
       { label: "Products", link: "/redux/products" },
       { label: "Products Detail", link: "/redux/product/smartphones/1" },
+      { label: "Checkout", link: "/redux/checkout" },
     ],
   },
 
@@ -72,8 +75,10 @@ export const mockdata = [
     links: [
       { label: "Sign In", link: "/signin" },
       { label: "Sign Up", link: "/signup" },
+      { label: "Forgot Password", link: "/forgotpassword" },
       { label: "Verify Email", link: "/verify/email/codeexampletest" },
       { label: "Reset Password", link: "/resetpassword" },
+      { label: "Code Verify", link: "/code-verify" },
     ],
   },
 
@@ -88,7 +93,7 @@ export const mockdata = [
       { label: "503", link: "/exeception/503" },
     ],
   },
-  { label: "Contracts", icon: IconFileAnalytics, link: "/contracts" },
+
   {
     label: "Permission",
     icon: IconLockAccess,
@@ -99,5 +104,19 @@ export const mockdata = [
       { label: "Admin", link: "/permission/admin" },
       { label: "Super Secret", link: "/permission/secret" },
     ],
+  },
+  { label: "Contract", icon: IconFileAnalytics, link: "/contact" },
+
+  {
+    label: "Landing Page",
+    icon: IconBrandWebflow,
+    initiallyOpened: false,
+    link: "/landing",
+  },
+  {
+    label: "Projects",
+    icon: IconProgressCheck,
+    initiallyOpened: false,
+    link: "/projects",
   },
 ]
