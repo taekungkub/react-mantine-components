@@ -3,9 +3,10 @@ import DummyServices from "../services/DummyServices"
 import { TodoTy } from "../type"
 
 function useTodos() {
-  const [todos, setTodos] = useState<TodoTy[]>()
+  const [todos, setTodos] = useState<TodoTy[]>([])
   const [completed, setCompleted] = useState<TodoTy[]>([])
   const [incomplete, setIncomplete] = useState<TodoTy[]>([])
+  const [board2, setBoard2] = useState<TodoTy[]>()
 
   async function getTodos() {
     try {
@@ -23,10 +24,13 @@ function useTodos() {
   }, [])
   return {
     todos,
+    setTodos,
     completed,
     incomplete,
     setCompleted,
     setIncomplete,
+    setBoard2,
+    board2
   }
 }
 

@@ -1,10 +1,11 @@
-import { createStyles, Text, rem, Grid, Box } from "@mantine/core"
-import { useListState } from "@mantine/hooks"
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import dataTest from "./data.json"
-import { useEffect, useState } from "react"
-import useTodos from "../../hooks/useTodos"
-import { TodoTy } from "../../type"
+import { createStyles, Text, rem, Grid, Box, Container, ScrollArea, Flex } from "@mantine/core";
+import { useListState } from "@mantine/hooks";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import dataTest from "./data.json";
+import { useEffect, useState } from "react";
+import useTodos from "../../hooks/useTodos";
+import { TodoTy } from "../../type";
+import BoardTask from "./Board";
 
 const useStyles = createStyles((theme) => ({
   item: {
@@ -28,31 +29,23 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     width: rem(60),
   },
-  board: {
-    padding: "8px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    minHeight: "200px",
-    borderRadius: "10px",
-  },
-}))
+}));
 
 interface DndListProps {
   data: {
-    position: number
-    mass: number
-    symbol: string
-    name: string
-  }[]
+    position: number;
+    mass: number;
+    symbol: string;
+    name: string;
+  }[];
 }
 
 export default function DndList() {
-  const { classes, cx } = useStyles()
-  const [data, setData] = useState(dataTest.props.data)
-  const [state, handlers] = useListState(data)
+  const { classes, cx } = useStyles();
+  const [data, setData] = useState(dataTest.props.data);
+  const [state, handlers] = useListState(data);
 
-  const { todos, setCompleted, setIncomplete, completed, incomplete } = useTodos()
+  const { todos, setCompleted, setIncomplete, completed, incomplete, setTodos, board2, setBoard2 } = useTodos();
 
   // const handleDragEnd = (result: any) => {
   //   const { destination, source, draggableId } = result
@@ -82,6 +75,34 @@ export default function DndList() {
   //   return array.filter((item) => item.id != id)
   // }
 
+  const handleDragEnd = (result: any) => {
+    if (!result.destination) return; // Item dropped outside the list
+    const sourceBoard = result.source?.droppableId;
+    const destinationBoard = result.destination?.droppableId;
+
+    if (sourceBoard === "board1" && destinationBoard === "board2") {
+      const updatedBoard1 = Object.assign([], todos);
+      const [removed] = updatedBoard1.splice(result.source.index, 1);
+
+      const updatedBoard2 = Object.assign([], board2);
+      updatedBoard2.splice(result.destination.index, 0, removed);
+
+      setTodos(updatedBoard1);
+      setBoard2(updatedBoard2);
+    }
+
+    if (sourceBoard === "board2" && destinationBoard === "board1") {
+      const updatedBoard2 = Object.assign([], board2);
+      const [removed] = updatedBoard2.splice(result.source.index, 1);
+
+      const updatedBoard1 = Object.assign([], todos);
+      updatedBoard1.splice(result.destination.index, 0, removed);
+
+      setTodos(updatedBoard1);
+      setBoard2(updatedBoard2);
+    }
+  };
+
   const items = todos?.map((item, index) => (
     <Draggable key={item.id} index={index} draggableId={`${item.id}`}>
       {(provided, snapshot) => (
@@ -101,9 +122,9 @@ export default function DndList() {
         </div>
       )}
     </Draggable>
-  ))
+  ));
 
-  const items2 = completed.map((item, index) => (
+  const items2 = board2?.map((item, index) => (
     <Draggable key={item.id} index={index} draggableId={`${item.id}`}>
       {(provided, snapshot) => (
         <div
@@ -122,37 +143,41 @@ export default function DndList() {
         </div>
       )}
     </Draggable>
-  ))
-
+  ));
   return (
     <>
-      <DragDropContext onDragEnd={({ destination, source }) => handlers.reorder({ from: source.index, to: destination?.index || 0 })}>
-        <Grid>
-          <Grid.Col sm={6}>
-            <Box className={classes.board} bg="yellow">
-              <Droppable droppableId="1" direction="vertical">
-                {(provided) => (
-                  <Box className={classes.board} {...provided.droppableProps} ref={provided.innerRef}>
+    <DragDropContext onDragEnd={handleDragEnd}>
+        <Flex gap={20} justify={'space-between'} miw={1000} p={20}>
+            <Box w={'100%'}>
+            <Droppable droppableId="board1" direction="vertical">
+              {(provided) => (
+                <BoardTask title="Todo" background="yellow">
+                  <Box {...provided.droppableProps} ref={provided.innerRef}>
                     {items}
                     {provided.placeholder}
                   </Box>
-                )}
-              </Droppable>
+                </BoardTask>
+              )}
+            </Droppable>
             </Box>
-          </Grid.Col>
-          <Grid.Col sm={6}>
-            <Box className={classes.board} bg="teal">
-              <Droppable droppableId="2" direction="vertical">
-                {(provided) => (
-                  <Box className={classes.board} {...provided.droppableProps} ref={provided.innerRef}>
+            <Box w={'100%'}>
+            <Droppable droppableId="board2" direction="vertical">
+              {(provided) => (
+                <BoardTask title="Done" background="teal">
+                  <Box mih={250} {...provided.droppableProps} ref={provided.innerRef}>
+                    {items2}
                     {provided.placeholder}
                   </Box>
-                )}
-              </Droppable>
+                </BoardTask>
+              )}
+            </Droppable>
             </Box>
-          </Grid.Col>
-        </Grid>
+         <Box w={'100%'}>
+         <BoardTask title="Trash" background="red">
+              <Box mih={250}></Box>
+            </BoardTask></Box>
+        </Flex>
       </DragDropContext>
     </>
-  )
+  );
 }
