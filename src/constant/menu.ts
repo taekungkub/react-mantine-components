@@ -1,4 +1,5 @@
 import {
+  IconBlockquote,
   IconBrandRedux,
   IconBrandWebflow,
   IconCompass,
@@ -121,5 +122,11 @@ export const mockdata = [
     icon: IconProgressCheck,
     initiallyOpened: false,
     link: "/projects",
+  },
+  {
+    label: "Web3",
+    icon: IconBlockquote,
+    initiallyOpened: false,
+    link: "/web3",
   },
 ]

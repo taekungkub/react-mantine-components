@@ -43,6 +43,8 @@ import CodeVerifyPage from "./views/Auth/CodeVerify"
 import ContactPage from "./views/Contact"
 import LandingPage from "./views/Landing"
 import ProjectsPage from "./views/Projects"
+import Web3Page from "./views/Web3"
+import { WagmiProvider } from "@/context/WagmiContext"
 
 function App() {
   return (
@@ -51,78 +53,78 @@ function App() {
         <MyGlobalStyles />
         <BrowserRouter>
           <Providers store={store}>
-            <AuthProvider>
-              <Routes>
-                <Route element={<DashboardLayout />}>
-                  <Route path="/" element={<Home />}></Route>
-                  <Route path="/dashboard" element={<Dashboard />}></Route>
+            <Routes>
+              <Route element={<DashboardLayout />}>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/dashboard" element={<Dashboard />}></Route>
 
-                  <Route element={<PrivateRoutes />}>
-                    <Route path="/account" element={<AccountLayout />}>
-                      <Route path="/account/profile" element={<ProfilePage />}></Route>
-                      <Route path="/account/password" element={<PasswordPage />}></Route>
-                      <Route path="/account/notification" element={<NotificationPage />}></Route>
-                      <Route path="/account/billing" element={<BillingPage />}></Route>
-                    </Route>
+                <Route element={<PrivateRoutes />}>
+                  <Route path="/account" element={<AccountLayout />}>
+                    <Route path="/account/profile" element={<ProfilePage />}></Route>
+                    <Route path="/account/password" element={<PasswordPage />}></Route>
+                    <Route path="/account/notification" element={<NotificationPage />}></Route>
+                    <Route path="/account/billing" element={<BillingPage />}></Route>
                   </Route>
-
-                  <Route path="/crm/customer" element={<CustomerPage />}></Route>
-
-                  <Route path="/exeception/403" element={<NoPermisstionPage />}></Route>
-                  <Route path="/exeception/404" element={<NotFoundPage />}></Route>
-                  <Route path="/exeception/503" element={<ServerOverload />}></Route>
-
-                  <Route path="/components/button" element={<ButtonPage />}></Route>
-
-                  <Route path="/products" element={<ProductListPage />}></Route>
-                  <Route path="/products/new" element={<ProductNewPage />}></Route>
-                  <Route path="/products/:id" element={<ProductNewPage />}></Route>
-
-                  <Route path="/redux/counter" element={<CounterPage />}></Route>
-
-                  <Route element={<EcommerceLayout />}>
-                    <Route element={<ProductLayout />}>
-                      <Route path="/redux/products" element={<ProductReduxPage />}></Route>
-                      <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>
-                    </Route>
-                    <Route path="/redux/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
-                    <Route path="/redux/search" element={<SearchProductPage />}></Route>
-                  </Route>
-                  <Route path="/redux/checkout" element={<CheckoutPage />}></Route>
-
-                  <Route path="/cart/" element={<CartPage />}></Route>
-
-                  <Route element={<PrivateRoutes />}>
-                    <Route path="/permission/auth" element={<AuthPage />}></Route>
-                  </Route>
-
-                  <Route element={<PrivateRoutes allowedRoles={["superadmin"]} />}>
-                    <Route path="/permission/admin" element={<AdminPage />}></Route>
-                  </Route>
-
-                  <Route path="/permission/secret" element={<SecretPage />}></Route>
-
-                  <Route path="/projects" element={<ProjectsPage />}></Route>
                 </Route>
 
-                <Route path="/contact" element={<ContactPage />}></Route>
-                <Route path="/landing" element={<LandingPage />}></Route>
+                <Route path="/crm/customer" element={<CustomerPage />}></Route>
 
-                <Route element={<EmptyLayout />}>
-                  <Route element={<UnAuthRoutes />}>
-                    <Route path="/signin" element={<SigninPage />}></Route>
-                    <Route path="/signup" element={<SignupPage />}></Route>
+                <Route path="/exeception/403" element={<NoPermisstionPage />}></Route>
+                <Route path="/exeception/404" element={<NotFoundPage />}></Route>
+                <Route path="/exeception/503" element={<ServerOverload />}></Route>
+
+                <Route path="/components/button" element={<ButtonPage />}></Route>
+
+                <Route path="/products" element={<ProductListPage />}></Route>
+                <Route path="/products/new" element={<ProductNewPage />}></Route>
+                <Route path="/products/:id" element={<ProductNewPage />}></Route>
+
+                <Route path="/redux/counter" element={<CounterPage />}></Route>
+
+                <Route element={<EcommerceLayout />}>
+                  <Route element={<ProductLayout />}>
+                    <Route path="/redux/products" element={<ProductReduxPage />}></Route>
+                    <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>
                   </Route>
+                  <Route path="/redux/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
+                  <Route path="/redux/search" element={<SearchProductPage />}></Route>
+                </Route>
+                <Route path="/redux/checkout" element={<CheckoutPage />}></Route>
 
-                  <Route path="/forgotpassword" element={<ForgotPasswordPage />}></Route>
-                  <Route path="/resetpassword" element={<ResetPasswordPage />}></Route>
-                  <Route path="/verify/email/:code" element={<VerifyEmailPage />}></Route>
-                  <Route path="/code-verify" element={<CodeVerifyPage />}></Route>
+                <Route path="/cart/" element={<CartPage />}></Route>
+
+                <Route element={<PrivateRoutes />}>
+                  <Route path="/permission/auth" element={<AuthPage />}></Route>
                 </Route>
 
-                <Route path="*" element={<NotFoundPage />}></Route>
-              </Routes>
-            </AuthProvider>
+                <Route element={<PrivateRoutes allowedRoles={["superadmin"]} />}>
+                  <Route path="/permission/admin" element={<AdminPage />}></Route>
+                </Route>
+
+                <Route path="/permission/secret" element={<SecretPage />}></Route>
+
+                <Route path="/projects" element={<ProjectsPage />}></Route>
+
+                <Route path="/web3" element={<Web3Page />}></Route>
+              </Route>
+
+              <Route path="/contact" element={<ContactPage />}></Route>
+              <Route path="/landing" element={<LandingPage />}></Route>
+
+              <Route element={<EmptyLayout />}>
+                <Route element={<UnAuthRoutes />}>
+                  <Route path="/signin" element={<SigninPage />}></Route>
+                  <Route path="/signup" element={<SignupPage />}></Route>
+                </Route>
+
+                <Route path="/forgotpassword" element={<ForgotPasswordPage />}></Route>
+                <Route path="/resetpassword" element={<ResetPasswordPage />}></Route>
+                <Route path="/verify/email/:code" element={<VerifyEmailPage />}></Route>
+                <Route path="/code-verify" element={<CodeVerifyPage />}></Route>
+              </Route>
+
+              <Route path="*" element={<NotFoundPage />}></Route>
+            </Routes>
           </Providers>
         </BrowserRouter>
       </ThemeProvider>

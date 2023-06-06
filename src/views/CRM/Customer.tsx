@@ -8,26 +8,33 @@ import { CustomerTy } from "../../type"
 import { modals } from "@mantine/modals"
 import CardStatsCustomer from "../../components/Cards/CardStatsCustomer"
 import { IconUserCheck, IconUserPlus, IconUsers } from "@tabler/icons-react"
-
+import { motion } from "framer-motion"
+import { Suspense } from "react"
 function SectionUserStats() {
+  let stats = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  }
   return (
-    <SimpleGrid cols={3} breakpoints={[{ maxWidth: "sm", cols: 1 }]} mt={20}>
-      <CardStatsCustomer title="Total Customers" value={2400} percent={17.9} type="UP">
-        <ThemeIcon size={"xl"}>
-          <IconUsers />
-        </ThemeIcon>
-      </CardStatsCustomer>
-      <CardStatsCustomer title="Active Customers" value={1897} percent={32.7} type="UP">
-        <ThemeIcon size={"xl"} color="violet">
-          <IconUserCheck />
-        </ThemeIcon>
-      </CardStatsCustomer>
-      <CardStatsCustomer title="New Customers" value={241} percent={2.7} type="DOWN">
-        <ThemeIcon size={"xl"} color="teal">
-          <IconUserPlus />
-        </ThemeIcon>
-      </CardStatsCustomer>
-    </SimpleGrid>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <SimpleGrid cols={3} breakpoints={[{ maxWidth: "sm", cols: 1 }]} mt={20}>
+        <CardStatsCustomer title="Total Customers" value={2400} percent={17.9} type="UP">
+          <ThemeIcon size={"xl"}>
+            <IconUsers />
+          </ThemeIcon>
+        </CardStatsCustomer>
+        <CardStatsCustomer title="Active Customers" value={1897} percent={32.7} type="UP">
+          <ThemeIcon size={"xl"} color="violet">
+            <IconUserCheck />
+          </ThemeIcon>
+        </CardStatsCustomer>
+        <CardStatsCustomer title="New Customers" value={241} percent={2.7} type="DOWN">
+          <ThemeIcon size={"xl"} color="teal">
+            <IconUserPlus />
+          </ThemeIcon>
+        </CardStatsCustomer>
+      </SimpleGrid>
+    </motion.div>
   )
 }
 
