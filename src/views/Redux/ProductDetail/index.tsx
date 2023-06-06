@@ -7,7 +7,8 @@ import InfoSection from "./InfoSection"
 import { Anchor, Breadcrumbs, Grid, SimpleGrid, Tabs } from "@mantine/core"
 import ImageSection from "./ImageSection"
 import MyBreadcrumbs from "../../../components/MyBreadcrumbs"
-import ReviewTab from "./ReviewTab"
+import ReviewTab from "./CommentTab"
+import CommentTab from "./CommentTab"
 
 function ProductReduxDetailPage() {
   const dispatch = useAppDispatch()
@@ -20,26 +21,6 @@ function ProductReduxDetailPage() {
   useEffect(() => {
     dispatch(fetchOneProducts(id as string))
   }, [id])
-
-  // function ProductSection() {
-  //   if (productStatus === "loading") {
-  //     return (
-  //       <>
-  //         <div>Loading</div>
-  //       </>
-  //     );
-  //   } else if (productStatus === "succeeded") {
-  //     return (
-  //       <>
-  //         <div>
-  //           <div>{product?.title}</div>
-  //         </div>
-  //       </>
-  //     );
-  //   } else {
-  //     return <></>;
-  //   }
-  // }
 
   return (
     <>
@@ -58,23 +39,13 @@ function ProductReduxDetailPage() {
           <InfoSection data={product} />
         </Grid.Col>
         <Grid.Col>
-          <Tabs defaultValue="gallery">
+          <Tabs defaultValue="comments">
             <Tabs.List>
-              <Tabs.Tab value="gallery">Gallery</Tabs.Tab>
-              <Tabs.Tab value="messages">Review</Tabs.Tab>
-              <Tabs.Tab value="settings">Settings</Tabs.Tab>
+              <Tabs.Tab value="comments">Comments</Tabs.Tab>
             </Tabs.List>
 
-            <Tabs.Panel value="gallery" pt="xs">
-              Gallery tab content
-            </Tabs.Panel>
-
-            <Tabs.Panel value="messages" pt="xs">
-              <ReviewTab />
-            </Tabs.Panel>
-
-            <Tabs.Panel value="settings" pt="xs">
-              Settings tab content
+            <Tabs.Panel value="comments" pt="xs">
+              <CommentTab />
             </Tabs.Panel>
           </Tabs>
         </Grid.Col>

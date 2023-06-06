@@ -31,12 +31,14 @@ export const mockdata = [
     icon: IconUser,
     initiallyOpened: false,
     links: [{ label: "Profile", link: "/account/profile" }],
+    activeLinks: ["/account/profile", "/account/password", "/account/notification", "/account/billing"],
   },
 
   {
     label: "Components",
     icon: IconCompass,
     links: [{ label: "Button", link: "/components/button" }],
+    activeLinks: ["/components/button"],
   },
   {
     label: "Sales",
@@ -47,6 +49,7 @@ export const mockdata = [
       { label: "New Product", link: "/products/new" },
       { label: "Edit Product", link: "/products/1" },
     ],
+    activeLinks: ["/products", "/products/new", "/products/:detail"],
   },
 
   {

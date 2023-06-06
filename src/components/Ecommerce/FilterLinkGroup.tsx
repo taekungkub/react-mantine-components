@@ -137,21 +137,21 @@ export function FilterLinkGroup({ label, initiallyOpened, links, isPrice, maxPri
       )
     } else if (isRating) {
       return (
-        <Flex wrap={"wrap"} gap={10} my={20} px={theme.spacing.md} key={index}>
-          <Button variant="outline" onClick={() => setRating("5")}>
-            5
+        <Flex direction={"column"} align={"start"} wrap={"wrap"} gap={10} my={20} px={theme.spacing.md} key={index}>
+          <Button variant="subtle" color="gray" onClick={() => setRating("5")}>
+            <Rating value={5} fractions={2} readOnly mr={"sm"} /> 5
           </Button>
-          <Button variant="outline" onClick={() => setRating("4")}>
-            4
+          <Button variant="subtle" color="gray" onClick={() => setRating("4")}>
+            <Rating value={4} fractions={2} readOnly mr={"sm"} /> 4 Star Up
           </Button>
-          <Button variant="outline" onClick={() => setRating("3")}>
-            3
+          <Button variant="subtle" color="gray" onClick={() => setRating("3")}>
+            <Rating value={3} fractions={2} readOnly mr={"sm"} /> 3 Star Up
           </Button>
-          <Button variant="outline" onClick={() => setRating("2")}>
-            2
+          <Button variant="subtle" color="gray" onClick={() => setRating("2")}>
+            <Rating value={2} fractions={2} readOnly mr={"sm"} /> 2 Star Up
           </Button>
-          <Button variant="outline" onClick={() => setRating("1")}>
-            1
+          <Button variant="subtle" color="gray" onClick={() => setRating("1")}>
+            <Rating value={1} fractions={2} readOnly mr={"sm"} /> 1 Star Up
           </Button>
         </Flex>
       )

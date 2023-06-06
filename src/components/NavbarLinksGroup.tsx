@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea, NavLink } from "@mantine/core"
 import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useMatch, useMatches, useNavigate } from "react-router-dom"
 import useAuth from "../context/AuthContext"
 
 const useStyles = createStyles((theme) => ({

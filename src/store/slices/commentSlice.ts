@@ -13,9 +13,9 @@ const initialState: SliceState = {
   ccommentsStatus: "idle",
 }
 
-export const fetchComments = createAsyncThunk("comments/fetchComments", async (keyword: string) => {
-  const response = await DummyServices.searchProduct(keyword)
-  return response.data.products
+export const fetchComments = createAsyncThunk("comments/fetchComments", async () => {
+  const response = await DummyServices.comments()
+  return response.data.comments
 })
 
 export const commentSlice = createSlice({
@@ -38,10 +38,8 @@ export const commentSlice = createSlice({
 })
 export const {} = commentSlice.actions
 
-export const searchSelector = (store: RootState) => store.comment
-
+export const commentSelector = (store: RootState) => store.comment
 export const getAllComments = (state: RootState) => state.comment.comments
-
 export const getCommentStatus = (state: RootState) => state.comment.ccommentsStatus
 
 export default commentSlice.reducer

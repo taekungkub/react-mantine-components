@@ -30,4 +30,7 @@ export default {
   todos() {
     return Api.get(`/todos`)
   },
+  comments() {
+    return Api.get("/comments")
+  },
 }
