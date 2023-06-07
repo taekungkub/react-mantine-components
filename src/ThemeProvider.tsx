@@ -29,7 +29,9 @@ function ThemeProvider({ children }: Props) {
             primaryColor: dark ? "yellow" : "",
             loader: "bars",
             colorScheme,
-            fontFamily: "Poppins",
+            fontFamily: "Poppins, sans-serif",
+            fontFamilyMonospace: "Monaco, Courier, monospace",
+            headings: { fontFamily: "Greycliff CF, sans-serif" },
             components: {
               Button: {},
               Card: {
@@ -52,7 +54,6 @@ function ThemeProvider({ children }: Props) {
           withNormalizeCSS
         >
           <Notifications position="top-center" />
-
           <ModalsProvider>{children}</ModalsProvider>
         </MantineProvider>
       </ColorSchemeProvider>

@@ -1,47 +1,65 @@
 import { Button, Flex, Group, Paper, Text } from "@mantine/core"
-import { IconUser } from "@tabler/icons-react"
 
-import { ethers } from "ethers"
 import { useEffect } from "react"
-import { useAccount, useConnect, useContractRead, useDisconnect, useEnsName, useNetwork, useSwitchNetwork } from "wagmi"
-import { InjectedConnector } from "wagmi/connectors/injected"
-import { bscTestnet } from "wagmi/chains"
+import { useAccount, useConnect, useDisconnect } from "wagmi"
 import useWagmi from "../../context/WagmiContext"
-import { mainnet, optimism, polygon } from "@wagmi/core/chains"
-import TokanAAbi from "@/constant/abi/TokenAABI"
 import TokenInfo from "../../components/TokenInfo"
 import TokenBalance from "../../components/TokenBalance"
+import { motion } from "framer-motion"
+import useToast from "../../hooks/useToast"
+import "wagmi/window"
 
 function Web3Page() {
   const { address, isConnected } = useAccount()
 
-  const { connect, connectors, error, isLoading, pendingConnector } = useConnect()
+  const { connect, connectors, error, isLoading, pendingConnector } = useConnect({
+    chainId: 97,
+    onMutate(connector) {
+      console.log("Before Connect", connector)
+    },
+    onSuccess(data) {
+      toast.success("Connected")
+    },
 
-  const { chain } = useNetwork()
+    onError(error) {
+      console.log("Error", error)
+      toast.error(error?.message)
+    },
+  })
+
   const { disconnect } = useDisconnect()
   const { account } = useWagmi()
+  const toast = useToast()
+
+  useEffect(() => {
+    const isMetaMask = window.ethereum?.isMetaMask
+    if (!isMetaMask) {
+      toast.error("Please install metamask !")
+    }
+  }, [])
 
   return (
     <>
-      {!isConnected && (
-        <Group>
-          {connectors.map((connector) => (
-            <Button disabled={!connector.ready} key={connector.id} onClick={() => connect({ connector })}>
-              {connector.name}
-              {!connector.ready && " (unsupported)"}
-              {isLoading && connector.id === pendingConnector?.id && " (connecting)"}
-            </Button>
-          ))}
-        </Group>
-      )}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}></motion.div>
 
-      <Group>
+      <motion.div key={isConnected ? "active" : "empty"} initial={{ y: -150, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
         {isConnected && (
           <Button color="red" onClick={() => disconnect()}>
             Disconnect
           </Button>
         )}
-      </Group>
+        {!isConnected && (
+          <Group>
+            {connectors.map((connector) => (
+              <Button disabled={!connector.ready} key={connector.id} onClick={() => connect({ connector })}>
+                {connector.name}
+                {!connector.ready && " (unsupported)"}
+                {isLoading && connector.id === pendingConnector?.id && " (connecting)"}
+              </Button>
+            ))}
+          </Group>
+        )}
+      </motion.div>
 
       <h2>Account Information</h2>
       <Paper p={"md"} mt={"md"} withBorder>

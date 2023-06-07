@@ -11,7 +11,7 @@ export default function useToast() {
     })
   }
 
-  function error(label = "Error", desc = "Something went wrong! 🤥") {
+  function error(label = "Error", desc?: string) {
     notifications.show({
       title: label,
       message: desc,

@@ -97,7 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       navigate("/dashboard")
       await getUserInfo()
     } catch (error: any) {
-      toast.error(error, "")
+      toast.error(error)
     }
   }
 

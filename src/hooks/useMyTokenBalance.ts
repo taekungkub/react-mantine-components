@@ -3,6 +3,7 @@ import { fetchBalance, multicall } from "@wagmi/core"
 import { bscTokens } from "../constant/bscTokens"
 import { useAccount } from "wagmi"
 import { toEther } from "../helper/utils"
+import useWagmi from "../context/WagmiContext"
 
 function useMyTokenbalance() {
   const [tokenBalance, setTokenBalance] = useState({
