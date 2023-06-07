@@ -5,16 +5,13 @@ import { mainnet, optimism, polygon, bscTestnet } from "@wagmi/core/chains"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 
-const { chains, publicClient, webSocketPublicClient } = configureChains([mainnet], [publicProvider()])
+const { chains, publicClient } = configureChains([mainnet, bscTestnet], [publicProvider()])
 
 const config = createConfig({
-  autoConnect: false,
+  autoConnect: true,
   publicClient,
-  webSocketPublicClient,
   connectors: [
-    new MetaMaskConnector({
-      chains: [mainnet, optimism, polygon, bscTestnet],
-    }),
+    new MetaMaskConnector(),
 
     new InjectedConnector({
       chains,
@@ -31,5 +28,5 @@ interface Props {
 }
 
 export const WagmiConfigProvider = ({ children }: Props) => {
-  return <WagmiConfig config={config}>{children}</WagmiConfig>
+  return <WagmiConfig config={config}>{children} </WagmiConfig>
 }

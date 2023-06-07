@@ -1,4 +1,4 @@
-import { Button, Flex, Group, Text } from "@mantine/core"
+import { Button, Flex, Group, Paper, Text } from "@mantine/core"
 import { IconUser } from "@tabler/icons-react"
 
 import { ethers } from "ethers"
@@ -8,8 +8,9 @@ import { InjectedConnector } from "wagmi/connectors/injected"
 import { bscTestnet } from "wagmi/chains"
 import useWagmi from "../../context/WagmiContext"
 import { mainnet, optimism, polygon } from "@wagmi/core/chains"
-import TokanAAbi from "@/constant/abi/tokena.json"
-import wagmigotchiABI from "@/constant/abi/wagmi.json"
+import TokanAAbi from "@/constant/abi/TokenAABI"
+import TokenInfo from "../../components/TokenInfo"
+import TokenBalance from "../../components/TokenBalance"
 
 function Web3Page() {
   const { address, isConnected } = useAccount()
@@ -41,8 +42,14 @@ function Web3Page() {
           </Button>
         )}
       </Group>
-      {address && <Text>ChainId {Number(chain?.id)}</Text>}
-      {isConnected && <div>Connected to {address}</div>}
+
+      <h2>Account Information</h2>
+      <Paper p={"md"} mt={"md"} withBorder>
+        <p>Address: {account.address}</p>
+        <p>ChainId: {account.chainId}</p>
+      </Paper>
+      <TokenInfo />
+      <TokenBalance />
     </>
   )
 }
