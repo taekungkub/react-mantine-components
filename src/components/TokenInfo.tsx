@@ -4,7 +4,9 @@ import { erc20ABI, usePublicClient, useContractRead, useAccount } from "wagmi"
 import { getContract, multicall, fetchToken } from "@wagmi/core"
 import { formatUnits } from "viem"
 import { bscTokens } from "../constant/bscTokens"
-import { Paper } from "@mantine/core"
+import { Grid, Paper } from "@mantine/core"
+import PageTitle from "./PageTitle"
+import CardTokenInfo from "./Cards/CardTokenInfo"
 
 interface Token {
   name: string
@@ -89,25 +91,16 @@ export default function TokenInfo() {
   }
 
   return (
-    <div>
-      <h2>Token Information</h2>
-
-      <Paper p={"md"} withBorder>
-        <p>Name: {token.name}</p>
-        <p>Symbol: {token.symbol}</p>
-        <p>Decimals: {token.decimals}</p>
-        <p>
-          Total Supply : {token.totalSupply} {token.symbol}
-        </p>
-      </Paper>
-      <Paper p={"md"} mt={"md"} withBorder>
-        <p>Name: {token2.name}</p>
-        <p>Symbol: {token2.symbol}</p>
-        <p>Decimals: {token2.decimals}</p>
-        <p>
-          Total Supply : {token2.totalSupply} {token2.symbol}
-        </p>
-      </Paper>
-    </div>
+    <>
+      <PageTitle pageTitle={"Token information"} />
+      <Grid>
+        <Grid.Col sm={6}>
+          <CardTokenInfo data={token} />
+        </Grid.Col>
+        <Grid.Col sm={6}>
+          <CardTokenInfo data={token2} />
+        </Grid.Col>
+      </Grid>
+    </>
   )
 }

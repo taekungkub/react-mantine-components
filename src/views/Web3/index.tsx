@@ -8,6 +8,7 @@ import TokenBalance from "../../components/TokenBalance"
 import { motion } from "framer-motion"
 import useToast from "../../hooks/useToast"
 import "wagmi/window"
+import PageTitle from "../../components/PageTitle"
 
 function Web3Page() {
   const { address, isConnected } = useAccount()
@@ -60,13 +61,16 @@ function Web3Page() {
           </Group>
         )}
       </motion.div>
+      <br />
+      <PageTitle pageTitle={"Account Information"} />
 
-      <h2>Account Information</h2>
       <Paper p={"md"} mt={"md"} withBorder>
         <p>Address: {account.address}</p>
         <p>ChainId: {account.chainId}</p>
       </Paper>
+      <br />
       <TokenInfo />
+      <br />
       <TokenBalance />
     </>
   )
