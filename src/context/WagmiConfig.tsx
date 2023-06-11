@@ -1,11 +1,11 @@
-import { WagmiConfig, createConfig, configureChains } from "wagmi"
-import { publicProvider } from "wagmi/providers/public"
-import { mainnet, optimism, polygon, bscTestnet } from "@wagmi/core/chains"
+import { WagmiConfig, createConfig, configureChains } from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
+import { mainnet, optimism, polygon, bscTestnet } from "@wagmi/core/chains";
 
-import { InjectedConnector } from "wagmi/connectors/injected"
-import { MetaMaskConnector } from "wagmi/connectors/metaMask"
+import { InjectedConnector } from "wagmi/connectors/injected";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 
-const { chains, publicClient, webSocketPublicClient } = configureChains([mainnet], [publicProvider()])
+const { chains, publicClient, webSocketPublicClient } = configureChains([mainnet], [publicProvider()]);
 
 const config = createConfig({
   autoConnect: false,
@@ -24,12 +24,12 @@ const config = createConfig({
       },
     }),
   ],
-})
+});
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export const WagmiConfigProvider = ({ children }: Props) => {
-  return <WagmiConfig config={config}>{children}</WagmiConfig>
-}
+  return <WagmiConfig config={config}>{children}</WagmiConfig>;
+};
