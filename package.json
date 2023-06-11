@@ -28,7 +28,9 @@
     "@tiptap/extension-link": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
+    "@wagmi/core": "^1.1.0",
     "axios": "^1.4.0",
+    "connectkit": "^1.4.0",
     "dayjs": "^1.11.7",
     "embla-carousel-react": "^7.1.0",
     "ethers": "^6.4.2",
@@ -49,6 +51,7 @@
     "react-router-dom": "^6.10.0",
     "styled-components": "^5.3.9",
     "swr": "^2.1.5",
+    "viem": "^0.3.50",
     "wagmi": "^1.1.0",
     "yup": "^1.2.0"
   },

@@ -16,7 +16,7 @@ function PageTitle({ pageTitle, title, subtitle }: Props) {
   }
 
   return (
-    <div style={{ marginBottom: "5px" }}>
+    <div style={{ marginBottom: "12px" }}>
       {MyTitle()}
       <Text fz="sm">{subtitle}</Text>
     </div>

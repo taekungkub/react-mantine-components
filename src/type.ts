@@ -117,4 +117,9 @@ export interface TodoTy {
   userId: number
 }
 
-
+export interface TokenInfoTy {
+  name: string
+  symbol: string
+  decimals: number
+  totalSupply: string
+}
