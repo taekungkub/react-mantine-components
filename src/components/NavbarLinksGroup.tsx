@@ -3,6 +3,7 @@ import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, re
 import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react"
 import { useLocation, useMatch, useMatches, useNavigate } from "react-router-dom"
 import useAuth from "../context/AuthContext"
+import { mockdata } from "../constant/menu"
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -52,11 +53,12 @@ interface LinksGroupProps {
   icon: React.FC<any>
   label: string
   initiallyOpened?: boolean
-  links?: { label: string; link: string }[]
+  links?: { label: string; link: string; roles?: string[] }[]
   link?: string
+  roles?: string[]
 }
 
-export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: LinksGroupProps) {
+export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link, roles }: LinksGroupProps) {
   const { classes, theme, cx } = useStyles()
   const hasLinks = Array.isArray(links)
   const [opened, setOpened] = useState(initiallyOpened || false)
@@ -81,42 +83,53 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
     })
   }, [location.pathname])
 
-  const items = (hasLinks ? links : []).map((link) => (
-    <Text<"a">
-      component="a"
-      className={cx(classes.link, { [classes.linkActive]: link.link === active })}
-      href={link.link}
-      key={link.label}
-      onClick={(event) => {
-        event.preventDefault()
-
-        navigate(`${link.link}`)
-      }}
-    >
-      {link.label}
-    </Text>
-  ))
+  const items = (hasLinks ? links : []).map((link) => {
+    const ItemDropdown = (
+      <>
+        <Text<"a">
+          component="a"
+          className={cx(classes.link, { [classes.linkActive]: link.link === active })}
+          href={link.link}
+          key={link.label}
+          onClick={(event) => {
+            event.preventDefault()
+            navigate(`${link.link}`)
+          }}
+        >
+          {link.label}
+        </Text>
+      </>
+    )
+    if (link.roles) {
+      if (link.roles.find((role) => user?.roles.includes(role))) {
+        return <div key={link.label}>{ItemDropdown}</div>
+      } else {
+        return null
+      }
+    } else {
+      return <div key={link.label}>{ItemDropdown}</div>
+    }
+  })
 
   const ItemsNoDropdown = () => {
-    if (link)
+    if (link) {
       return (
-        <>
-          <Text<"a">
-            component="a"
-            className={cx({ [classes.linkActive]: link === active })}
-            href={link}
-            key={label}
-            onClick={(event) => {
-              event.preventDefault()
-            }}
-          >
-            {label}
-          </Text>
-        </>
+        <Text<"a">
+          component="a"
+          className={cx({ [classes.linkActive]: link === active })}
+          href={link}
+          key={label}
+          onClick={(event) => {
+            event.preventDefault()
+          }}
+        >
+          {label}
+        </Text>
       )
+    }
   }
 
-  return (
+  const MenuItem = (
     <>
       <UnstyledButton
         onClick={() => {
@@ -150,28 +163,29 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link }: 
       {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
     </>
   )
+
+  if (roles) {
+    if (roles?.find((role) => user?.roles.includes(role))) {
+      return <>{MenuItem}</>
+    } else {
+      return null
+    }
+  }
+
+  return <>{MenuItem}</>
 }
 
-const mockdata = {
-  label: "Releases",
-  icon: IconCalendarStats,
-  links: [
-    { label: "Upcoming releases", link: "/" },
-    { label: "Previous releases", link: "/" },
-    { label: "Releases schedule", link: "/" },
-  ],
+export function NavbarLinksGroup() {
+  const Items = mockdata.map((item) => <LinksGroup {...item} key={item.label} />)
+  return (
+    <Box
+      sx={(theme) => ({
+        minHeight: rem(220),
+        padding: theme.spacing.md,
+        backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
+      })}
+    >
+      {Items}
+    </Box>
+  )
 }
-
-// export function NavbarLinksGroup() {
-//   return (
-//     <Box
-//       sx={(theme) => ({
-//         minHeight: rem(220),
-//         padding: theme.spacing.md,
-//         backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
-//       })}
-//     >
-//       <LinksGroup {...mockdata} />
-//     </Box>
-//   );
-// }

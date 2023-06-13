@@ -1,7 +1,5 @@
 import { Drawer, Navbar, ScrollArea, createStyles } from "@mantine/core"
-import { mockdata } from "../constant/menu"
-import { LinksGroup } from "../components/NavbarLinksGroup"
-import { boolean } from "joi"
+import { NavbarLinksGroup } from "../components/NavbarLinksGroup"
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -16,13 +14,12 @@ interface PropsTheNavbar {
 
 //Sidebar
 export function TheNavbar({ isCollapse }: PropsTheNavbar) {
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />)
   const { classes } = useStyles()
 
   return (
     <Navbar hidden width={{ sm: isCollapse ? 0 : 250 }} height={"100vh-60px"} hiddenBreakpoint={"sm"} className={classes.navbar}>
       <Navbar.Section grow component={ScrollArea}>
-        {links}
+        <NavbarLinksGroup />
       </Navbar.Section>
     </Navbar>
   )
@@ -32,8 +29,6 @@ interface Props {
   handleOpened: () => void
 }
 export function TheDrawer({ opened, handleOpened }: Props) {
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />)
-
   return (
     <Drawer
       opened={opened}
@@ -43,7 +38,7 @@ export function TheDrawer({ opened, handleOpened }: Props) {
       transitionProps={{ transition: "rotate-left", duration: 150, timingFunction: "linear" }}
     >
       <Navbar.Section grow component={ScrollArea}>
-        {links}
+        <NavbarLinksGroup />
       </Navbar.Section>
     </Drawer>
   )

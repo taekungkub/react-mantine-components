@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./views/Home"
 import DashboardLayout from "./layout/DashboardLayout"
 import Dashboard from "./views/Dashboard"
@@ -21,7 +21,6 @@ import ThemeProvider from ".//ThemeProvider"
 import ButtonPage from "./views/Components/Button"
 import ProductListPage from "./views/Products/ProductList"
 import ProductNewPage from "./views/Products/NewProduct"
-import { AuthProvider } from "./context/AuthContext"
 import PrivateRoutes from "./middleware/PrivateRoutes"
 import UnAuthRoutes from "./middleware/UnAuthRoutes"
 import CustomerPage from "./views/CRM/Customer"
@@ -44,7 +43,6 @@ import ContactPage from "./views/Contact"
 import LandingPage from "./views/Landing"
 import ProjectsPage from "./views/Projects"
 import Web3Page from "./views/Web3"
-import { WagmiProvider } from "@/context/WagmiContext"
 
 function App() {
   return (
@@ -101,7 +99,13 @@ function App() {
                   <Route path="/permission/admin" element={<AdminPage />}></Route>
                 </Route>
 
-                <Route path="/permission/secret" element={<SecretPage />}></Route>
+                <Route element={<PrivateRoutes allowedRoles={["superadmin"]} />}>
+                  <Route path="/superadmin" element={<SecretPage />}></Route>
+                </Route>
+
+                <Route element={<PrivateRoutes allowedRoles={["superadmin"]} />}>
+                  <Route path="/permission/secret" element={<SecretPage />}></Route>
+                </Route>
 
                 <Route path="/projects" element={<ProjectsPage />}></Route>
 

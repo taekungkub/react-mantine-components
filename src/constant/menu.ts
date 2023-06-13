@@ -1,5 +1,6 @@
 import {
   IconBlockquote,
+  IconBrandMantine,
   IconBrandRedux,
   IconBrandWebflow,
   IconCompass,
@@ -97,7 +98,12 @@ export const mockdata = [
       { label: "503", link: "/exeception/503" },
     ],
   },
-
+  {
+    label: "Super admin",
+    icon: IconBrandMantine,
+    link: "/superadmin",
+    roles: ["superadmin"],
+  },
   {
     label: "Permission",
     icon: IconLockAccess,
@@ -105,8 +111,8 @@ export const mockdata = [
 
     links: [
       { label: "Auth", link: "/permission/auth" },
-      { label: "Admin", link: "/permission/admin" },
-      { label: "Super Secret", link: "/permission/secret" },
+      { label: "Admin", link: "/permission/admin", roles: ["admin"] },
+      { label: "Super Secret (superadmin)", link: "/permission/secret", roles: ["superadmin"] },
     ],
   },
   { label: "Contract", icon: IconFileAnalytics, link: "/contact" },
