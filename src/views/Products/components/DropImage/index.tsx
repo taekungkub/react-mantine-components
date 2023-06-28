@@ -1,21 +1,4 @@
-import {
-  Group,
-  Text,
-  useMantineTheme,
-  Flex,
-  Image,
-  SimpleGrid,
-  Overlay,
-  ActionIcon,
-  Center,
-  createStyles,
-  Card,
-  Modal,
-  Button,
-  Transition,
-  Box,
-  Paper,
-} from "@mantine/core"
+import { Group, Text, useMantineTheme, Flex, Image, SimpleGrid, ActionIcon, Center, createStyles, Modal, Box, Paper } from "@mantine/core"
 import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react"
 import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone"
 import useToast from "../../../../hooks/useToast"
@@ -24,16 +7,14 @@ import { useDisclosure } from "@mantine/hooks"
 import { useState } from "react"
 
 interface Props {
-  handleSetFile: (e: any) => void
+  handleSetFileToList: (e: any) => void
   handleDeleteFile: (index: number) => void
   isHasImage: boolean
   images: Array<FileWithPath | String>
 }
 
-export default function DropImage({ handleSetFile, isHasImage, images, handleDeleteFile }: Props) {
+export default function DropImage({ handleSetFileToList, isHasImage, images, handleDeleteFile }: Props) {
   const theme = useMantineTheme()
-  const useStyles = createStyles((theme) => ({}))
-  const { classes, cx } = useStyles()
   const toast = useToast()
   const [opened, { open, close }] = useDisclosure(false)
 
@@ -41,7 +22,7 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
 
   function handleRejectFile(files: FileRejection[]) {
     console.log("reject files", files)
-    toast.error()
+    toast.error("Maximum max 5 file or something has error")
   }
 
   function handleViewImage(file: String | FileWithPath) {
@@ -59,26 +40,28 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
     else imageUrl = URL.createObjectURL(file as FileWithPath)
 
     return (
-      <Paper withBorder radius={"sm"} p={"sm"} key={index}>
-        <Paper bg={"gray.2"} h={"100%"} className="boxWrapper">
-          <div className="overlay"></div>
-          <Box className="boxAction">
-            <Center h={"100%"}>
-              <Group position="center">
-                <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleViewImage(file)}>
-                  <IconEye />
-                </ActionIcon>
-                <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleDeleteFile(index)}>
-                  <IconTrash />
-                </ActionIcon>
-              </Group>
-            </Center>
-          </Box>
-          <Box className="innerBox">
-            <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
-          </Box>
+      <>
+        <Paper withBorder radius={"sm"} p={"xs"} key={index}>
+          <Paper bg={"gray.2"} h={"100%"} display={"flex"} sx={{ alignItems: "center" }} className="boxWrapper">
+            <div className="overlay"></div>
+            <Box className="boxAction">
+              <Center h={"100%"}>
+                <Group position="center">
+                  <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleViewImage(file)}>
+                    <IconEye />
+                  </ActionIcon>
+                  <ActionIcon color="teal" size="sm" variant="transparent" onClick={() => handleDeleteFile(index)}>
+                    <IconTrash />
+                  </ActionIcon>
+                </Group>
+              </Center>
+            </Box>
+            <Box className="innerBox">
+              <Image fit="cover" src={imageUrl} imageProps={{ onLoad: () => URL.revokeObjectURL(imageUrl) }} />
+            </Box>
+          </Paper>
         </Paper>
-      </Paper>
+      </>
     )
   })
 
@@ -102,7 +85,7 @@ export default function DropImage({ handleSetFile, isHasImage, images, handleDel
           onReject={(files) => handleRejectFile(files)}
           maxSize={3 * 1024 ** 2} //5MB
           accept={IMAGE_MIME_TYPE}
-          onDrop={handleSetFile}
+          onDrop={handleSetFileToList}
           maxFiles={5}
         >
           <Group position="center" spacing={"xl"} style={{ pointerEvents: "none" }} mih={isHasImage ? "5rem" : "20rem"}>

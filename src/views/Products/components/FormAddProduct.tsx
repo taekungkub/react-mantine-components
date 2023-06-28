@@ -4,7 +4,7 @@ import { joiResolver, useForm } from "@mantine/form"
 import Joi from "joi"
 import DropImage from "./DropImage"
 import { FileWithPath } from "@mantine/dropzone"
-import { FormEventHandler, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import useToast from "@/hooks/useToast"
 
 interface Props {
@@ -62,7 +62,11 @@ function FormAddProduct({ inititialForm, category }: Props) {
     }, 1500)
   }
 
-  function handleSetFile(e: Array<FileWithPath | String>) {
+  function handleSetFileToList(e: Array<FileWithPath | String>) {
+    if (images.length >= 10) {
+      toast.error("Image is too many")
+      return
+    }
     setImages((images) => [...images, ...e])
   }
 
@@ -144,7 +148,7 @@ function FormAddProduct({ inititialForm, category }: Props) {
         <Grid.Col md={5}>
           <PageTitle title="Product Image" subtitle="Add or change image for the product"></PageTitle>
 
-          <DropImage handleSetFile={handleSetFile} isHasImage={isHasImage} images={images} handleDeleteFile={handleDeleteFile} />
+          <DropImage handleSetFileToList={handleSetFileToList} isHasImage={isHasImage} images={images} handleDeleteFile={handleDeleteFile} />
         </Grid.Col>
       </Grid>
       <Card p={0} py={20} my={10} sx={{ position: "sticky", bottom: 0 }}>
