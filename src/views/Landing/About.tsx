@@ -1,5 +1,4 @@
-import { Text, Container, Anchor, MediaQuery, Button, Box } from "@mantine/core"
-import { Icon2fa } from "@tabler/icons-react"
+import { Text, Anchor, MediaQuery, Button, Box, Transition } from "@mantine/core"
 import { Link } from "react-scroll"
 
 import "./styles/About.scss"
