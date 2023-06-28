@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea, NavLink } from "@mantine/core"
+import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea, NavLink, Menu, Button } from "@mantine/core"
 import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react"
 import { useLocation, useMatch, useMatches, useNavigate } from "react-router-dom"
 import useAuth from "../context/AuthContext"
@@ -25,8 +25,9 @@ const useStyles = createStyles((theme) => ({
     display: "block",
     textDecoration: "none",
     padding: `${theme.spacing.xs} ${theme.spacing.md}`,
-    paddingLeft: rem(63),
-
+    paddingLeft: rem(31),
+    marginLeft: rem(30),
+    borderLeft: `${rem(1)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]}`,
     fontSize: theme.fontSizes.sm,
     color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.colors.gray[7],
 
