@@ -1,5 +1,5 @@
 function SecretPage() {
-  return <div>SecretPage</div>
+  return <div>SecretPage</div>;
 }
 
-export default SecretPage
+export default SecretPage;

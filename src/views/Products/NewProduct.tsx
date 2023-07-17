@@ -1,28 +1,28 @@
-import { Box, Divider, Grid } from "@mantine/core"
-import PageTitle from "../../components/PageTitle"
-import FormAddProduct from "./components/FormAddProduct"
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import useOneProduct from "./hooks/useOneProduct"
+import { Box, Divider, Grid } from "@mantine/core";
+import PageTitle from "../../components/PageTitle";
+import FormAddProduct from "./components/FormAddProduct";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import useOneProduct from "./hooks/useOneProduct";
 
 function ProductNewPage() {
-  const params = useParams()
+  const params = useParams();
 
-  const { data, category, initProduct, getProduct, getCategory, setData } = useOneProduct()
+  const { data, category, initProduct, getProduct, getCategory, setData } = useOneProduct();
 
   useEffect(() => {
     if (!params.id) {
       setData({
         ...initProduct,
         images: [],
-      })
-      getCategory()
+      });
+      getCategory();
 
-      return
+      return;
     }
-    getProduct(params.id as string)
-    getCategory()
-  }, [params.id])
+    getProduct(params.id as string);
+    getCategory();
+  }, [params.id]);
 
   return (
     <div>
@@ -32,7 +32,7 @@ function ProductNewPage() {
         <FormAddProduct inititialForm={data} category={category} />
       </Box>
     </div>
-  )
+  );
 }
 
-export default ProductNewPage
+export default ProductNewPage;

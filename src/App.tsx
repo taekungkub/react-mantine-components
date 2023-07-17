@@ -1,48 +1,50 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Home from "./views/Home"
-import DashboardLayout from "./layout/DashboardLayout"
-import Dashboard from "./views/Dashboard"
-import NotFoundPage from "./views/Exeception/404"
-import ServerOverload from "./views/Exeception/503"
-import SigninPage from "./views/Auth/Signin"
-import SignupPage from "./views/Auth/Signup"
-import ForgotPasswordPage from "./views/Auth/ForgotPassword"
-import ProfilePage from "./views/Account/Profile"
-import AccountLayout from "./views/Account"
-import PasswordPage from "./views/Account/Password"
-import NotificationPage from "./views/Account/Notification"
-import BillingPage from "./views/Account/Billing"
-import ResetPasswordPage from "./views/Auth/ResetPassword"
-import EmptyLayout from "./layout/EmptyLayout"
-import VerifyEmailPage from "./views/Auth/VerifyEmail"
-import NoPermisstionPage from "./views/Exeception/403"
-import MyGlobalStyles from "./style/MyGlobalStyle"
-import ThemeProvider from ".//ThemeProvider"
-import ButtonPage from "./views/Components/Button"
-import ProductListPage from "./views/Products/ProductList"
-import ProductNewPage from "./views/Products/NewProduct"
-import PrivateRoutes from "./middleware/PrivateRoutes"
-import UnAuthRoutes from "./middleware/UnAuthRoutes"
-import CustomerPage from "./views/CRM/Customer"
-import Providers from "./Providers"
-import { store } from "./store/store"
-import CounterPage from "./views/Redux/counter"
-import ProductReduxPage from "./views/Redux/Products"
-import ProductReduxDetailPage from "./views/Redux/ProductDetail"
-import ProductCategory from "./views/Redux/ProductCategory"
-import EcommerceLayout from "./layout/EcommerceLayout"
-import ProductLayout from "./layout/ProductLayout"
-import CartPage from "./views/Redux/Cart"
-import AdminPage from "./views/Permission/Admin"
-import SecretPage from "./views/Permission/Secret"
-import AuthPage from "./views/Permission/Auth"
-import SearchProductPage from "./views/Redux/Search"
-import CheckoutPage from "./views/Redux/Checkout"
-import CodeVerifyPage from "./views/Auth/CodeVerify"
-import ContactPage from "./views/Contact"
-import LandingPage from "./views/Landing"
-import ProjectsPage from "./views/Projects"
-import Web3Page from "./views/Web3"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./views/Home";
+import DashboardLayout from "./layout/DashboardLayout";
+import Dashboard from "./views/Dashboard";
+import NotFoundPage from "./views/Exeception/404";
+import ServerOverload from "./views/Exeception/503";
+import SigninPage from "./views/Auth/Signin";
+import SignupPage from "./views/Auth/Signup";
+import ForgotPasswordPage from "./views/Auth/ForgotPassword";
+import ProfilePage from "./views/Account/Profile";
+import AccountLayout from "./views/Account";
+import PasswordPage from "./views/Account/Password";
+import NotificationPage from "./views/Account/Notification";
+import BillingPage from "./views/Account/Billing";
+import ResetPasswordPage from "./views/Auth/ResetPassword";
+import EmptyLayout from "./layout/EmptyLayout";
+import VerifyEmailPage from "./views/Auth/VerifyEmail";
+import NoPermisstionPage from "./views/Exeception/403";
+import MyGlobalStyles from "./style/MyGlobalStyle";
+import ThemeProvider from ".//ThemeProvider";
+import ButtonPage from "./views/Components/Button";
+import ProductListPage from "./views/Products/ProductList";
+import ProductNewPage from "./views/Products/NewProduct";
+import PrivateRoutes from "./middleware/PrivateRoutes";
+import UnAuthRoutes from "./middleware/UnAuthRoutes";
+import CustomerPage from "./views/CRM/Customer";
+import Providers from "./Providers";
+import { store } from "./store/store";
+import CounterPage from "./views/Redux/counter";
+import ProductReduxPage from "./views/Redux/Products";
+import ProductReduxDetailPage from "./views/Redux/ProductDetail";
+import ProductCategory from "./views/Redux/ProductCategory";
+import EcommerceLayout from "./layout/EcommerceLayout";
+import ProductLayout from "./layout/ProductLayout";
+import CartPage from "./views/Redux/Cart";
+import AdminPage from "./views/Permission/Admin";
+import SecretPage from "./views/Permission/Secret";
+import AuthPage from "./views/Permission/Auth";
+import SearchProductPage from "./views/Redux/Search";
+import CheckoutPage from "./views/Redux/Checkout";
+import CodeVerifyPage from "./views/Auth/CodeVerify";
+import ContactPage from "./views/Contact";
+import LandingPage from "./views/Landing";
+import ProjectsPage from "./views/Projects";
+import Web3Page from "./views/Web3";
+import OrderListPage from "./views/Orders";
+import OrderDetailPage from "./views/Order";
 
 function App() {
   return (
@@ -73,9 +75,11 @@ function App() {
 
                 <Route path="/components/button" element={<ButtonPage />}></Route>
 
-                <Route path="/products" element={<ProductListPage />}></Route>
-                <Route path="/products/new" element={<ProductNewPage />}></Route>
-                <Route path="/products/:id" element={<ProductNewPage />}></Route>
+                <Route path="/sales/products" element={<ProductListPage />}></Route>
+                <Route path="/sales/products/new" element={<ProductNewPage />}></Route>
+                <Route path="/sales/products/:id" element={<ProductNewPage />}></Route>
+                <Route path="/sales/orders" element={<OrderListPage />}></Route>
+                <Route path="/sales/order/:id" element={<OrderDetailPage />}></Route>
 
                 <Route path="/redux/counter" element={<CounterPage />}></Route>
 
@@ -133,7 +137,7 @@ function App() {
         </BrowserRouter>
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

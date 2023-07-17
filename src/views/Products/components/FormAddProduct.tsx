@@ -1,84 +1,84 @@
-import { Box, Button, Card, Divider, Flex, Grid, Group, TextInput, Image, Textarea, Select, MultiSelect } from "@mantine/core"
-import PageTitle from "@/components/PageTitle"
-import { joiResolver, useForm } from "@mantine/form"
-import Joi from "joi"
-import DropImage from "./DropImage"
-import { FileWithPath } from "@mantine/dropzone"
-import { useEffect, useState } from "react"
-import useToast from "@/hooks/useToast"
+import { Box, Button, Card, Divider, Flex, Grid, Group, TextInput, Image, Textarea, Select, MultiSelect } from "@mantine/core";
+import PageTitle from "@/components/PageTitle";
+import { joiResolver, useForm } from "@mantine/form";
+import Joi from "joi";
+import DropImage from "./DropImage";
+import { FileWithPath } from "@mantine/dropzone";
+import { useEffect, useState } from "react";
+import useToast from "@/hooks/useToast";
 
 interface Props {
   inititialForm: {
-    title: string
-    description: string
-    sku: string
-    price: string
-    stock: string
-    category: string
-    tags: string
-    vendor: string
-    brand: string
-    images: Array<string>
-  }
-  category?: Array<string>
+    title: string;
+    description: string;
+    sku: string;
+    price: string;
+    stock: string;
+    category: string;
+    tags: string;
+    vendor: string;
+    brand: string;
+    images: Array<string>;
+  };
+  category?: Array<string>;
 }
 
 function FormAddProduct({ inititialForm, category }: Props) {
-  const schema = Joi.object({})
-  const toast = useToast()
+  const schema = Joi.object({});
+  const toast = useToast();
 
   const form = useForm({
     initialValues: inititialForm,
-  })
+  });
 
-  const [images, setImages] = useState<Array<FileWithPath | String>>(inititialForm.images)
-  const [isHasImage, setIsHasImage] = useState(false)
+  const [images, setImages] = useState<Array<FileWithPath | String>>(inititialForm.images);
+  const [isHasImage, setIsHasImage] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false)
-
-  useEffect(() => {
-    setImages(inititialForm.images)
-    form.setValues(inititialForm)
-  }, [inititialForm])
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    form.setValues((prev) => ({ ...prev, images: images as Array<string> }))
+    setImages(inititialForm.images);
+    form.setValues(inititialForm);
+  }, [inititialForm]);
+
+  useEffect(() => {
+    form.setValues((prev) => ({ ...prev, images: images as Array<string> }));
 
     if (images.length === 0) {
-      setIsHasImage(false)
+      setIsHasImage(false);
     } else {
-      setIsHasImage(true)
+      setIsHasImage(true);
     }
-  }, [images])
+  }, [images]);
 
   function handleSubmit() {
-    console.log("Submit !")
-    console.log(form.values)
-    setIsLoading(true)
+    console.log("Submit !");
+    console.log(form.values);
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false)
-      toast.success()
-    }, 1500)
+      setIsLoading(false);
+      toast.success();
+    }, 1500);
   }
 
   function handleSetFileToList(e: Array<FileWithPath | String>) {
     if (images.length >= 10) {
-      toast.error("Image is too many")
-      return
+      toast.error("Image is too many");
+      return;
     }
-    setImages((images) => [...images, ...e])
+    setImages((images) => [...images, ...e]);
   }
 
   function handleDeleteFile(index: number) {
-    setImages((images) => images.filter((image, i) => i !== index))
+    setImages((images) => images.filter((image, i) => i !== index));
   }
 
   useEffect(() => {
     if (inititialForm.images.length >= 1) {
-      setIsHasImage(true)
+      setIsHasImage(true);
     }
-  }, [inititialForm.images])
+  }, [inititialForm.images]);
 
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit())}>
@@ -148,7 +148,12 @@ function FormAddProduct({ inititialForm, category }: Props) {
         <Grid.Col md={5}>
           <PageTitle title="Product Image" subtitle="Add or change image for the product"></PageTitle>
 
-          <DropImage handleSetFileToList={handleSetFileToList} isHasImage={isHasImage} images={images} handleDeleteFile={handleDeleteFile} />
+          <DropImage
+            handleSetFileToList={handleSetFileToList}
+            isHasImage={isHasImage}
+            images={images}
+            handleDeleteFile={handleDeleteFile}
+          />
         </Grid.Col>
       </Grid>
       <Card p={0} py={20} my={10} sx={{ position: "sticky", bottom: 0 }}>
@@ -160,7 +165,7 @@ function FormAddProduct({ inititialForm, category }: Props) {
         </Group>
       </Card>
     </form>
-  )
+  );
 }
 
-export default FormAddProduct
+export default FormAddProduct;

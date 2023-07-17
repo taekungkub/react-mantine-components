@@ -1,25 +1,25 @@
-import { ActionIcon, Button, Group, Text, createStyles } from "@mantine/core"
-import { DataTable, DataTableSortStatus } from "mantine-datatable"
-import { useEffect, useState } from "react"
-import sortBy from "lodash/sortBy"
-import { IconChevronUp, IconEdit, IconEye, IconSelector, IconTrash } from "@tabler/icons-react"
-import { ProductTy } from "../../../type"
-import { Navigate, useNavigate } from "react-router-dom"
+import { ActionIcon, Button, Group, Text, createStyles } from "@mantine/core";
+import { DataTable, DataTableSortStatus } from "mantine-datatable";
+import { useEffect, useState } from "react";
+import sortBy from "lodash/sortBy";
+import { IconChevronUp, IconEdit, IconEye, IconSelector, IconTrash } from "@tabler/icons-react";
+import { ProductTy } from "../../../type";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface Props {
-  data: Array<ProductTy>
+  data: Array<ProductTy>;
 }
 
 export default function ProductsTable2({ data }: Props) {
-  const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ columnAccessor: "#", direction: "asc" })
-  const [records, setRecords] = useState(sortBy(data, "id"))
+  const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ columnAccessor: "#", direction: "asc" });
+  const [records, setRecords] = useState(sortBy(data, "id"));
 
   useEffect(() => {
-    const myData = sortBy(data, sortStatus.columnAccessor)
-    setRecords(sortStatus.direction === "desc" ? myData.reverse() : myData)
-  }, [sortStatus, data])
+    const myData = sortBy(data, sortStatus.columnAccessor);
+    setRecords(sortStatus.direction === "desc" ? myData.reverse() : myData);
+  }, [sortStatus, data]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <DataTable
       rowStyle={(theme) => ({})}
@@ -49,7 +49,7 @@ export default function ProductsTable2({ data }: Props) {
           accessor: "actions",
           render: ({ id }) => (
             <Group position="center">
-              <ActionIcon size={20} onClick={() => navigate(`/products/${id}`)}>
+              <ActionIcon size={20} onClick={() => navigate(`/sales/products/${id}`)}>
                 <IconEdit />
               </ActionIcon>
               <ActionIcon size={20}>
@@ -76,5 +76,5 @@ export default function ProductsTable2({ data }: Props) {
       // execute this callback when a row is clicked
       // onRowClick={({ id }) => }
     />
-  )
+  );
 }

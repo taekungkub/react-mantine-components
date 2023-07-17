@@ -14,8 +14,7 @@ import {
   IconShoppingCart,
   IconUser,
   IconUsers,
-  IconUsersGroup,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
 export const mockdata = [
   {
@@ -33,25 +32,24 @@ export const mockdata = [
     icon: IconUser,
     initiallyOpened: false,
     links: [{ label: "Profile", link: "/account/profile" }],
-    activeLinks: ["/account/profile", "/account/password", "/account/notification", "/account/billing"],
   },
 
   {
     label: "Components",
     icon: IconCompass,
     links: [{ label: "Button", link: "/components/button" }],
-    activeLinks: ["/components/button"],
   },
   {
     label: "Sales",
     icon: IconShoppingCart,
     initiallyOpened: false,
     links: [
-      { label: "Product List", link: "/products" },
-      { label: "New Product", link: "/products/new" },
-      { label: "Edit Product", link: "/products/1" },
+      { label: "Product List", link: "/sales/products" },
+      { label: "New Product", link: "/sales/products/new" },
+      { label: "Edit Product", link: "/sales/products/1" },
+      { label: "Order List", link: "/sales/orders" },
+      { label: "Order detail", link: "/sales/order/1" },
     ],
-    activeLinks: ["/products", "/products/new", "/products/:detail"],
   },
 
   {
@@ -135,4 +133,4 @@ export const mockdata = [
     initiallyOpened: false,
     link: "/web3",
   },
-]
+];
