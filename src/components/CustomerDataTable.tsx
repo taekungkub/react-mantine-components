@@ -8,11 +8,12 @@ import { Navigate, useNavigate } from "react-router-dom"
 
 interface Props {
   data: Array<CustomerTy> | null
+  onView: (data: CustomerTy) => void
   onEdit: (data: CustomerTy) => void
   onDelete: (data: CustomerTy) => void
 }
 
-export default function CustomerDataTable({ data, onEdit, onDelete }: Props) {
+export default function CustomerDataTable({ data, onEdit, onDelete, onView }: Props) {
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({ columnAccessor: "#", direction: "asc" })
   const [records, setRecords] = useState(sortBy(data, "id"))
 
@@ -66,6 +67,9 @@ export default function CustomerDataTable({ data, onEdit, onDelete }: Props) {
           textAlignment: "center",
           render: (data: CustomerTy) => (
             <Group position="center">
+              <ActionIcon size={20} onClick={() => onView(data)}>
+                <IconEye />
+              </ActionIcon>
               <ActionIcon size={20} onClick={() => onEdit(data)}>
                 <IconEdit />
               </ActionIcon>

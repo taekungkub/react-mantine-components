@@ -1,16 +1,19 @@
-import { Box, Button, Card, Divider, Drawer, Group, Navbar, ScrollArea, TextInput } from "@mantine/core"
+import { Avatar, Box, Button, Card, Divider, Drawer, Flex, Group, Image, Navbar, ScrollArea, TextInput } from "@mantine/core"
 import { CustomerTy } from "../../../type"
 import { useForm } from "@mantine/form"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { func } from "joi"
+import useToast from "../../../hooks/useToast"
 
 interface Props {
   opened: boolean
+  update: (data: CustomerTy) => void
   close: () => void
   open: () => void
   customerData?: CustomerTy | null
 }
 
-function EditCustomerDrawer({ opened, close, open, customerData }: Props) {
+function EditCustomerDrawer({ opened, close, update, open, customerData }: Props) {
   const form = useForm({
     initialValues: customerData,
   })
@@ -21,10 +24,27 @@ function EditCustomerDrawer({ opened, close, open, customerData }: Props) {
     })
   }, [customerData])
 
+  const [IsLoading, setIsLoading] = useState(false)
+  const toast = useToast()
+
+  async function onSubmitUpdate() {
+    setIsLoading(true)
+
+    setTimeout(() => {
+      update(form.values as CustomerTy)
+      toast.success("Update successfully !")
+      setIsLoading(false)
+    }, 1000)
+  }
+
   return (
     <Drawer opened={opened} onClose={close} title={`Edit ${customerData?.firstName}`} position="right" scrollAreaComponent={ScrollArea.Autosize}>
       <form>
         <ScrollArea>
+          <Flex justify={"center"}>
+            <Avatar src={customerData?.image} size={"5rem"} radius={"999px"} bg="gray.2"></Avatar>
+          </Flex>
+
           <TextInput label="Firstname" {...form.getInputProps("firstName")} />
           <TextInput label="Lastname" mt={20} {...form.getInputProps("lastName")} />
           <TextInput label="Email" mt={20} {...form.getInputProps("email")} />
@@ -33,7 +53,9 @@ function EditCustomerDrawer({ opened, close, open, customerData }: Props) {
 
         <Card px={0} sx={{ position: "sticky", bottom: 0 }} py={20}>
           <Group>
-            <Button>Update</Button>
+            <Button onClick={() => onSubmitUpdate()} loading={IsLoading}>
+              Update
+            </Button>
             <Button variant="subtle" onClick={close}>
               Cancel
             </Button>

@@ -39,10 +39,7 @@ export default function useCustomer() {
   const [custoemrs, setCustomers] = useState<Array<CustomerTy> | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCustomer, setSelectedCustomer] = useState<CustomerTy | null>()
-
-  useEffect(() => {
-    getCustomers()
-  }, [])
+  const [customerData, setCustomerData] = useState<CustomerTy | null>(null)
 
   async function getCustomers() {
     try {
@@ -52,11 +49,24 @@ export default function useCustomer() {
     } finally {
     }
   }
+
+  async function getCustomerData(id: number) {
+    try {
+      const res = await DummyServices.customerById(id)
+      setCustomerData(res.data)
+    } catch {
+    } finally {
+    }
+  }
+
   return {
+    getCustomers,
     custoemrs,
     searchQuery,
     setSearchQuery,
     selectedCustomer,
     setSelectedCustomer,
+    getCustomerData,
+    customerData,
   }
 }

@@ -10,6 +10,9 @@ export default {
   customers() {
     return Api.get("/users")
   },
+  customerById(id: number) {
+    return Api.get(`/users/${id}`)
+  },
 
   categories() {
     return Api.get("/products/categories")

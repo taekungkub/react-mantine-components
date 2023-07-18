@@ -9,7 +9,8 @@ import { modals } from "@mantine/modals"
 import CardStatsCustomer from "../../components/Cards/CardStatsCustomer"
 import { IconUserCheck, IconUserPlus, IconUsers } from "@tabler/icons-react"
 import { motion } from "framer-motion"
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 function SectionUserStats() {
   let stats = {
     hidden: { opacity: 0 },
@@ -39,9 +40,15 @@ function SectionUserStats() {
 }
 
 function CustomerPage() {
-  const { custoemrs, searchQuery, setSearchQuery, selectedCustomer, setSelectedCustomer } = useCustomer()
+  const { getCustomers, custoemrs, searchQuery, setSearchQuery, selectedCustomer, setSelectedCustomer } = useCustomer()
   const customerFilter = useFilterCustomer({ data: custoemrs, searchQuery })
+
   const [opened, { open, close }] = useDisclosure(false)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    getCustomers()
+  }, [])
 
   function handleEdit(data: CustomerTy) {
     open()
@@ -51,6 +58,15 @@ function CustomerPage() {
   function handleDelete(data: CustomerTy) {
     setSelectedCustomer(data)
     openDeleteModal(data)
+  }
+
+  function handleUpdate(data: CustomerTy) {
+    console.log(data)
+  }
+
+  function handleView(data: CustomerTy) {
+    console.log(data)
+    navigate("/crm/customer/" + data.id)
   }
 
   const openDeleteModal = (data: CustomerTy) =>
@@ -71,8 +87,8 @@ function CustomerPage() {
       <Flex wrap={"wrap"} gap={10} justify={"start"} my={20}>
         <TextInput placeholder="Seacrch" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
       </Flex>
-      <CustomerDataTable data={customerFilter} onEdit={(data: CustomerTy) => handleEdit(data)} onDelete={handleDelete} />
-      <EditCustomerDrawer opened={opened} close={close} open={open} customerData={selectedCustomer} />
+      <CustomerDataTable data={customerFilter} onView={handleView} onEdit={(data: CustomerTy) => handleEdit(data)} onDelete={handleDelete} />
+      <EditCustomerDrawer opened={opened} close={close} open={open} customerData={selectedCustomer} update={(data: CustomerTy) => handleUpdate(data)} />
     </div>
   )
 }
