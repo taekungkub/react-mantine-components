@@ -1,4 +1,4 @@
-import { createStyles, Card, Avatar, Text, Group, Button, rem, ActionIcon, Box, Flex, ThemeIcon } from "@mantine/core"
+import { createStyles, Card, Avatar, Text, Group, Button, rem, ActionIcon, Box, Flex, ThemeIcon } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -8,18 +8,17 @@ const useStyles = createStyles((theme) => ({
   avatar: {
     border: `${rem(2)} solid ${theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white}`,
   },
-}))
+}));
 
 interface UserCardImageProps {
-  image: string
-  avatar: string
-  name: string
-  job: string
-  stats: { label: string; icon: React.FC<any> }[]
+  image: string;
+  name: string;
+  job: string;
+  stats: { label: string; icon: React.FC<any> }[];
 }
 
-export function UserCardImage({ image, avatar, name, job, stats }: UserCardImageProps) {
-  const { classes, theme } = useStyles()
+export function UserCardImage({ image, name, job, stats }: UserCardImageProps) {
+  const { classes, theme } = useStyles();
 
   const items = stats.map((stat) => (
     <Flex key={stat.label} direction={"column"} justify={"center"} align={"center"}>
@@ -30,12 +29,12 @@ export function UserCardImage({ image, avatar, name, job, stats }: UserCardImage
         {stat.label}
       </Text>
     </Flex>
-  ))
+  ));
 
   return (
     <Card withBorder padding="xl" radius="md" className={classes.card}>
       <Card.Section />
-      <Avatar src={avatar} size={120} radius={80} mx="auto" mt={30} className={classes.avatar} />
+      <Avatar src={image} size={120} radius={80} mx="auto" mt={30} className={classes.avatar} />
       <Text ta="center" fz="lg" fw={500} mt="sm">
         {name}
       </Text>
@@ -46,5 +45,5 @@ export function UserCardImage({ image, avatar, name, job, stats }: UserCardImage
         {items}
       </Group>
     </Card>
-  )
+  );
 }

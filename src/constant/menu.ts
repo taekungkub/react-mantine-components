@@ -14,7 +14,7 @@ import {
   IconShoppingCart,
   IconUser,
   IconUsers,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
 export const mockdata = [
   {
@@ -31,7 +31,10 @@ export const mockdata = [
     label: "Account",
     icon: IconUser,
     initiallyOpened: false,
-    links: [{ label: "Profile", link: "/account/profile" }],
+    links: [
+      { label: "Profile", link: "/account/profile" },
+      { label: "Invoice", link: "/account/invoice" },
+    ],
   },
 
   {
@@ -136,4 +139,4 @@ export const mockdata = [
     initiallyOpened: false,
     link: "/web3",
   },
-]
+];
