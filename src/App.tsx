@@ -47,6 +47,8 @@ import OrderListPage from "./views/Orders";
 import OrderDetailPage from "./views/Order";
 import CustomerDetailPage from "./views/CustomerDetail";
 import InvoicePage from "./views/Invoice";
+import ActivityLogPage from "./views/ActivityLogPage";
+import CalendarPage from "./views/CRM/Calendar";
 
 function App() {
   return (
@@ -68,10 +70,12 @@ function App() {
                     <Route path="/account/billing" element={<BillingPage />}></Route>
                   </Route>
                   <Route path="/account/invoice" element={<InvoicePage />}></Route>
+                  <Route path="/account/activity-log" element={<ActivityLogPage />}></Route>
                 </Route>
 
                 <Route path="/crm/customer" element={<CustomerPage />}></Route>
                 <Route path="/crm/customer/:id" element={<CustomerDetailPage />}></Route>
+                <Route path="/crm/calendar" element={<CalendarPage />}></Route>
 
                 <Route path="/exeception/403" element={<NoPermisstionPage />}></Route>
                 <Route path="/exeception/404" element={<NotFoundPage />}></Route>

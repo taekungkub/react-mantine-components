@@ -11,13 +11,6 @@ export default function InvoicePage({}: Props) {
         <Card withBorder>
           <Card.Section inheritPadding py={"md"}>
             <Box p={"sm"}>
-              {/* <Grid.Col sm={24}>
-                <Text fw={500} fz={"lg"} style={{ float: "right" }}>
-                  #123456
-                </Text>
-                <Divider my={14} />
-              </Grid.Col> */}
-
               <Box>
                 <Text fw={500} fz={"lg"} style={{ float: "right" }}>
                   #123456

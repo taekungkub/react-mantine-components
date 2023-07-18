@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
-import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem, getStylesRef, Navbar, ScrollArea, NavLink, Menu, Button } from "@mantine/core"
-import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react"
-import { useLocation, useMatch, useMatches, useNavigate } from "react-router-dom"
-import useAuth from "../context/AuthContext"
-import { mockdata } from "../constant/menu"
+import { useEffect, useState } from "react";
+import { Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles, rem } from "@mantine/core";
+import { IconChevronLeft, IconChevronRight, IconLogout } from "@tabler/icons-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../context/AuthContext";
+import { mockdata } from "../constant/menu";
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -48,45 +48,46 @@ const useStyles = createStyles((theme) => ({
   chevron: {
     transition: "transform 200ms ease",
   },
-}))
+}));
 
 interface LinksGroupProps {
-  icon: React.FC<any>
-  label: string
-  initiallyOpened?: boolean
-  links?: { label: string; link: string; roles?: string[] }[]
-  link?: string
-  roles?: string[]
+  icon: React.FC<any>;
+  label: string;
+  initiallyOpened?: boolean;
+  links?: { label: string; link: string; roles?: string[] }[];
+  link?: string;
+  roles?: string[];
 }
 
 export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link, roles }: LinksGroupProps) {
-  const { classes, theme, cx } = useStyles()
-  const hasLinks = Array.isArray(links)
-  const [opened, setOpened] = useState(initiallyOpened || false)
-  const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft
-  const navigate = useNavigate()
-  const location = useLocation()
-  const [active, setActive] = useState(location.pathname ?? "")
-  const { user } = useAuth()
-  const splitLocation = location.pathname.split("/")
-  const [subLinkActive, setSubLinkActive] = useState("")
+  const { classes, theme, cx } = useStyles();
+  const hasLinks = Array.isArray(links);
+  const [opened, setOpened] = useState(initiallyOpened || false);
+  const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [active, setActive] = useState(location.pathname ?? "");
+  const { user } = useAuth();
+  const splitLocation = location.pathname.split("/");
+  const [subLinkActive, setSubLinkActive] = useState("");
 
   useEffect(() => {
+    setSubLinkActive(location.pathname);
+
     if (hasLinks) {
       links?.map((menu) => {
         if (splitLocation[1]) {
           if (splitLocation[1] === menu.link.split("/")[1]) {
-            setOpened(true)
-            setSubLinkActive(location.pathname)
+            setOpened(true);
           } else {
-            setOpened(false)
+            setOpened(false);
           }
         }
-      })
+      });
     } else {
-      setActive(location.pathname)
+      setActive(location.pathname);
     }
-  }, [location.pathname])
+  }, [location.pathname]);
 
   const items = (hasLinks ? links : []).map((menu) => {
     const ItemDropdown = (
@@ -97,24 +98,24 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link, ro
           href={menu.link}
           key={menu.label}
           onClick={(event) => {
-            event.preventDefault()
-            navigate(`${menu.link}`)
+            event.preventDefault();
+            navigate(`${menu.link}`);
           }}
         >
           {menu.label}
         </Text>
       </>
-    )
+    );
     if (menu.roles) {
       if (menu.roles.find((role) => user?.roles.includes(role))) {
-        return <div key={menu.label}>{ItemDropdown}</div>
+        return <div key={menu.label}>{ItemDropdown}</div>;
       } else {
-        return null
+        return null;
       }
     } else {
-      return <div key={menu.label}>{ItemDropdown}</div>
+      return <div key={menu.label}>{ItemDropdown}</div>;
     }
-  })
+  });
 
   const ItemsNoDropdown = () => {
     if (link) {
@@ -125,23 +126,23 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link, ro
           href={link}
           key={label}
           onClick={(event) => {
-            event.preventDefault()
+            event.preventDefault();
           }}
         >
           {label}
         </Text>
-      )
+      );
     }
-  }
+  };
 
   const MenuItem = (
     <>
       <UnstyledButton
         onClick={() => {
-          setOpened((o) => !o)
+          setOpened((o) => !o);
 
           if (!hasLinks) {
-            navigate(`${link}`)
+            navigate(`${link}`);
           }
         }}
         className={classes.control}
@@ -167,30 +168,29 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link, ro
       </UnstyledButton>
       {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
     </>
-  )
+  );
 
   if (roles) {
     if (roles?.find((role) => user?.roles.includes(role))) {
-      return <>{MenuItem}</>
+      return <>{MenuItem}</>;
     } else {
-      return null
+      return null;
     }
   }
 
-  return <>{MenuItem}</>
+  return <>{MenuItem}</>;
 }
 
 export function NavbarLinksGroup() {
-  const Items = mockdata.map((item) => <LinksGroup {...item} key={item.label} />)
+  const Items = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
   return (
     <Box
       sx={(theme) => ({
         minHeight: rem(220),
         padding: theme.spacing.sm,
-        backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
       })}
     >
       {Items}
     </Box>
-  )
+  );
 }

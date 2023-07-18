@@ -34,6 +34,7 @@ export const mockdata = [
     links: [
       { label: "Profile", link: "/account/profile" },
       { label: "Invoice", link: "/account/invoice" },
+      { label: "Activity Log", link: "/account/activity-log" },
     ],
   },
 
@@ -61,6 +62,7 @@ export const mockdata = [
     links: [
       { label: "Customer", link: "/crm/customer" },
       { label: "Customer Detail", link: "/crm/customer/1" },
+      { label: "Calendar", link: "/crm/calendar" },
     ],
   },
 
