@@ -39,7 +39,10 @@ export default function useCustomer() {
   const [custoemrs, setCustomers] = useState<Array<CustomerTy> | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCustomer, setSelectedCustomer] = useState<CustomerTy | null>()
-  const [customerData, setCustomerData] = useState<CustomerTy | null>(null)
+  const [customerDataState, setCustomerDataState] = useState({
+    data: null as CustomerTy | null,
+    isLoading: false,
+  })
 
   async function getCustomers() {
     try {
@@ -52,10 +55,21 @@ export default function useCustomer() {
 
   async function getCustomerData(id: number) {
     try {
+      setCustomerDataState((prev) => ({
+        ...prev,
+        isLoading: true,
+      }))
       const res = await DummyServices.customerById(id)
-      setCustomerData(res.data)
+      setCustomerDataState((prev) => ({
+        ...prev,
+        data: res.data,
+      }))
     } catch {
     } finally {
+      setCustomerDataState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }))
     }
   }
 
@@ -67,6 +81,6 @@ export default function useCustomer() {
     selectedCustomer,
     setSelectedCustomer,
     getCustomerData,
-    customerData,
+    customerDataState,
   }
 }

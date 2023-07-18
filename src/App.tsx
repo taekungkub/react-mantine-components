@@ -101,7 +101,7 @@ function App() {
                   <Route path="/permission/auth" element={<AuthPage />}></Route>
                 </Route>
 
-                <Route element={<PrivateRoutes allowedRoles={["superadmin"]} />}>
+                <Route element={<PrivateRoutes allowedRoles={["admin"]} />}>
                   <Route path="/permission/admin" element={<AdminPage />}></Route>
                 </Route>
 

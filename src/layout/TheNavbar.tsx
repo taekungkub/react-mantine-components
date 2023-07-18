@@ -30,13 +30,7 @@ interface Props {
 }
 export function TheDrawer({ opened, handleOpened }: Props) {
   return (
-    <Drawer
-      opened={opened}
-      onClose={handleOpened}
-      title="Default Text"
-      size={"250px"}
-      transitionProps={{ transition: "rotate-left", duration: 150, timingFunction: "linear" }}
-    >
+    <Drawer opened={opened} onClose={handleOpened} title="My App" size={"270px"} transitionProps={{ transition: "rotate-left", duration: 150, timingFunction: "linear" }}>
       <Navbar.Section grow component={ScrollArea}>
         <NavbarLinksGroup />
       </Navbar.Section>

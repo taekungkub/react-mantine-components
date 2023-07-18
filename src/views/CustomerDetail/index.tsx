@@ -13,7 +13,7 @@ type Props = {}
 
 export default function CustomerDetailPage({}: Props) {
   const [opened, { open, close }] = useDisclosure(false)
-  const { getCustomerData, customerData } = useCustomer()
+  const { getCustomerData, customerDataState } = useCustomer()
   const { id } = useParams()
   useEffect(() => {
     getCustomerData(Number(id))
@@ -25,7 +25,7 @@ export default function CustomerDetailPage({}: Props) {
 
   const openDeleteModal = () =>
     modals.openConfirmModal({
-      title: `Delete ${customerData?.firstName} ${customerData?.lastName}`,
+      title: `Delete ${customerDataState?.data?.firstName} ${customerDataState?.data?.firstName}`,
       centered: true,
       children: <Text size="sm">Are you sure you want to delete data.</Text>,
       labels: { confirm: "Delete account", cancel: "No don't delete it" },
@@ -34,9 +34,13 @@ export default function CustomerDetailPage({}: Props) {
       onConfirm: () => console.log("Confirmed"),
     })
 
+  if (customerDataState.isLoading === true) {
+    return <>Loading...</>
+  }
+
   return (
     <div>
-      <EditCustomerDrawer opened={opened} close={close} open={open} customerData={customerData} update={(data: CustomerTy) => handleUpdate(data)} />
+      <EditCustomerDrawer opened={opened} close={close} open={open} customerData={customerDataState.data} update={(data: CustomerTy) => handleUpdate(data)} />
 
       <PageTitle pageTitle={"Customer Details"} />
 
@@ -45,23 +49,23 @@ export default function CustomerDetailPage({}: Props) {
           <Card withBorder>
             <Card.Section inheritPadding py={"lg"}>
               <Flex justify={"center"} direction={"column"} align={"center"}>
-                <Avatar src={customerData?.image} size={"5rem"} radius={"999px"} bg="gray.2"></Avatar>
+                <Avatar src={customerDataState.data?.image} size={"5rem"} radius={"999px"} bg="gray.2"></Avatar>
 
                 <Text fw={500} mt={14}>
-                  {customerData?.firstName} {customerData?.lastName}
+                  {customerDataState?.data?.firstName} {customerDataState?.data?.lastName}
                 </Text>
               </Flex>
               <Box>
                 <Text color="dimmed" fz={"sm"} mt={14}>
                   Email
                 </Text>
-                <Text fz={"sm"}>{customerData?.email}</Text>
+                <Text fz={"sm"}>{customerDataState?.data?.email}</Text>
               </Box>
               <Box mt={"lg"}>
                 <Text color="dimmed" fz={"sm"} mt={14}>
                   Phone
                 </Text>
-                <Text fz={"sm"}>{customerData?.phone}</Text>
+                <Text fz={"sm"}>{customerDataState?.data?.phone}</Text>
               </Box>
               <Box mt={"lg"}>
                 <Text color="dimmed" fz={"sm"} mt={14}>
@@ -79,7 +83,7 @@ export default function CustomerDetailPage({}: Props) {
                 <Text color="dimmed" fz={"sm"} mt={14}>
                   Title
                 </Text>
-                <Text fz={"sm"}>{customerData?.company.title}</Text>
+                <Text fz={"sm"}>{customerDataState?.data?.company.title}</Text>
               </Box>
               <Flex w={"100%"} gap={8} mt={"md"}>
                 <Button variant={"light"} color="blue" fullWidth leftIcon={<IconTrash size={"1.125rem"} />} onClick={openDeleteModal}>

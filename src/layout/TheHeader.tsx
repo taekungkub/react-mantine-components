@@ -36,7 +36,9 @@ function TheHeader({ toggleCollapse, toggleBurger, opened }: Props) {
           <Flex justify={"space-between"} align={"center"} px={"sm"}>
             <Flex>
               <MediaQuery largerThan={"sm"} styles={{ display: "none" }}>
-                <Burger opened={opened} onClick={() => toggleBurger()} title={"title"} size="sm" />
+                <ThemeIcon variant="light" color="gray" size={"lg"}>
+                  <Burger opened={opened} onClick={() => toggleBurger()} title={"title"} size="sm" />
+                </ThemeIcon>
               </MediaQuery>
               <Flex wrap={"nowrap"} gap={20} align={"center"}>
                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>

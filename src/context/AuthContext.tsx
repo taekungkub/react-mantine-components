@@ -5,6 +5,7 @@ import AuthServices from "../services/AuthServices"
 import useToast from "../hooks/useToast"
 import DummyServices from "../services/DummyServices"
 import jwt_decode from "jwt-decode"
+import { Center, Loader } from "@mantine/core"
 
 interface AuthContextType {
   // We defined the user type in `index.d.ts`, but it's
@@ -42,7 +43,6 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     let token = localStorage.getItem("token")
     if (token) {
       setToken(token)
-      getUserInfo()
     } else {
       setLoggedIn(false)
       setLoading(false)
@@ -52,13 +52,13 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
 
   useEffect(() => {
     if (token) {
-      checkExpired()
+      getUserInfo()
     }
   }, [token])
 
   async function getUserInfo() {
     try {
-      setLoading(true)
+      await checkExpired()
       const res = await DummyServices.login()
       setUser({
         ...res.data,
@@ -76,14 +76,19 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
 
   async function checkExpired() {
     try {
-      if (!token) return
+      if (!token) {
+        return Promise.reject("no token")
+      }
       var decodedToken = jwt_decode(token)
       const { exp } = decodedToken as any
       if (Date.now() > exp * 1000) {
         logout()
+        return Promise.reject("token exp")
       }
+      return Promise.resolve("done")
     } catch (error) {
       console.log(error)
+      return Promise.reject(error)
     }
   }
 
@@ -136,6 +141,13 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
     [token, user, loading, error, loggedIn]
   )
 
+  if (loadingInitial) {
+    return (
+      <Center h={"100vh"}>
+        <Loader />
+      </Center>
+    )
+  }
   // We only want to render the underlying app after we
   // assert for the presence of a current user.
   return <AuthContext.Provider value={memoedValue}>{!loadingInitial && children}</AuthContext.Provider>
