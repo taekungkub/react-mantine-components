@@ -1,43 +1,43 @@
-import { Group, Text, useMantineTheme, Flex, Image, SimpleGrid, ActionIcon, Center, createStyles, Modal, Box, Paper } from "@mantine/core";
-import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react";
-import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import useToast from "../../../../hooks/useToast";
-import "./index.scss";
-import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { Group, Text, useMantineTheme, Flex, Image, SimpleGrid, ActionIcon, Center, createStyles, Modal, Box, Paper } from "@mantine/core"
+import { IconUpload, IconPhoto, IconX, IconTrash, IconEye } from "@tabler/icons-react"
+import { Dropzone, FileRejection, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone"
+import useToast from "../../../../hooks/useToast"
+import "./index.scss"
+import { useDisclosure } from "@mantine/hooks"
+import { useState } from "react"
 
 interface Props {
-  handleSetFileToList: (e: any) => void;
-  handleDeleteFile: (index: number) => void;
-  isHasImage: boolean;
-  images: Array<FileWithPath | String>;
+  handleSetFileToList: (e: any) => void
+  handleDeleteFile: (index: number) => void
+  isHasImage: boolean
+  images: Array<FileWithPath | String>
 }
 
 export default function DropImage({ handleSetFileToList, isHasImage, images, handleDeleteFile }: Props) {
-  const theme = useMantineTheme();
-  const toast = useToast();
-  const [opened, { open, close }] = useDisclosure(false);
+  const theme = useMantineTheme()
+  const toast = useToast()
+  const [opened, { open, close }] = useDisclosure(false)
 
-  const [imageModal, setImageModal] = useState("");
+  const [imageModal, setImageModal] = useState("")
 
   function handleRejectFile(files: FileRejection[]) {
-    console.log("reject files", files);
-    toast.error("Maximum max 5 file or something has error");
+    console.log("reject files", files)
+    toast.error("Maximum max 5 file or something has error")
   }
 
   function handleViewImage(file: String | FileWithPath) {
-    let imageUrl = "";
-    if (typeof file === "string") imageUrl = file;
-    else imageUrl = URL.createObjectURL(file as FileWithPath);
+    let imageUrl = ""
+    if (typeof file === "string") imageUrl = file
+    else imageUrl = URL.createObjectURL(file as FileWithPath)
 
-    setImageModal(imageUrl);
-    open();
+    setImageModal(imageUrl)
+    open()
   }
 
   const previews = images.map((file, index) => {
-    let imageUrl = "";
-    if (typeof file === "string") imageUrl = file;
-    else imageUrl = URL.createObjectURL(file as FileWithPath);
+    let imageUrl = ""
+    if (typeof file === "string") imageUrl = file
+    else imageUrl = URL.createObjectURL(file as FileWithPath)
 
     return (
       <Paper withBorder radius={"sm"} p={"xs"} key={index}>
@@ -60,8 +60,8 @@ export default function DropImage({ handleSetFileToList, isHasImage, images, han
           </Box>
         </Paper>
       </Paper>
-    );
-  });
+    )
+  })
 
   return (
     <>
@@ -108,5 +108,5 @@ export default function DropImage({ handleSetFileToList, isHasImage, images, han
         </Dropzone>
       </SimpleGrid>
     </>
-  );
+  )
 }
