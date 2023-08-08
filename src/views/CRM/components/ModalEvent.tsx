@@ -63,10 +63,17 @@ export default function ModalEvent({ opened, open, close }: Props) {
             <TextInput label="User Name" />
           </Grid.Col>
           <Grid.Col sm={12}>
-            <DateInput value={startDate} onChange={setStartDate} label="Start date" maw={400} mx="auto" />
+            <DateInput
+              value={startDate}
+              onChange={setStartDate}
+              label="Start date"
+              maw={400}
+              mx="auto"
+              popoverProps={{ withinPortal: true }}
+            />
           </Grid.Col>
           <Grid.Col sm={12}>
-            <DateInput value={endDate} onChange={setEndDate} label="End date" mx="auto" />
+            <DateInput value={endDate} onChange={setEndDate} label="End date" mx="auto" popoverProps={{ withinPortal: true }} />
           </Grid.Col>
 
           <Grid.Col sm={12}>

@@ -1,13 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit"
-import { RootState } from "../store"
-import { FetchStatusTy, ProductTy } from "@/type"
-import DummyServices from "../../services/DummyServices"
+import { PayloadAction, createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
+import { FetchStatusTy, ProductTy } from "@/type";
+import DummyServices from "../../services/DummyServices";
 
 interface SliceState {
-  products: ProductTy[]
-  productsStatus: FetchStatusTy
-  productData: ProductTy | null
-  productDataStatus: FetchStatusTy
+  products: ProductTy[];
+  productsStatus: FetchStatusTy;
+  productData: ProductTy | null;
+  productDataStatus: FetchStatusTy;
 }
 
 const initialState: SliceState = {
@@ -15,60 +15,60 @@ const initialState: SliceState = {
   productsStatus: "idle",
   productData: null,
   productDataStatus: "idle",
-}
+};
 
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
-  const response = await DummyServices.products()
-  return response.data.products
-})
+  const response = await DummyServices.products();
+  return response.data.products;
+});
 
 export const fetchOneProducts = createAsyncThunk("products/fetchOneProduct", async (id: string) => {
-  const response = await DummyServices.product(id)
-  return response.data
-})
+  const response = await DummyServices.product(id);
+  return response.data;
+});
 
 export const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
     selecteProductById: (state, action: PayloadAction<Number>) => {
-      state.productData = state.products.find((v) => v.id === action.payload) ?? null
+      state.productData = state.products.find((v) => v.id === action.payload) ?? null;
     },
   },
   extraReducers(builder) {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
-        state.productsStatus = "loading"
+        state.productsStatus = "loading";
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.products = action.payload
-        state.productsStatus = "succeeded"
+        state.products = action.payload;
+        state.productsStatus = "succeeded";
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        state.productsStatus = "failed"
-      })
+        state.productsStatus = "failed";
+      });
 
     builder
       .addCase(fetchOneProducts.pending, (state, action) => {
-        state.productDataStatus = "loading"
+        state.productDataStatus = "loading";
       })
       .addCase(fetchOneProducts.fulfilled, (state, action) => {
-        state.productData = action.payload
-        state.productDataStatus = "succeeded"
+        state.productData = action.payload;
+        state.productDataStatus = "succeeded";
       })
       .addCase(fetchOneProducts.rejected, (state, action) => {
-        state.productDataStatus = "failed"
-      })
+        state.productDataStatus = "failed";
+      });
   },
-})
+});
 
-export const { selecteProductById } = productSlice.actions
-export const productSelector = (store: RootState) => store.product
+export const { selecteProductById } = productSlice.actions;
+export const productSelector = (store: RootState) => store.product;
 
-export const getAllProducts = (state: RootState) => state.product.products
+export const getAllProducts = (state: RootState) => state.product.products;
 
-export const getOneProduct = (state: RootState) => state.product.productData
+export const getOneProduct = (state: RootState) => state.product.productData;
 
 // export const selectProductById = (state: RootState , id:number) => state.productReducer.products.find((v)=> v.id === id)
 
-export default productSlice.reducer
+export default productSlice.reducer;
