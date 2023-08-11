@@ -116,9 +116,7 @@ function Root() {
               <Route element={<PrivateRoutes allowedRoles={["superadmin"]} />}>
                 <Route path="/permission/secret" element={<SecretPage />}></Route>
               </Route>
-
               <Route path="/projects" element={<ProjectsPage />}></Route>
-
               <Route path="/web3" element={<Web3Page />}></Route>
             </Route>
 
