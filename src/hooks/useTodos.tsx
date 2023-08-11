@@ -7,6 +7,7 @@ function useTodos() {
   const [completed, setCompleted] = useState<TodoTy[]>([])
   const [incomplete, setIncomplete] = useState<TodoTy[]>([])
   const [board2, setBoard2] = useState<TodoTy[]>()
+  const [boardTrash, setBoardTrash] = useState<TodoTy[]>()
 
   async function getTodos() {
     try {
@@ -30,7 +31,9 @@ function useTodos() {
     setCompleted,
     setIncomplete,
     setBoard2,
-    board2
+    board2,
+    boardTrash,
+    setBoardTrash,
   }
 }
 
