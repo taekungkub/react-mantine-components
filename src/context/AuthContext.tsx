@@ -62,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       const res = await DummyServices.login()
       setUser({
         ...res.data,
-        roles: ["admin"],
+        roles: ["admin", "superadmin"],
       })
       setLoggedIn(true)
     } catch (error) {
