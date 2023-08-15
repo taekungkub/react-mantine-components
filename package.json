@@ -58,7 +58,8 @@
     "swr": "^2.1.5",
     "viem": "^0.3.50",
     "wagmi": "^1.1.0",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.194",

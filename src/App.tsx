@@ -49,6 +49,7 @@ import CustomerDetailPage from "./views/CustomerDetail"
 import InvoicePage from "./views/Invoice"
 import ActivityLogPage from "./views/ActivityLogPage"
 import CalendarPage from "./views/CRM/Calendar"
+import ModalGlobal from "./components/Modals/ModalGlobal"
 
 function Root() {
   return (
@@ -56,6 +57,7 @@ function Root() {
       <ThemeProvider>
         <MyGlobalStyles />
         <Providers store={store}>
+          <ModalGlobal />
           <Routes>
             <Route element={<DashboardLayout />}>
               <Route path="/" element={<Home />}></Route>

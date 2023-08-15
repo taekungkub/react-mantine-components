@@ -1,6 +1,8 @@
 import { Button, Group } from "@mantine/core"
+import useGlobalModal from "../../hooks/useGlobalModal"
 
 function ButtonPage() {
+  const globalModal = useGlobalModal()
   return (
     <div>
       <Group position="center">
@@ -17,7 +19,9 @@ function ButtonPage() {
       <Group position="center" mt={20}>
         <Button variant="filled">filled</Button>
         <Button variant="light">light</Button>
-        <Button variant="outline">outline</Button>
+        <Button variant="outline" onClick={() => globalModal.open()}>
+          outline
+        </Button>
       </Group>
     </div>
   )
