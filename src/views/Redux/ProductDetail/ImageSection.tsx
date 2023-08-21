@@ -1,5 +1,4 @@
 import { Flex, Image } from "@mantine/core"
-import { func } from "joi"
 import { FetchStatusTy, ProductTy } from "../../../type"
 import ImageFlex from "./components/ImageFlex"
 

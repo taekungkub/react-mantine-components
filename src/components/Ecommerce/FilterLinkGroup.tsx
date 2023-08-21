@@ -18,9 +18,8 @@ import {
   Button,
   Flex,
 } from "@mantine/core"
-import { IconCalendarStats, IconChevronLeft, IconChevronRight, IconLogout, IconStar } from "@tabler/icons-react"
-import { createSearchParams, useLocation, useNavigate, useSearchParams } from "react-router-dom"
-import { link } from "joi"
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react"
+import { useSearchParams } from "react-router-dom"
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -75,10 +74,7 @@ export function FilterLinkGroup({ label, initiallyOpened, links, isPrice, maxPri
   const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const [rangeValue, setRangeValue] = useState<[number, number]>([
-    Number(searchParams.get("minPrice")) ?? minPrice,
-    Number(searchParams.get("maxPrice")) ?? maxPrice,
-  ])
+  const [rangeValue, setRangeValue] = useState<[number, number]>([Number(searchParams.get("minPrice")) ?? minPrice, Number(searchParams.get("maxPrice")) ?? maxPrice])
 
   const [rating, setRating] = useState(searchParams.get("rating") ?? "")
 

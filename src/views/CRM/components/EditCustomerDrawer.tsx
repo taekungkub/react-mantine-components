@@ -2,7 +2,6 @@ import { Avatar, Box, Button, Card, Divider, Drawer, Flex, Group, Image, Navbar,
 import { CustomerTy } from "../../../type"
 import { useForm } from "@mantine/form"
 import { useEffect, useState } from "react"
-import { func } from "joi"
 import useToast from "../../../hooks/useToast"
 
 interface Props {

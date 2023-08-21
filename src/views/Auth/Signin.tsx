@@ -1,7 +1,6 @@
 import { TextInput, PasswordInput, Checkbox, Anchor, Paper, Title, Text, Container, Group, Button } from "@mantine/core"
 import { useNavigate } from "react-router-dom"
-import { useForm, isNotEmpty, isEmail, isInRange, hasLength, matches, joiResolver, yupResolver } from "@mantine/form"
-import Joi from "joi"
+import { useForm, isNotEmpty, isEmail, isInRange, hasLength, matches, yupResolver, zodResolver } from "@mantine/form"
 import { regexStrongPassword } from "../../helper/utils"
 import AuthAervices from "../../services/AuthServices"
 import useAuth from "../../context/AuthContext"
@@ -14,7 +13,7 @@ export default function SigninPage() {
 
   const form = useForm({
     initialValues: { email: "tae@hotmail.com", password: "!Test123456" },
-    validate: yupResolver(signinSchema),
+    validate: zodResolver(signinSchema),
   })
 
   async function handleSubmit() {

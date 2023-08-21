@@ -1,5 +1,5 @@
 import { TextInput, PasswordInput, Checkbox, Anchor, Paper, Title, Text, Container, Group, Button, Flex } from "@mantine/core"
-import { useForm, yupResolver } from "@mantine/form"
+import { useForm, zodResolver } from "@mantine/form"
 import { IconArrowLeft } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
 import { signupSchema } from "../../constant/form.schema"
@@ -9,7 +9,7 @@ export default function SignupPage() {
 
   const form = useForm({
     initialValues: { email: "", password: "", confirmPassword: "" },
-    validate: yupResolver(signupSchema),
+    validate: zodResolver(signupSchema),
   })
 
   return (
