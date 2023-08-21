@@ -1,7 +1,8 @@
 import React from "react"
 import PageTitle from "../../components/PageTitle"
-import { Badge, Button, Flex, Group } from "@mantine/core"
+import { Badge, Box, Button, Flex, Group } from "@mantine/core"
 import useGlobalModal from "../../hooks/useGlobalModal"
+import NoteApps from "../../components/Notes"
 
 type Props = {}
 
@@ -11,12 +12,12 @@ export default function TestPage({}: Props) {
   return (
     <div>
       <Flex direction={"column"} gap={20}>
-        <div>
+        <Box>
           <PageTitle title={"Global modal with zustand"} />
           <Button onClick={() => globalModal.open()}>Open </Button>
-        </div>
+        </Box>
 
-        <div>
+        <Box>
           <PageTitle title={"Mantine + Tailwind"} />
 
           <Group>
@@ -26,7 +27,12 @@ export default function TestPage({}: Props) {
             </Badge>
             <Button classNames={{ root: "bg-blue-400 hover:bg-blue-200 dark:bg-red-500 rounded-lg " }}>Dark mode</Button>
           </Group>
-        </div>
+        </Box>
+
+        <Box>
+          <PageTitle title={"useNotes"} />
+          <NoteApps />
+        </Box>
       </Flex>
     </div>
   )

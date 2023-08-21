@@ -123,3 +123,9 @@ export interface TokenInfoTy {
   decimals: number
   totalSupply: string
 }
+
+export interface NoteTy {
+  id?: string
+  title: string
+  desc: string
+}

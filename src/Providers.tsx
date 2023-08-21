@@ -3,6 +3,7 @@ import { Store } from "@reduxjs/toolkit"
 import { AuthProvider } from "./context/AuthContext"
 import { WagmiProvider } from "./context/WagmiContext"
 import { WagmiConfigProvider } from "./context/WagmiConfig"
+import { NoteProvider } from "./context/NoteContext"
 
 interface Props {
   store: Store
@@ -12,11 +13,13 @@ function Providers({ store, children }: Props) {
   return (
     <>
       <Provider store={store}>
-        <WagmiConfigProvider>
-          <WagmiProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </WagmiProvider>
-        </WagmiConfigProvider>
+        <NoteProvider>
+          <WagmiConfigProvider>
+            <WagmiProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </WagmiProvider>
+          </WagmiConfigProvider>
+        </NoteProvider>
       </Provider>
     </>
   )
