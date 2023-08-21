@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import PageTitle from "../../components/PageTitle"
-import { Badge, Box, Button, Flex, Group } from "@mantine/core"
+import { Badge, Box, Button, Collapse, Flex, Group } from "@mantine/core"
 import useGlobalModal from "../../hooks/useGlobalModal"
 import NoteApps from "../../components/Notes"
 
@@ -8,6 +8,8 @@ type Props = {}
 
 export default function TestPage({}: Props) {
   const globalModal = useGlobalModal()
+
+  const [opened, setOpen] = useState(false)
 
   return (
     <div>
@@ -31,7 +33,12 @@ export default function TestPage({}: Props) {
 
         <Box>
           <PageTitle title={"useNotes"} />
-          <NoteApps />
+          <Button onClick={() => setOpen(!opened)} mb={8}>
+            Toggle content
+          </Button>
+          <Collapse in={opened}>
+            <NoteApps />
+          </Collapse>
         </Box>
       </Flex>
     </div>
