@@ -50,6 +50,7 @@ import InvoicePage from "./views/Invoice"
 import ActivityLogPage from "./views/ActivityLogPage"
 import CalendarPage from "./views/CRM/Calendar"
 import ModalGlobal from "./components/Modals/ModalGlobal"
+import TestPage from "./views/Test"
 
 function Root() {
   return (
@@ -120,6 +121,7 @@ function Root() {
               </Route>
               <Route path="/projects" element={<ProjectsPage />}></Route>
               <Route path="/web3" element={<Web3Page />}></Route>
+              <Route path="/test" element={<TestPage />}></Route>
             </Route>
 
             <Route path="/contact" element={<ContactPage />}></Route>

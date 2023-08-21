@@ -1,5 +1,5 @@
 import * as Yup from "yup"
-import { regexStrongPassword } from "./helper/utils"
+import { regexStrongPassword } from "../helper/utils"
 
 const passwordStrongText = "Password must contain at least 8 characters, one uppercase, one number and one special case character"
 export const signinSchema = Yup.object({

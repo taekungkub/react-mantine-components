@@ -1,12 +1,12 @@
-import { Button, Group } from "@mantine/core"
-import useGlobalModal from "../../hooks/useGlobalModal"
+import { Button, Group, Title } from "@mantine/core"
+import PageTitle from "../../components/PageTitle"
 
 function ButtonPage() {
-  const globalModal = useGlobalModal()
   return (
     <div>
-      <Group position="center">
-        <Button>Primary</Button>
+      <PageTitle pageTitle={"Color"}></PageTitle>
+      <Group>
+        <Button>primary</Button>
         <Button color="teal">teal</Button>
         <Button color="green">green</Button>
         <Button color="info">info</Button>
@@ -16,12 +16,28 @@ function ButtonPage() {
         <Button color="dark">dark</Button>
       </Group>
 
-      <Group position="center" mt={20}>
+      <br />
+
+      <PageTitle pageTitle={"Custom"}></PageTitle>
+      <Group>
+        <Button color="danger" variant={"danger"}>
+          danger
+        </Button>
+        <Button color="danger" variant={"success"}>
+          success gradient
+        </Button>
+      </Group>
+
+      <br />
+
+      <PageTitle pageTitle={"Variant"}></PageTitle>
+      <Group>
         <Button variant="filled">filled</Button>
         <Button variant="light">light</Button>
-        <Button variant="outline" onClick={() => globalModal.open()}>
-          outline
-        </Button>
+        <Button variant="outline">outline</Button>
+        <Button variant={"gradient"}>gradient</Button>
+        <Button variant={"subtle"}>subtle</Button>
+        <Button variant="white">white</Button>
       </Group>
     </div>
   )

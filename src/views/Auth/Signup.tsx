@@ -2,7 +2,7 @@ import { TextInput, PasswordInput, Checkbox, Anchor, Paper, Title, Text, Contain
 import { useForm, yupResolver } from "@mantine/form"
 import { IconArrowLeft } from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom"
-import { signupSchema } from "../../FormSchema"
+import { signupSchema } from "../../constant/form.schema"
 
 export default function SignupPage() {
   const navigate = useNavigate()

@@ -5,7 +5,7 @@ import Joi from "joi"
 import { regexStrongPassword } from "../../helper/utils"
 import AuthAervices from "../../services/AuthServices"
 import useAuth from "../../context/AuthContext"
-import { signinSchema } from "@/FormSchema"
+import { signinSchema } from "@/constant/form.schema"
 
 export default function SigninPage() {
   const navigate = useNavigate()
