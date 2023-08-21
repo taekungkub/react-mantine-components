@@ -9,6 +9,8 @@ interface NoteContextType {
   onUpdate: (note: NoteTy) => void
   onSelectNote: (note: NoteTy) => void
   selectedNote?: NoteTy | null
+  isEdit: boolean
+  onSetEdit: () => void
 }
 
 const NoteContext = createContext<NoteContextType>({} as NoteContextType)
@@ -20,6 +22,7 @@ const uid = () => {
 export function NoteProvider({ children }: { children: ReactNode }) {
   const [notes, setNotes] = useState<NoteTy[]>([])
   const [selectedNote, setSelectedNote] = useState<NoteTy | null>(null)
+  const [isEdit, setIsEdit] = useState(false)
 
   async function handleAddNotes(note: NoteTy) {
     delete note.id
@@ -42,7 +45,12 @@ export function NoteProvider({ children }: { children: ReactNode }) {
   }
 
   async function onSelectNote(note: NoteTy) {
+    setIsEdit(true)
     setSelectedNote(note)
+  }
+
+  function onSetEdit() {
+    setIsEdit(!isEdit)
   }
 
   const context = {
@@ -52,6 +60,8 @@ export function NoteProvider({ children }: { children: ReactNode }) {
     onUpdate: handleUpdateNote,
     onSelectNote,
     selectedNote,
+    isEdit,
+    onSetEdit,
   }
 
   return <NoteContext.Provider value={context}>{children}</NoteContext.Provider>

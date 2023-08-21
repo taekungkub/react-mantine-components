@@ -14,8 +14,12 @@ export default function NoteLists({}: Props) {
         <Title order={5}>{v.title}</Title>
         <Text>{v.desc}</Text>
         <Group>
-          <Button onClick={() => onSelectNote(v)}>Update</Button>
-          <Button onClick={() => onDelete(v.id as string)}>Delete</Button>
+          <Button onClick={() => onSelectNote(v)} variant={"outline"} color="yellow">
+            Update
+          </Button>
+          <Button onClick={() => onDelete(v.id as string)} variant={"outline"} color="red">
+            Delete
+          </Button>
         </Group>
       </Box>
     )
