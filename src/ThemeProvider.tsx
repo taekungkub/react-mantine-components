@@ -81,6 +81,7 @@ function ThemeProvider({ children }: Props) {
               },
             },
           }}
+          withCSSVariables
           withGlobalStyles
           withNormalizeCSS
         >
