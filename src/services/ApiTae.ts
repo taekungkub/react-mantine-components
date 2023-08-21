@@ -10,7 +10,8 @@ export default function MyApi() {
     async (config: any) => {
       const token = localStorage.getItem("token")
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+        const access_token = JSON.parse(token)
+        config.headers.Authorization = `Bearer ${access_token}`
       }
 
       if (config.isUploadFile) {

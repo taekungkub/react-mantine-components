@@ -40,10 +40,19 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
   }, [location.pathname])
 
   useEffect(() => {
-    let token = localStorage.getItem("token")
-    if (token) {
-      setToken(token)
-    } else {
+    try {
+      let token = localStorage.getItem("token")
+
+      if (token) {
+        const { access_token, refresh_token } = JSON.parse(token)
+        if (access_token) {
+          setToken(access_token)
+        } else {
+        }
+      }
+    } catch (error) {
+      console.log("error")
+    } finally {
       setLoggedIn(false)
       setLoading(false)
       setLoadingInitial(false)
@@ -97,7 +106,8 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       setLoading(true)
       const res = await DummyServices.login()
       setToken(res.data.token)
-      localStorage.setItem("token", res.data.token)
+      const myToken = { access_token: res.data.token, refresh_token: "" }
+      localStorage.setItem("token", JSON.stringify(myToken))
       toast.success("Login successfully !")
       navigate("/dashboard")
       await getUserInfo()
