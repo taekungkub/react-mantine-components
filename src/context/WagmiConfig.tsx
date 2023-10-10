@@ -1,18 +1,32 @@
-import { WagmiConfig, createConfig, configureChains } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
-import { mainnet, optimism, polygon, bscTestnet } from "@wagmi/core/chains";
+import { WagmiConfig, createConfig, configureChains } from "wagmi"
+import { mainnet, optimism, polygon, bscTestnet } from "@wagmi/core/chains"
 
-import { InjectedConnector } from "wagmi/connectors/injected";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { alchemyProvider } from "wagmi/providers/alchemy"
+import { publicProvider } from "wagmi/providers/public"
 
-const { chains, publicClient } = configureChains([mainnet, bscTestnet], [publicProvider()]);
+import { InjectedConnector } from "wagmi/connectors/injected"
+import { MetaMaskConnector } from "wagmi/connectors/metaMask"
+import { WalletConnectConnector } from "@wagmi/core/connectors/walletConnect"
+import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet"
+
+const { chains, publicClient, webSocketPublicClient } = configureChains([mainnet, bscTestnet], [publicProvider()])
 
 const config = createConfig({
   autoConnect: true,
-  publicClient,
   connectors: [
     new MetaMaskConnector(),
-
+    // new CoinbaseWalletConnector({
+    //   chains,
+    //   options: {
+    //     appName: "wagmi",
+    //   },
+    // }),
+    // new WalletConnectConnector({
+    //   chains,
+    //   options: {
+    //     projectId: "...",
+    //   },
+    // }),
     new InjectedConnector({
       chains,
       options: {
@@ -21,12 +35,14 @@ const config = createConfig({
       },
     }),
   ],
-});
+  publicClient,
+  webSocketPublicClient,
+})
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const WagmiConfigProvider = ({ children }: Props) => {
-  return <WagmiConfig config={config}>{children} </WagmiConfig>;
-};
+  return <WagmiConfig config={config}>{children} </WagmiConfig>
+}

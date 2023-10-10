@@ -33,6 +33,7 @@ function Web3Page() {
   const toast = useToast()
 
   useEffect(() => {
+    //@ts-ignore
     const isMetaMask = window.ethereum?.isMetaMask
     if (!isMetaMask) {
       toast.error("Please install metamask !")
