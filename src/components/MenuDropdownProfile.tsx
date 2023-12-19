@@ -6,7 +6,7 @@ import useAuth from "../context/AuthContext"
 export default function MenuDropdownProfile() {
   const navigate = useNavigate()
 
-  const { user, logout, loggedIn } = useAuth()
+  const { user, logout, isAuthenticated } = useAuth()
   return (
     <div>
       <Group position="center">
@@ -17,7 +17,7 @@ export default function MenuDropdownProfile() {
             </ActionIcon>
           </Menu.Target>
           <Menu.Dropdown>
-            {loggedIn ? (
+            {isAuthenticated ? (
               <>
                 <Menu.Item onClick={() => navigate("/account/profile")}>
                   <Group>

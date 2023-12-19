@@ -2,9 +2,9 @@ import { Outlet, Navigate } from "react-router-dom"
 import useAuth from "../context/AuthContext"
 
 export default function UnAuthRoutes() {
-  const { user, token, loading, loggedIn } = useAuth()
+  const { user, token, loadingInitial, isAuthenticated } = useAuth()
 
-  if (!loading && loggedIn) {
+  if (!loadingInitial && isAuthenticated) {
     return <Navigate to="/" replace />
   }
 

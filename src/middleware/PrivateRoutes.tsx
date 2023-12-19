@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function PrivateRoutes({ allowedRoles }: Props) {
-  const { user, token, loading, loggedIn, checkExpired } = useAuth()
+  const { user, token, loadingInitial, isAuthenticated } = useAuth()
   const navigate = useNavigate()
 
   // const [Loading, setLoading] = useState(true)
@@ -28,27 +28,27 @@ export default function PrivateRoutes({ allowedRoles }: Props) {
   //   getUser()
   // }, [])
 
-  useEffect(() => {
-    checkExpired()
-  }, [])
+  // useEffect(() => {
+  //   checkExpired()
+  // }, [])
 
-  useEffect(() => {
-    if (!loading) {
-      if (!token) {
-        navigate("/signin")
-      }
-    }
-  }, [token])
+  // useEffect(() => {
+  //   if (!loading) {
+  //     if (!token) {
+  //       navigate("/signin")
+  //     }
+  //   }
+  // }, [token])
 
-  if (loading && !loggedIn) {
+  if (loadingInitial && !isAuthenticated) {
     return <LoadingScreen />
   }
 
-  if (!loading && !loggedIn) {
+  if (!loadingInitial && !isAuthenticated) {
     return <Navigate to="/signin" replace />
   }
 
-  if (allowedRoles) {
+  if (allowedRoles && user && isAuthenticated) {
     return user?.roles.find((role) => allowedRoles.includes(role)) ? <Outlet /> : <Navigate to={"/exeception/403"} replace />
   }
 

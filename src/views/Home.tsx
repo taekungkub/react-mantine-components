@@ -4,7 +4,7 @@ import useAuth from "../context/AuthContext"
 import useWagmi from "../context/WagmiContext"
 
 function Home() {
-  const { user, loggedIn } = useAuth()
+  const { user, isAuthenticated, loadingInitial } = useAuth()
   const { account } = useWagmi()
   const { isConnected } = useAccount()
 
@@ -13,7 +13,7 @@ function Home() {
       <PageTitle pageTitle={"Home"} />
       <div>
         <p>
-          Hi {user?.email} isLoggedIn {loggedIn.toString()}
+          Hi {user?.email} isAuthenticated {isAuthenticated.toString()}
         </p>
         <p>
           Hi {account.address} isConnect {isConnected.toString()}

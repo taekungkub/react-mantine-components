@@ -9,7 +9,7 @@ import { signinSchema } from "@/constant/form.schema"
 export default function SigninPage() {
   const navigate = useNavigate()
 
-  const { login, loading } = useAuth()
+  const { login, loadingSubmit } = useAuth()
 
   const form = useForm({
     initialValues: { email: "tae@hotmail.com", password: "!Test123456" },
@@ -47,7 +47,7 @@ export default function SigninPage() {
                 Forgot password?
               </Anchor>
             </Group>
-            <Button type="submit" fullWidth mt="xl" loading={loading}>
+            <Button type="submit" fullWidth mt="xl" loading={loadingSubmit}>
               Sign in
             </Button>
           </Paper>
