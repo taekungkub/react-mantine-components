@@ -34,6 +34,7 @@
     "@tiptap/starter-kit": "^2.0.3",
     "@wagmi/core": "^1.1.0",
     "@walletconnect/web3-provider": "^1.8.0",
+    "@web3modal/wagmi": "^3.5.0",
     "axios": "^1.4.0",
     "connectkit": "^1.4.0",
     "dayjs": "^1.11.7",

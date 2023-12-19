@@ -9,6 +9,7 @@ import { motion } from "framer-motion"
 import useToast from "../../hooks/useToast"
 import "wagmi/window"
 import PageTitle from "../../components/PageTitle"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 
 function Web3Page() {
   const { address, isConnected } = useAccount()
@@ -32,6 +33,8 @@ function Web3Page() {
   const { account } = useWagmi()
   const toast = useToast()
 
+  const { open } = useWeb3Modal()
+
   useEffect(() => {
     //@ts-ignore
     const isMetaMask = window.ethereum?.isMetaMask
@@ -42,6 +45,12 @@ function Web3Page() {
 
   return (
     <>
+      <div className="flex gap-4">
+        <Button onClick={() => open()}>Open Web3Modal</Button>
+        <Button onClick={() => open({ view: "Networks" })}>Open Network Web3Modal</Button>
+      </div>
+      <br />
+
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}></motion.div>
 
       <motion.div key={isConnected ? "active" : "empty"} initial={{ y: -150, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>

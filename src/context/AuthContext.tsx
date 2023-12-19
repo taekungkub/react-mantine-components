@@ -68,7 +68,6 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
         ...res.data,
         roles: ["admin", "superadmin"],
       })
-      console.log(res.data)
     } catch (error) {
       console.log(error)
       setIsAuthenticated(false)

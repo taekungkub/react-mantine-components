@@ -25,7 +25,6 @@ function SummarySection({ handlePay }: Props) {
       return
     }
     console.log("Pay !")
-    console.log(cartReducer.selected)
     handlePay()
   }
   return (

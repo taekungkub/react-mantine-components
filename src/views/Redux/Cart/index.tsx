@@ -1,9 +1,13 @@
 import { useSelector } from "react-redux"
 import { cartSelector } from "../../../store/slices/cartSlice"
-import { Box, Card, Container, Grid, Stepper } from "@mantine/core"
+import { Box, Button, Card, Center, Checkbox, Collapse, Container, Flex, Grid, Radio, Stepper, Text, Title } from "@mantine/core"
 import TableCartList from "./components/TableCartList"
 import SummarySection from "./components/SummarySection"
 import { useState } from "react"
+import { IconAddressBook, IconPlus } from "@tabler/icons-react"
+import { useDisclosure } from "@mantine/hooks"
+import ModalFormAddress from "./components/ModalFormAddress"
+import AddressItem from "./components/AddressItem"
 
 function CartPage() {
   const cartReducer = useSelector(cartSelector)
@@ -20,6 +24,15 @@ function CartPage() {
     nextStep()
   }
 
+  const [isTaxRequest, setIsTaxRequest] = useState(false)
+  const [opened, { open, close }] = useDisclosure(false)
+
+  function handleSubmitAddress(data: any) {
+    console.log(data)
+  }
+
+  const [value, setValue] = useState("react")
+
   return (
     <Box>
       <Card withBorder>
@@ -32,21 +45,59 @@ function CartPage() {
       </Card>
 
       <Box mt={20}>
-        {active === 0 && (
-          <>
-            <Grid>
-              <Grid.Col md={8}>
+        <>
+          <Grid>
+            <Grid.Col md={8}>
+              {active === 0 && (
                 <Card withBorder>
                   <TableCartList data={carts} />
                 </Card>
-              </Grid.Col>
-              <Grid.Col md={4}>
-                <SummarySection handlePay={handlePay} />
-              </Grid.Col>
-            </Grid>
-          </>
-        )}
+              )}
+              {active === 1 && (
+                <>
+                  <Flex justify={"space-between"} align={"center"}>
+                    <Flex>
+                      <IconAddressBook />
+                      <Text>Address</Text>
+                    </Flex>
+                    <Button variant={"subtle"}>Manage address</Button>
+                  </Flex>
+
+                  <Card withBorder>
+                    <Card.Section p={"lg"}>
+                      <Radio.Group value={value} onChange={setValue}>
+                        <Flex direction={"column"} gap={"md"}>
+                          <AddressItem value="vue" select={() => setValue("vue")} />
+                          <AddressItem value="react" select={() => setValue("react")} />
+                        </Flex>
+                      </Radio.Group>
+                    </Card.Section>
+                    <Card.Section withBorder inheritPadding py="xs">
+                      <Checkbox label="Request a receipt/tax invoice" checked={isTaxRequest} onChange={(event) => setIsTaxRequest(event.currentTarget.checked)} />
+
+                      <Collapse in={isTaxRequest}>
+                        <Text fz={"sm"} fw={300} c={"dimmed"} align="center">
+                          Not found address
+                        </Text>
+                        <Center>
+                          <Button variant="subtle" size="sm" leftIcon={<IconPlus />} onClick={open}>
+                            Add address
+                          </Button>
+                        </Center>
+                      </Collapse>
+                    </Card.Section>
+                  </Card>
+                </>
+              )}
+            </Grid.Col>
+            <Grid.Col md={4}>
+              <SummarySection handlePay={handlePay} />
+            </Grid.Col>
+          </Grid>
+        </>
       </Box>
+
+      <ModalFormAddress opened={opened} open={open} close={close} submit={handleSubmitAddress} />
     </Box>
   )
 }
