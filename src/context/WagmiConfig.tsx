@@ -11,7 +11,7 @@ import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet"
 
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react"
 // 1. Get projectId at https://cloud.walletconnect.com
-const projectId = "813f21219e2c27e6a67b7126c8d15668"
+const projectId = ""
 // 2. Create wagmiConfig
 const metadata = {
   name: "Web3Modal",
