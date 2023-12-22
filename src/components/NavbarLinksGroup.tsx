@@ -73,7 +73,6 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links, link, ro
 
   useEffect(() => {
     setSubLinkActive(location.pathname)
-
     if (hasLinks) {
       links?.map((menu) => {
         if (splitLocation[1]) {

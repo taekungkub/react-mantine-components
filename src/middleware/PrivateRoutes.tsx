@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react"
 import { Outlet, Navigate, useNavigate } from "react-router-dom"
 import useAuth from "../context/AuthContext"
-import { Group, Loader } from "@mantine/core"
 import LoadingScreen from "../components/LoadingScreen"
 
 interface Props {
@@ -12,35 +10,7 @@ export default function PrivateRoutes({ allowedRoles }: Props) {
   const { user, token, loadingInitial, isAuthenticated } = useAuth()
   const navigate = useNavigate()
 
-  // const [Loading, setLoading] = useState(true)
-  // const [loggedIn, setLoggedIn] = useState(false)
-
-  // function getUser() {
-  //   setLoading(true)
-
-  //   setTimeout(() => {
-  //     setLoggedIn(false)
-  //     setLoading(false)
-  //   }, 2000)
-  // }
-
-  // useEffect(() => {
-  //   getUser()
-  // }, [])
-
-  // useEffect(() => {
-  //   checkExpired()
-  // }, [])
-
-  // useEffect(() => {
-  //   if (!loading) {
-  //     if (!token) {
-  //       navigate("/signin")
-  //     }
-  //   }
-  // }, [token])
-
-  if (loadingInitial && !isAuthenticated) {
+  if (loadingInitial && !user) {
     return <LoadingScreen />
   }
 

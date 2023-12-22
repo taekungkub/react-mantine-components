@@ -53,20 +53,20 @@ export default function ProductLayout() {
 
   return (
     <>
-      <MyBreadcrumbs
+      {/* <MyBreadcrumbs
         items={
           name
             ? [
                 { title: "Home", href: "/" },
-                { title: "Products", href: "/redux/products" },
+                { title: "Products", href: "/ecommerce/products" },
                 { title: name, href: "#" },
               ]
             : [
                 { title: "Home", href: "/" },
-                { title: "Products", href: "/redux/products" },
+                { title: "Products", href: "/ecommerce/products" },
               ]
         }
-      />
+      /> */}
 
       <MediaQuery largerThan="sm" styles={{ display: "none" }}>
         <Drawer opened={opened} onClose={close} overlayProps={{ opacity: 0.5, blur: 4 }}>

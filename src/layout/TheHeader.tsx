@@ -1,12 +1,10 @@
-import { AppShell, Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button, ActionIcon, ThemeIcon, TextInput, Indicator } from "@mantine/core"
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom"
+import { Header, Burger, Box, Flex, MediaQuery, Text, createStyles, Button, ActionIcon, ThemeIcon, TextInput, Indicator, Menu } from "@mantine/core"
+import { useNavigate } from "react-router-dom"
 import ButtonCart from "../components/ButtonCart"
-import useSidebar from "../hooks/useSidebar"
 import { useState } from "react"
 import { IconAlignJustified, IconSearch } from "@tabler/icons-react"
 import { useAppDispatch } from "../store/store"
 import { setSearchTerms } from "../store/slices/searchSlice"
-import MenuLang from "../components/MenuLangs"
 import ButtonToggleTheme from "../components/ButtonToggleTheme"
 import LanguagePicker from "@/components/LanguagePicker"
 import MenuDropdownProfile from "../components/MenuDropdownProfile"
@@ -23,7 +21,7 @@ function TheHeader({ toggleCollapse, toggleBurger, opened }: Props) {
   function handleSearchTerms() {
     if (!keyword) return
     dispatch(setSearchTerms(keyword))
-    navigate(`/redux/search?keyword=${keyword}`)
+    navigate(`/ecommerce/search?keyword=${keyword}`)
   }
 
   const navigate = useNavigate()

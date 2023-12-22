@@ -1,11 +1,9 @@
-import React, { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { UserTy } from "../type"
-import AuthServices from "../services/AuthServices"
 import useToast from "../hooks/useToast"
 import DummyServices from "../services/DummyServices"
 import jwt_decode from "jwt-decode"
-import { Center, Loader } from "@mantine/core"
 
 interface AuthContextType {
   // We defined the user type in `index.d.ts`, but it's
@@ -101,9 +99,10 @@ export function AuthProvider({ children }: { children: ReactNode }): JSX.Element
       setToken(res.data.token)
       const myToken = { access_token: res.data.token, refresh_token: "" }
       localStorage.setItem("token", JSON.stringify(myToken))
+      setToken(res.data.token)
+      setIsAuthenticated(true)
       toast.success("Login successfully !")
       navigate("/dashboard")
-      // await getUserInfo()
     } catch (error: any) {
       toast.error(error)
     } finally {

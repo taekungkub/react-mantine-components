@@ -67,15 +67,15 @@ export const mockdata = [
   },
 
   {
-    label: "Redux",
+    label: "Ecommerce",
     icon: IconBrandRedux,
     initiallyOpened: false,
 
     links: [
-      { label: "Counter", link: "/redux/counter" },
-      { label: "Products", link: "/redux/products" },
-      { label: "Products Detail", link: "/redux/product/smartphones/1" },
-      { label: "Checkout", link: "/redux/checkout" },
+      { label: "Counter", link: "/ecommerce/counter" },
+      { label: "Products", link: "/ecommerce/products" },
+      { label: "Products Detail", link: "/ecommerce/product/smartphones/1" },
+      { label: "Checkout", link: "/ecommerce/cart" },
     ],
   },
 

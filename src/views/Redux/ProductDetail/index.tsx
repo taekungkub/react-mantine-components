@@ -26,8 +26,8 @@ function ProductReduxDetailPage() {
     <>
       <MyBreadcrumbs
         items={[
-          { title: "Products", href: "/redux/products" },
-          { title: product?.category, href: `/redux/product/category/${product?.category}` },
+          { title: "Products", href: "/ecommerce/products" },
+          { title: product?.category, href: `/ecommerce/product/category/${product?.category}` },
           { title: product?.title, href: "" },
         ]}
       />

@@ -45,7 +45,7 @@ export default function TableCartList({ data }: TableSelectionProps) {
             </Text>
           </Group>
         </td>
-        <td>{item.price}</td>
+        <td style={{ textAlign: "center" }}>{item.price}</td>
         <td>
           <Group position="center">
             <Flex align={"center"}>
@@ -53,7 +53,7 @@ export default function TableCartList({ data }: TableSelectionProps) {
             </Flex>
           </Group>
         </td>
-        <td>{item.totalPrice}</td>
+        <td style={{ textAlign: "center" }}>{item.totalPrice}</td>
         <td>
           <ActionIcon ml={"md"} color="red" onClick={() => dispatch(removeFromCart(item))}>
             <IconTrash />
@@ -77,9 +77,9 @@ export default function TableCartList({ data }: TableSelectionProps) {
               />
             </th>
             <th>Product</th>
-            <th>Unit Price</th>
+            <th style={{ width: "100px", textAlign: "center" }}>Unit Price</th>
             <th style={{ textAlign: "center" }}>Qty</th>
-            <th>Total Price</th>
+            <th style={{ width: "100px", textAlign: "center" }}>Total Price</th>
 
             <th></th>
           </tr>

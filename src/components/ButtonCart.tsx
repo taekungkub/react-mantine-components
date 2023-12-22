@@ -18,7 +18,7 @@ function ButtonCart() {
   return (
     <>
       <Indicator inline label={cart.itemsCount} size={16}>
-        <ActionIcon variant="default" color="blue" size={"lg"} onClick={() => navigate("/cart")}>
+        <ActionIcon variant="default" color="blue" size={"lg"} onClick={() => navigate("/ecommerce/cart")}>
           <IconShoppingCart size="1.125rem" />
         </ActionIcon>
       </Indicator>

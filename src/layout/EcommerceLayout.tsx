@@ -27,7 +27,7 @@ function CategoryList() {
             variant="light"
             key={i}
             onClick={() => {
-              navigate("/redux/product/category/" + v)
+              navigate("/ecommerce/product/category/" + v)
             }}
           >
             {v}

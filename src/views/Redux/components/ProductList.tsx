@@ -39,7 +39,7 @@ function ProductsList(props: Props) {
             <CardProduct
               key={product.id}
               data={product}
-              onToggle={() => navigate(`/redux/product/${product.category}/${product.id}`)}
+              onToggle={() => navigate(`/ecommerce/product/${product.category}/${product.id}`)}
               onAddToCart={() => {
                 if (product) {
                   dispatch(

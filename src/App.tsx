@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, RouterProvider, Routes, createBrowserRouter } from "react-router-dom"
+import { store } from "./store/store"
 import Home from "./views/Home"
 import DashboardLayout from "./layout/DashboardLayout"
 import Dashboard from "./views/Dashboard"
@@ -25,7 +26,6 @@ import PrivateRoutes from "./middleware/PrivateRoutes"
 import UnAuthRoutes from "./middleware/UnAuthRoutes"
 import CustomerPage from "./views/CRM/Customer"
 import Providers from "./Providers"
-import { store } from "./store/store"
 import CounterPage from "./views/Redux/counter"
 import ProductReduxPage from "./views/Redux/Products"
 import ProductReduxDetailPage from "./views/Redux/ProductDetail"
@@ -90,19 +90,18 @@ function Root() {
               <Route path="/sales/orders" element={<OrderListPage />}></Route>
               <Route path="/sales/order/:id" element={<OrderDetailPage />}></Route>
 
-              <Route path="/redux/counter" element={<CounterPage />}></Route>
+              <Route path="/ecommerce/counter" element={<CounterPage />}></Route>
 
               <Route element={<EcommerceLayout />}>
                 <Route element={<ProductLayout />}>
-                  <Route path="/redux/products" element={<ProductReduxPage />}></Route>
-                  <Route path="/redux/product/category/:name" element={<ProductCategory />}></Route>
+                  <Route path="/ecommerce/products" element={<ProductReduxPage />}></Route>
+                  <Route path="/ecommerce/product/category/:name" element={<ProductCategory />}></Route>
                 </Route>
-                <Route path="/redux/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
-                <Route path="/redux/search" element={<SearchProductPage />}></Route>
+                <Route path="/ecommerce/product/:category/:id" element={<ProductReduxDetailPage />}></Route>
+                <Route path="/ecommerce/search" element={<SearchProductPage />}></Route>
               </Route>
-              <Route path="/redux/checkout" element={<CheckoutPage />}></Route>
 
-              <Route path="/cart/" element={<CartPage />}></Route>
+              <Route path="/ecommerce/cart/" element={<CartPage />}></Route>
 
               <Route element={<PrivateRoutes />}>
                 <Route path="/permission/auth" element={<AuthPage />}></Route>
