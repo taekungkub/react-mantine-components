@@ -55,6 +55,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "react-scroll": "^1.8.9",
+    "recharts": "^2.11.0",
     "styled-components": "^5.3.9",
     "swr": "^2.1.5",
     "viem": "^0.3.50",
